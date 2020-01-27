@@ -64,8 +64,8 @@ userRegister = () => {
       console.error(error);
     });
 
-    //const {navigate} = this.props.navigation;
-    //navigate('Home')
+    const {navigate} = this.props.navigation;
+    navigate('Home')
 }
 
 // display input fields and buttons
@@ -126,16 +126,7 @@ container: {
   alignItems: 'center',
   backgroundColor: '#F5FCFF',
 },
-welcome: {
-  fontSize: 20,
-  textAlign: 'center',
-  margin: 10,
-},
-instructions: {
-  textAlign: 'center',
-  color: '#333333',
-  marginBottom: 5,
-},
+
 });
 
 AppRegistry.registerComponent('register', () => register);

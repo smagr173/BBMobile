@@ -12,7 +12,7 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { Divider, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
   static navigationOptions = {
@@ -23,22 +23,24 @@ render() {
   const {navigate} = this.props.navigation;
   return (
   <View style={styles.container}>
+  <TouchableOpacity
+  onPress={() => navigate('SignIn')}
+
+  // button styling
+  style={{marginBottom:35,width:250,padding:10, backgroundColor:'magenta',
+  alignItems:'center'}}>  
+
+  <Text style={{color:'#fff'}}>Sign In</Text>
+  </TouchableOpacity>
 
   <TouchableOpacity
   onPress={() => navigate('Register')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
+  style={{width:250, padding:10, backgroundColor:'magenta',
   alignItems:'center'}}>
   <Text style={{color:'#fff'}}>Create Account</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity
-  onPress={() => navigate('SignIn')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
-  alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Sign In</Text>
-  </TouchableOpacity>
-
-   </View>
+   </View>  // end style container
  );
 }
 }
@@ -49,10 +51,5 @@ container: {
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: '#F5FCFF',
-},
-instructions: {
-  textAlign: 'center',
-  color: '#333333',
-  marginBottom: 5,
 },
 });
