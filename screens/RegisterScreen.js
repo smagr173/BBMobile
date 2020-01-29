@@ -23,7 +23,8 @@ export default class register extends Component {
 constructor(props) {
   super(props)
   this.state = {
-    userName: '',
+    userFname: '',
+    userLname: '',
     userEmail: '', 
     userPassword1: '',
     userPassword2: ''				
@@ -35,10 +36,12 @@ constructor(props) {
 userRegister = () => {
   
   const {userName} = this.state;
+  const {userLname} = this.state;
   const {userEmail} = this.state;
   const {userPassword1} = this.state;
   const {userPassword2} = this.state;
   
+  // Networking for sending user inputs to PHP server
   fetch('http://csitrd.kutztown.edu/~smagr173/create_account.php', {
     method: 'POST',
     header: {
@@ -48,7 +51,8 @@ userRegister = () => {
 
     // Input values get converted to JSON here
     body: JSON.stringify({
-      name: this.state.userName,
+      fname: this.state.userFname,
+      lname: this.state.userLname,
       email: this.state.userEmail,
       password1: this.state.userPassword1,
       password2: this.state.userPassword2,
@@ -64,8 +68,8 @@ userRegister = () => {
       console.error(error);
     });
 
-    const {navigate} = this.props.navigation;
-    navigate('Home')
+    //const {navigate} = this.props.navigation;
+    //navigate('Home')
 }
 
 // display input fields and buttons
@@ -73,14 +77,21 @@ render() {
   return (
   <View style={styles.container}>
   <TextInput
-  placeholder="Enter Name"
+  placeholder="Enter First Name"
   style={{width:250,margin:10, borderColor:"#333", 
   borderWidth:1}}	
   underlineColorAndroid="transparent"
-  onChangeText = {userName => this.setState({userName})}  // on event set value for userName
-  
+  onChangeText = {userFname => this.setState({userFname})}  // on event set value for userName
   />
   
+  <TextInput
+  placeholder="Enter Last Name"
+  style={{width:250,margin:10, borderColor:"#333", 
+  borderWidth:1}}	
+  underlineColorAndroid="transparent"
+  onChangeText = {userLname => this.setState({userLname})}  // on event set value for userName
+  />
+
   <TextInput
   placeholder="Enter Email"
   style={{width:250,margin:10, borderColor:"#333", 

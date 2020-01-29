@@ -13,44 +13,41 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { AppRegistry,View,Text,StyleSheet } from 'react-native';
 
-export default class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Links',
- };
-
-render() {
- // const {navigate} = this.props.navigation;
-  return (
-  <View style={styles.container}>
-
-  <TouchableOpacity
- // onPress={() => navigate('Settings')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
-  alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Create Account</Text>
-  </TouchableOpacity>
+export default class homeScreen extends Component{
+static navigationOptions= ({navigation}) =>({
+		  title: 'Welcome',	
+	});  
   
-  <TouchableOpacity
-  //onPress={() => navigate('SignIn')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
-  alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Sign In</Text>
-  </TouchableOpacity>
+  
+  
+	render(){
+		const { navigate } = this.props.navigation;
+		return(
+	  <View style={styles.container}>	
+	  
+	   <Text style={styles.pageName}>profile</Text>
+	   
 
-   </View>
-
- );
-}
-}
+      </View>
+		);
+	}
+} // end homeScreen component
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: '#F5FCFF',
-},
+	container:{
+		display:'flex',alignItems:'center',
+		justifyContent:'center'
+	},
 
+	pageName:{
+		margin:10,fontWeight:'bold',
+		color:'#000', textAlign:'center'
+	},
+
+	
 });
+
+
+AppRegistry.registerComponent('profile', () => profile);

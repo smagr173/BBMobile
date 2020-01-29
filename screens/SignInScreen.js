@@ -27,11 +27,14 @@ constructor(props) {
   }
 }  // end constructor
 
+// On text change userSignIn gets called
+// Inputs get sent as JSON to PHP file, error msgs sent back
 userSignIn = () => {
   
   const {userEmail} = this.state;
   const {userPassword} = this.state;
   
+  // Networking for sending user inputs to PHP server
   fetch('http://csitrd.kutztown.edu/~smagr173/create_account.php', {
     method: 'POST',
     header: {
