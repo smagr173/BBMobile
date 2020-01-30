@@ -12,7 +12,7 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { Divider, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
   static navigationOptions = {
@@ -24,20 +24,23 @@ render() {
   return (
   <View style={styles.container}>
   <TouchableOpacity
-  onPress={() => navigate('SignIn')}
-
-  // button styling
-  style={{marginBottom:35,width:250,padding:10, backgroundColor:'magenta',
+  onPress={() => navigate('Menu')}
+  style={{marginTop:300,marginBottom:25,height:47,width:300,padding:10,justifyContent:'center',backgroundColor:'black',
   alignItems:'center'}}>  
-
-  <Text style={{color:'#fff'}}>Sign In</Text>
+  <Text style={styles.buttonText}>View Menu</Text>
   </TouchableOpacity>
 
   <TouchableOpacity
   onPress={() => navigate('Register')}
-  style={{width:250, padding:10, backgroundColor:'magenta',
+  style={{width:300,height:47,padding:10, justifyContent:'center',backgroundColor:'black',
   alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Create Account</Text>
+  <Text style={styles.buttonText}>Create Account</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity
+  onPress={() => navigate('SignIn')}
+  style={{width:100, padding:10, alignItems:'center'}}>
+  <Text style={styles.pageText}>Sign In</Text>
   </TouchableOpacity>
 
    </View>  // end style container
@@ -52,4 +55,17 @@ container: {
   alignItems: 'center',
   backgroundColor: '#F5FCFF',
 },
+pageText: {
+  margin:10,
+  fontWeight:'bold',
+  color:'gray',
+  textAlign:'center',
+  fontSize:17
+},
+buttonText: {
+  fontWeight:'bold',
+  color:'white',
+  textAlign:'center',
+  fontSize:15
+}
 });

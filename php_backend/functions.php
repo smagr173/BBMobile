@@ -5,7 +5,7 @@
  * Course: CSC 355-20
  * Professor: Dr. Tan
  * Filename: functions.php
- * Description: This file contains the functions for the PHP backe-end
+ * Description: This file contains the functions for the PHP back-end
  * code. It includes functions for inserting user data into a SQL
  * database. There are also queries for selecting user data.
  *
@@ -22,12 +22,6 @@
  */
 function insertUserRecord($fname, $lname, $email, $password) {
 
-   ///$servername = "34.74.102.179";
-   // $username = "sqlserver";
-    //$dbpassword = "DCJor@cl3";
-   // $database = "finalproject";
-
-
     // try to insert into the database
     // if an error occurs return FALSE
     try {
@@ -38,7 +32,6 @@ function insertUserRecord($fname, $lname, $email, $password) {
 	return TRUE;
     }
     catch (Exception $e) {
-       // echo json_encode($e);
         return FALSE;
     }
 	$db = NULL;
@@ -58,12 +51,11 @@ function getUserRecord($email) {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT * FROM users WHERE email='$email'";
         $stmt = $db->query($sql);
-        // there should only be a single record
+        // return user record as an associative array
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     catch (Exception $e) {
-        //echo json_encode($e);
-        return array();
+	return false;
     }
 	$db = NULL;
 }
@@ -147,7 +139,7 @@ function doesEmailExist($email) {
         }
     }
     return $result;
-	$db = NULL;
+    $db = NULL;
 }
 
 /* Function Name: printTable

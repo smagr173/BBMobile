@@ -13,11 +13,11 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class register extends Component {
   static navigationOptions = ({
-    title: 'Register'   // displayed at top of screen
+    title: 'Create Account'   // displayed at top of screen
  });
     
 constructor(props) {
@@ -26,8 +26,7 @@ constructor(props) {
     userFname: '',
     userLname: '',
     userEmail: '', 
-    userPassword1: '',
-    userPassword2: ''				
+    userPassword1: ''			
   }
 }  // end constructor
 
@@ -39,13 +38,12 @@ userRegister = () => {
   const {userLname} = this.state;
   const {userEmail} = this.state;
   const {userPassword1} = this.state;
-  const {userPassword2} = this.state;
   
   // Networking for sending user inputs to PHP server
   fetch('http://csitrd.kutztown.edu/~smagr173/create_account.php', {
     method: 'POST',
     header: {
-      Accept: 'application/json',
+      'Accept': 'application/json',
       'Content-type': 'application/json'
     },
 
@@ -55,14 +53,23 @@ userRegister = () => {
       lname: this.state.userLname,
       email: this.state.userEmail,
       password1: this.state.userPassword1,
-      password2: this.state.userPassword2,
     })
     
   })
   // handle response from PHP
   .then((response) => response.json())
     .then((responseJson) => {      // responseJson contains error msgs
-      console.warn(responseJson);  // gets displayed as console msg
+      if(responseJson == "User registered Successfully"){
+        // redirect to profile page
+        alert("Success");
+        const {navigate} = this.props.navigation;
+     navigate('SignIn')
+       // this.props.navigation.navigate("Home");
+      }else{
+       // alert("Errors");
+        console.warn(responseJson);  // gets displayed as console msg
+      }
+      //console.warn(responseJson);  // gets displayed as console msg
     })
     .catch((error) => {
       console.error(error);
@@ -74,55 +81,56 @@ userRegister = () => {
 
 // display input fields and buttons
 render() {
+  const {navigate} = this.props.navigation;
   return (
   <View style={styles.container}>
+
+    <Text style={styles.pageText}>Create a Bagel Bar account</Text>
+    
   <TextInput
-  placeholder="Enter First Name"
-  style={{width:250,margin:10, borderColor:"#333", 
+  placeholder="First Name"
+  style={{marginTop:20,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:1}}	
   underlineColorAndroid="transparent"
   onChangeText = {userFname => this.setState({userFname})}  // on event set value for userName
   />
   
   <TextInput
-  placeholder="Enter Last Name"
-  style={{width:250,margin:10, borderColor:"#333", 
+  placeholder="Last Name"
+  style={{width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:1}}	
   underlineColorAndroid="transparent"
   onChangeText = {userLname => this.setState({userLname})}  // on event set value for userName
   />
 
   <TextInput
-  placeholder="Enter Email"
-  style={{width:250,margin:10, borderColor:"#333", 
+  placeholder="Email Address"
+  style={{width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:1}}	
   underlineColorAndroid="transparent"
   onChangeText= {userEmail => this.setState({userEmail})} // on event set value for email
   />
   
   <TextInput
-  placeholder="Enter Password"
-  style={{width:250,margin:10, borderColor:"#333", 
+  placeholder="Password"
+  style={{marginBottom:27,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:1}}	
   underlineColorAndroid="transparent"
   onChangeText= {userPassword1 => this.setState({userPassword1})} // on event set value for password1
   />
-  
-  <TextInput
-  placeholder="Re-enter Password"
-  style={{width:250,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
-  underlineColorAndroid="transparent"
-  onChangeText= {userPassword2 => this.setState({userPassword2})} // on event set value for password2
-  />
 
   <TouchableOpacity
   onPress={this.userRegister}  // when pressed call the userRegister function
-  style={{width:250,padding:10, backgroundColor:'magenta',
+  style={{width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
   alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Sign up</Text>
+  <Text style={styles.buttonText}>Create Account</Text>
   </TouchableOpacity>
   
+  <TouchableOpacity
+  onPress={() => navigate('SignIn')}
+  style={{marginBottom:260, width:100, padding:10, alignItems:'center'}}>
+  <Text style={styles.pageText}>Sign In</Text>
+  </TouchableOpacity>
 
    </View>
 
@@ -137,6 +145,19 @@ container: {
   alignItems: 'center',
   backgroundColor: '#F5FCFF',
 },
+pageText: {
+  margin:10,
+  fontWeight:'bold',
+  color:'gray',
+  textAlign:'center',
+  fontSize:15
+},
+buttonText: {
+  fontWeight:'bold',
+  color:'white',
+  textAlign:'center',
+  fontSize:14
+}
 
 });
 
