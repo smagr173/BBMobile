@@ -59,9 +59,10 @@ userRegister = () => {
   // handle response from PHP
   .then((response) => response.json())
     .then((responseJson) => {      // responseJson contains error msgs
+      // this.saveItem('error', responseJson.error),
       if(responseJson == "User registered Successfully"){
         // redirect to profile page
-        alert("Success");
+       // alert("Success");
         const {navigate} = this.props.navigation;
      navigate('SignIn')
        // this.props.navigation.navigate("Home");
@@ -74,9 +75,7 @@ userRegister = () => {
     .catch((error) => {
       console.error(error);
     });
-
-    //const {navigate} = this.props.navigation;
-    //navigate('Home')
+    Keyboard.dismiss();
 }
 
 // display input fields and buttons
@@ -143,7 +142,7 @@ container: {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  backgroundColor: 'white',
 },
 pageText: {
   margin:10,

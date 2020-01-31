@@ -13,7 +13,7 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
+import { Image, TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
 
 export default class homeScreen extends Component{
 static navigationOptions= ({navigation}) =>({
@@ -44,7 +44,6 @@ static navigationOptions= ({navigation}) =>({
 	render(){
 		return(
 	 	 <View style={styles.container}>
-
 	    <TouchableOpacity
  		 onPress={this.profileView}  // when pressed call the userRegister function
   		style={{marginTop:50,width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
@@ -59,8 +58,10 @@ static navigationOptions= ({navigation}) =>({
 
 const styles = StyleSheet.create({
 	container:{
-		display:'flex',alignItems:'center',
-		justifyContent:'center'
+		display:'flex',
+		alignItems:'center',
+		justifyContent:'center',
+		backgroundColor: 'white'
 	},
 	pageText: {
 		margin:10,
@@ -76,6 +77,5 @@ const styles = StyleSheet.create({
 		fontSize:14
 	  }
 });
-
 
 AppRegistry.registerComponent('profile', () => profile);

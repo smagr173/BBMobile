@@ -51,13 +51,14 @@ SignIn = () => {
   .then((response) => response.json())
    .then((responseJson)=>{
      if(responseJson == "Success"){
+       
+       //alert("Successfully Login");
        // redirect to profile page
-       alert("Successfully Login");
        const {navigate} = this.props.navigation;
     navigate('Home')
       // this.props.navigation.navigate("Home");
      }else{
-      alert("Errors");
+      //alert("Errors");
       console.warn(responseJson);  // gets displayed as console msg
      }
    })
@@ -117,7 +118,7 @@ container: {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  backgroundColor: 'white',
 },
 pageText: {
   margin:10,

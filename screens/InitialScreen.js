@@ -12,7 +12,7 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
   static navigationOptions = {
@@ -23,37 +23,41 @@ render() {
   const {navigate} = this.props.navigation;
   return (
   <View style={styles.container}>
-  <TouchableOpacity
-  onPress={() => navigate('Menu')}
-  style={{marginTop:300,marginBottom:25,height:47,width:300,padding:10,justifyContent:'center',backgroundColor:'black',
-  alignItems:'center'}}>  
+
+  <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/MainLogo.png'}}
+	 style={styles.image1} />
+  
+  <Text style={styles.divider}>_____________________________</Text>
+  
+  <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/Order.png'}}
+	 style={styles.image2} />
+
+  <TouchableOpacity style={styles.topButton}
+  onPress={() => navigate('Menu')}>
   <Text style={styles.buttonText}>View Menu</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity
-  onPress={() => navigate('Register')}
-  style={{width:300,height:47,padding:10, justifyContent:'center',backgroundColor:'black',
-  alignItems:'center'}}>
+  <TouchableOpacity style={styles.button}
+  onPress={() => navigate('Register')}>
   <Text style={styles.buttonText}>Create Account</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity
-  onPress={() => navigate('SignIn')}
-  style={{width:100, padding:10, alignItems:'center'}}>
+  <TouchableOpacity style={styles.link}
+  onPress={() => navigate('SignIn')}>
   <Text style={styles.pageText}>Sign In</Text>
   </TouchableOpacity>
 
    </View>  // end style container
  );
-}
-}
+}  // end render
+}  // end component
 
 const styles = StyleSheet.create({
 container: {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  backgroundColor: 'white'
 },
 pageText: {
   margin:10,
@@ -67,5 +71,44 @@ buttonText: {
   color:'white',
   textAlign:'center',
   fontSize:15
+},
+topButton: {
+  marginTop:130,
+  marginBottom:25,
+  height:47,
+  width:300,
+  padding:10,
+  justifyContent:'center',
+  backgroundColor:'black',
+  alignItems:'center'
+},
+button: {
+  width:300,
+  height:47,
+  padding:10,
+  justifyContent:'center',
+  backgroundColor:'black',
+  alignItems:'center'
+},
+link: {
+  width:100,
+  padding:10,
+  alignItems:'center'
+},
+image1: {
+  width:360,
+  height:210
+},
+image2: {
+  marginTop:32,
+  width:310,
+  height:50
+},
+divider: {
+  fontWeight:'bold',
+  color:'black',
+  textAlign:'center',
+  fontSize:17
 }
+
 });
