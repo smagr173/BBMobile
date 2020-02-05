@@ -53,12 +53,12 @@ container: {
 bodyText:{
   color:'gray',
   textAlign:'center',
-  fontSize:20,
+  fontSize:21,
   marginBottom:5,
 },
 subtitle:{
   fontWeight:'bold',
-  color:'gray',
+  color:'black',
   textAlign:'center',
   fontSize:25,
   marginBottom: 10,
