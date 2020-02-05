@@ -7,8 +7,8 @@ export default class MenuScreen extends Component {
       <View style={styles.container}>
         <SectionList
           sections={[
-            {title: 'Burgers', data: ['Bacon Bleu', 'Chesseburger']},
-            {title: 'Fries', data: ['Nacho Jalepeno', 'Old Bay', 'Nacho']},
+            {title: 'Bagels', data: ['Everything', 'Plain']},
+            {title: 'Drinks', data: ['Coffee', 'Tea', 'Water']},
           ]}
           renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>

@@ -25,19 +25,7 @@ render() {
   return (
   <View style={styles.container}>
 
-  <TouchableOpacity
- // onPress={() => navigate('Settings')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
-  alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Create Account</Text>
-  </TouchableOpacity>
-  
-  <TouchableOpacity
-  //onPress={() => navigate('SignIn')}
-  style={{width:250,padding:10, backgroundColor:'magenta',
-  alignItems:'center'}}>
-  <Text style={{color:'#fff'}}>Sign In</Text>
-  </TouchableOpacity>
+<Text style={styles.pageText}>Location & Contact</Text>
 
    </View>
 
@@ -62,4 +50,11 @@ instructions: {
   color: '#333333',
   marginBottom: 5,
 },
+pageText: {
+  margin:10,
+  fontWeight:'bold',
+  color:'gray',
+  textAlign:'center',
+  fontSize:15
+}
 });

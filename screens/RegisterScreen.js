@@ -16,9 +16,6 @@ import React, { Component } from 'react';
 import { Keyboard, AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class register extends Component {
-  static navigationOptions = ({
-    title: 'Create Account'   // displayed at top of screen
- });
     
 constructor(props) {
   super(props)

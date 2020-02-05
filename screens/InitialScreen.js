@@ -15,9 +15,6 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
-  static navigationOptions = {
-    title: 'Welcome!',    // displayed at top of screen
- };
 
 render() {
   const {navigate} = this.props.navigation;

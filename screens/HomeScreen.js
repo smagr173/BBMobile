@@ -15,9 +15,17 @@
 import React, { Component } from 'react';
 import { Image, TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
 
+//const {navigate} = this.props.navigation;
 export default class homeScreen extends Component{
-static navigationOptions= ({navigation}) =>({
-		  title: 'Welcome',	
+
+		 static navigationOptions= ({navigation}) =>({ 
+			 title: 'Home',
+			 headerRight:
+		  <TouchableOpacity
+			onPress={() => navigation.navigate('Settings')}
+			style={{margin:10,width:90,height:28,padding:10, backgroundColor:'black'}}>
+			<Text style={{textAlign:'center',color:'white',fontSize:9}}>Settings</Text>
+			</TouchableOpacity>
 	});  
   
 	profileView = () => {
@@ -42,14 +50,24 @@ static navigationOptions= ({navigation}) =>({
 	  }
   
 	render(){
+		const {navigate} = this.props.navigation;
 		return(
 	 	 <View style={styles.container}>
 	    <TouchableOpacity
- 		 onPress={this.profileView}  // when pressed call the userRegister function
+ 		 onPress={this.profileView}
   		style={{marginTop:50,width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
   		alignItems:'center'}}>
   		<Text style={styles.buttonText}>View User</Text>
   		</TouchableOpacity>  
+
+		  <Text style={styles.divider}>_____________________________</Text>
+
+		<TouchableOpacity
+ 	     onPress={() => navigate('SignIn')}
+  		style={{marginTop:20,width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
+  	   	alignItems:'center'}}>
+  	  	<Text style={styles.buttonText}>Sign In</Text>
+  	  	</TouchableOpacity>  
 
       </View>
 		);
@@ -75,6 +93,12 @@ const styles = StyleSheet.create({
 		color:'white',
 		textAlign:'center',
 		fontSize:14
+	  },
+	  divider: {
+		fontWeight:'bold',
+		color:'black',
+		textAlign:'center',
+		fontSize:17
 	  }
 });
 
