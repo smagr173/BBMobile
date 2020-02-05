@@ -76,7 +76,7 @@ const AboutStack = createStackNavigator(
 
 // Customize tab icon and label
 AboutStack.navigationOptions = {
-  tabBarLabel: 'About',
+  tabBarLabel: 'Info',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
