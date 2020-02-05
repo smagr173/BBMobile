@@ -20,6 +20,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
 import AboutScreen from '../screens/AboutScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import UpdateScreen from '../screens/UpdateScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -30,6 +32,8 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Settings: SettingsScreen,
+    Update: UpdateScreen,
   },
   config
 );
@@ -38,14 +42,7 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
@@ -81,7 +78,14 @@ const AboutStack = createStackNavigator(
 AboutStack.navigationOptions = {
   tabBarLabel: 'About',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
   ),
 };
 

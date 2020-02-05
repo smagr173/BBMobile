@@ -17,6 +17,7 @@ import InitialScreen from '../screens/InitialScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import SignInScreen from '../screens/SignInScreen';
 
+
 import MainTabNavigator from './MainTabNavigator';  // Import navigation tab
 
 // Main navigation stack
