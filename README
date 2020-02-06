@@ -23,7 +23,7 @@ It will ask you to enter your email address, username, and password to create th
 the credentials that were entered previously. Note: You will only have to create an account once.
 
 You can also create an Expo account in your browser by entering this link in your browser: https://expo.io/signup
-However you will still have to sign into the Expo Client app using the credentials you created in the browser.
+However, you will still have to sign into the Expo Client app using the credentials you created in the browser.
 
 After you have installed the Expo Client app and have signed into your account you will be able to open the link provided to view
 the Bagel Bar Mobile project. You can enter the link in your browser to view options for opening the project on your phone.
