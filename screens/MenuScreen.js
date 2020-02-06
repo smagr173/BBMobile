@@ -1,3 +1,14 @@
+/********************************************************************/
+/*  Author:     Stephen Magrowski                                   */
+/*  Created:    Febuary 1, 2020                                     */
+/*  Course:     CSC 355-020                                         */
+/*  Professor:  Dr. Tan                                             */
+/*  Filename:   MenuScreen.js                                       */
+/*  Purpose:    This file contains the Bagel Bar menu organized     */
+/*              by category.                                        */
+/*                                                                  */
+/********************************************************************/
+
 import React, { Component } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 

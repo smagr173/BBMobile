@@ -1,3 +1,14 @@
+/********************************************************************/
+/*  Author:     Stephen Magrowski                                   */
+/*  Created:    February 3, 2020                                    */
+/*  Course:     CSC 355-020                                         */
+/*  Professor:  Dr. Tan                                             */
+/*  Filename:   UpdateScreen.js                                     */
+/*  Purpose:    This file contains input fields for viewing and     */
+/*              updating user account information.                  */
+/*                                                                  */
+/********************************************************************/
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 

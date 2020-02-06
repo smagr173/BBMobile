@@ -16,14 +16,23 @@ import React, { Component } from 'react';
 import { Keyboard, AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class register extends Component {
-    
+  static navigationOptions = ({
+    title: 'Register'  // displayed at top of screen
+ });
+
 constructor(props) {
   super(props)
   this.state = {
     userFname: '',
     userLname: '',
     userEmail: '', 
-    userPassword1: ''			
+    userPassword1: '',
+    fnamePlace: 'First Name',	
+    lnamePlace: 'Last Name',
+    emailPlace: 'Email Address',
+    passPlace: 'Password',
+    invalidEmail: '',
+    regFail: '',
   }
 }  // end constructor
 
@@ -56,18 +65,28 @@ userRegister = () => {
   // handle response from PHP
   .then((response) => response.json())
     .then((responseJson) => {      // responseJson contains error msgs
-      // this.saveItem('error', responseJson.error),
-      if(responseJson == "User registered Successfully"){
-        // redirect to profile page
-       // alert("Success");
+     if(responseJson.succ == "Registration successful") {
         const {navigate} = this.props.navigation;
-     navigate('SignIn')
-       // this.props.navigation.navigate("Home");
-      }else{
-       // alert("Errors");
-        console.warn(responseJson);  // gets displayed as console msg
+        navigate('SignIn') // redirect to sign in page
+       }
+       if(responseJson.fnameErr == "First name is required") {
+        this.setState({ fnamePlace: responseJson.fnameErr})
+       }
+       if(responseJson.lnameErr == "Last name is required") {
+        this.setState({ lnamePlace: responseJson.lnameErr})
+       }
+       if(responseJson.eErr == "Email address is required") {
+        this.setState({ emailPlace: responseJson.eErr})
+       }
+       if(responseJson.passReq == "Password is required") {
+        this.setState({ passPlace: responseJson.passReq})
+       }
+       if(responseJson.eTaken == "The email you entered is already being used") {
+        this.setState({ invalidEmail: responseJson.eTaken})
+       }
+       if(responseJson.fail == "Register failed: Check connection") {
+        this.setState({ regFail: responseJson.fail})
       }
-      //console.warn(responseJson);  // gets displayed as console msg
     })
     .catch((error) => {
       console.error(error);
@@ -77,40 +96,62 @@ userRegister = () => {
 
 // display input fields and buttons
 render() {
-  const {navigate} = this.props.navigation;
+  const { fnamePlace } = this.state;
+  const { lnamePlace } = this.state;
+  const { emailPlace } = this.state;
+  const { passPlace } = this.state;
+  const { invalidEmail } = this.state;
+  const { regFail } = this.state;
+  const { navigate } = this.props.navigation;
+
   return (
   <View style={styles.container}>
 
     <Text style={styles.pageText}>Create a Bagel Bar account</Text>
     
+    <Text style={styles.errorText}>{invalidEmail}</Text>
+    <Text style={styles.errorText}>{regFail}</Text>
+
   <TextInput
-  placeholder="First Name"
-  style={{marginTop:20,width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholder={ fnamePlace }
+  placeholderTextColor="red"
+  style={{paddingHorizontal:5,marginTop:1,width:300,height:35,margin:10, borderColor:"#333", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText = {userFname => this.setState({userFname})}  // on event set value for userName
   />
   
   <TextInput
-  placeholder="Last Name"
-  style={{width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholder={ lnamePlace }
+  placeholderTextColor="red"
+  style={{paddingHorizontal:5,width:300,height:35,margin:10, borderColor:"#333", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText = {userLname => this.setState({userLname})}  // on event set value for userName
   />
 
   <TextInput
-  placeholder="Email Address"
-  style={{width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholder={ emailPlace }
+  placeholderTextColor="red"
+  style={{paddingHorizontal:5,width:300,height:35,margin:10, borderColor:"#333", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText= {userEmail => this.setState({userEmail})} // on event set value for email
   />
   
   <TextInput
-  placeholder="Password"
-  style={{marginBottom:27,width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholder={ passPlace }
+  placeholderTextColor="red"
+  style={{paddingHorizontal:5,marginBottom:27,width:300,height:35,margin:10, borderColor:"#333", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText= {userPassword1 => this.setState({userPassword1})} // on event set value for password1
   />
@@ -125,7 +166,7 @@ render() {
   <TouchableOpacity
   onPress={() => navigate('SignIn')}
   style={{marginBottom:260, width:100, padding:10, alignItems:'center'}}>
-  <Text style={styles.pageText}>Sign In</Text>
+  <Text style={styles.link}>Sign In</Text>
   </TouchableOpacity>
 
    </View>
@@ -142,19 +183,32 @@ container: {
   backgroundColor: 'white',
 },
 pageText: {
-  margin:10,
+  marginTop:25,
+  marginBottom:20,
   fontWeight:'bold',
   color:'gray',
   textAlign:'center',
-  fontSize:15
+  fontSize:17
 },
 buttonText: {
   fontWeight:'bold',
   color:'white',
   textAlign:'center',
   fontSize:14
-}
-
+},
+errorText: {
+  fontWeight:'bold',
+  color:'red',
+  textAlign:'center',
+  fontSize:15
+},
+link: {
+  margin:10,
+  fontWeight:'bold',
+  color:'gray',
+  textAlign:'center',
+  fontSize:16
+},
 });
 
 AppRegistry.registerComponent('register', () => register);

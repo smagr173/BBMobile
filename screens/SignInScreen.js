@@ -23,7 +23,10 @@ constructor(props) {
   super(props)
   this.state = {
     userEmail: '', 
-    userPassword: ''
+    userPassword: '',
+    emailPlace: 'Email Address',
+    passPlace: 'Password',
+    invalidCombo: '',
   }
 }  // end constructor
 
@@ -31,8 +34,8 @@ constructor(props) {
 // Inputs get sent as JSON to PHP file, error msgs sent back
 SignIn = () => {
   
-  const {userEmail} = this.state;
-  const {userPassword} = this.state;
+  const { userEmail } = this.state;
+  const { userPassword } = this.state;
   
   // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/sign_in.php', {
@@ -50,50 +53,62 @@ SignIn = () => {
   })
   .then((response) => response.json())
    .then((responseJson)=>{
-     if(responseJson == "Success"){
-       
-       //alert("Successfully Login");
+     if(responseJson.succ == "Success"){
        // redirect to profile page
        const {navigate} = this.props.navigation;
-    navigate('Home')
-      // this.props.navigation.navigate("Home");
-     }else{
-      //alert("Errors");
-      console.warn(responseJson);  // gets displayed as console msg
+       navigate('Home')
+
+     }
+     if(responseJson.emailErr == "Email address is required") {
+      this.setState({ emailPlace: responseJson.emailErr})
+     }
+     if(responseJson.passErr == "Password is required") {
+      this.setState({ passPlace: responseJson.passErr})
+     }
+     if(responseJson.incorrect == "Incorrect Email/Password Entry") {
+      this.setState({ invalidCombo: responseJson.incorrect})
      }
    })
    .catch((error)=>{
    console.error(error);
    });
-  
-  
   Keyboard.dismiss();
 }
 
 // display input fields and buttons
 render() {
+  const { emailPlace } = this.state;
+  const { passPlace } = this.state;
+  const { invalidCombo } = this.state;
   const {navigate} = this.props.navigation;
   return (
   <View style={styles.container}>
-  <Text style={styles.pageText}>Sign into your Bagel Bar account</Text>
+  <Text style={styles.pageText}>Sign in to your Bagel Bar Account</Text>
+
+  <Text style={styles.errorText}>{invalidCombo}</Text>
 
   <TextInput
-  placeholder="Email Address"
-  style={{marginTop:40,width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholder={emailPlace}
+  placeholderTextColor="red"
+  style={{paddingHorizontal:5,marginTop:17,width:300,height:35,margin:10, borderColor:"gray", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText= {userEmail => this.setState({userEmail})}  // on event set value for email
   />
   
   <TextInput
-  placeholder="Password"
-  style={{marginBottom:27,width:300,height:35,margin:10, borderColor:"#333", 
-  borderWidth:1}}	
+  autoCorrect={false}
+  returnKeyType='done'
+  placeholderTextColor="red"
+  placeholder={passPlace}
+  style={{paddingHorizontal:5,marginBottom:27,width:300,height:35,margin:10, borderColor:"gray", 
+  borderWidth:2}}	
   underlineColorAndroid="transparent"
   onChangeText= {userPassword => this.setState({userPassword})}  // on event set value for password
   />
   
-
   <TouchableOpacity
   onPress={this.SignIn}   // when pressed call the userSignIn function
   style={{width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
@@ -104,7 +119,7 @@ render() {
   <TouchableOpacity
   onPress={() => navigate('Register')}
   style={{marginBottom:275, width:165, padding:10, alignItems:'center'}}>
-  <Text style={styles.pageText}>Create Account</Text>
+  <Text style={styles.link}>Create Account</Text>
   </TouchableOpacity>
 
    </View>    // end style view
@@ -121,18 +136,31 @@ container: {
   backgroundColor: 'white',
 },
 pageText: {
+  marginBottom:50,
+  fontWeight:'bold',
+  color:'gray',
+  textAlign:'center',
+  fontSize:20
+},
+link: {
   margin:10,
   fontWeight:'bold',
   color:'gray',
   textAlign:'center',
-  fontSize:15
+  fontSize:16
 },
 buttonText: {
   fontWeight:'bold',
   color:'white',
   textAlign:'center',
   fontSize:14
-}
+},
+errorText: {
+  fontWeight:'bold',
+  color:'red',
+  textAlign:'center',
+  fontSize:15
+},
 });
 
 AppRegistry.registerComponent('SignIn', () => SignIn);

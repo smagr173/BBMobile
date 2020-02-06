@@ -23,11 +23,19 @@ export default class homeScreen extends Component{
 			 headerRight:
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Settings')}
-			style={{margin:10,width:90,height:28,padding:10, backgroundColor:'black'}}>
-			<Text style={{textAlign:'center',color:'white',fontSize:9}}>Settings</Text>
+			style={{margin:10,width:90,height:28, backgroundColor:'black'}}>
+			<Text style={{textAlign:'center',color:'white',fontSize:13,paddingTop:5}}>Settings</Text>
 			</TouchableOpacity>
 	});  
   
+	constructor (props) {
+		super(props)
+		this.state = {
+		  record: ''
+		}
+	  }  // end constructor
+
+
 	profileView = () => {
   
 		// Networking for sending user inputs to PHP server
@@ -41,7 +49,13 @@ export default class homeScreen extends Component{
 		})
 		.then((response) => response.json())
 		 .then((responseJson)=>{
-			console.warn(responseJson);  // gets displayed as console msg
+			if(responseJson != 0){
+				this.setState({ record: responseJson.email})
+			//console.warn(responseJson);  // gets displayed as console msg
+			}
+			else{
+				this.setState({ record: 'Not signed in!'})
+			}
 		   })
 		 .catch((error)=>{
 		 console.error(error);
@@ -50,9 +64,12 @@ export default class homeScreen extends Component{
 	  }
   
 	render(){
+		const { record } = this.state;
 		const {navigate} = this.props.navigation;
 		return(
 	 	 <View style={styles.container}>
+        <Text style={styles.pageText}>{record}</Text>
+
 	    <TouchableOpacity
  		 onPress={this.profileView}
   		style={{marginTop:50,width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',

@@ -4,18 +4,16 @@
 /*  Course:     CSC 355-020                                         */
 /*  Professor:  Dr. Tan                                             */
 /*  Filename:   AboutScreen.js                                      */
-/*  Purpose:    This file contains the user registration screen     */
-/*              to create an account. It allows the user to         */
-/*              enter their name, email, and password into the      */
-/*              input fields. These credentials are then sent to    */
-/*              a PHP file where they are entered into a database.  */
+/*  Purpose:    This file contains information about the Bagel      */
+/*              Bar Cafe. This includes their address, hours of     */
+/*              operation, and phone number.                        */
 /*                                                                  */
 /********************************************************************/
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 
-export default class HomeScreen extends Component {
+export default class AboutScreen extends Component {
   static navigationOptions = {
     title: 'Information',
  };
