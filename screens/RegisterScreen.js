@@ -40,13 +40,13 @@ constructor(props) {
 // Inputs get sent as JSON to PHP file, error msgs sent back
 userRegister = () => {
   
-  const {userName} = this.state;
+  const {userFname} = this.state;
   const {userLname} = this.state;
   const {userEmail} = this.state;
   const {userPassword1} = this.state;
   
   // Networking for sending user inputs to PHP server
-  fetch('http://csitrd.kutztown.edu/~smagr173/create_account.php', {
+  fetch('http://csitrd.kutztown.edu/~smagr173/backend/create_account.php', {
     method: 'POST',
     header: {
       'Accept': 'application/json',
@@ -65,7 +65,7 @@ userRegister = () => {
   // handle response from PHP
   .then((response) => response.json())
     .then((responseJson) => {      // responseJson contains error msgs
-     if(responseJson.succ == "Registration successful") {
+      if(responseJson.suc == "Success") {
         const {navigate} = this.props.navigation;
         navigate('SignIn') // redirect to sign in page
        }

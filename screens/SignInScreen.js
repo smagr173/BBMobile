@@ -38,7 +38,7 @@ SignIn = () => {
   const { userPassword } = this.state;
   
   // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/sign_in.php', {
+    fetch('http://csitrd.kutztown.edu/~smagr173/backend/sign_in.php', {
     method:'POST',
     header:{
       'Accept': 'application/json',

@@ -21,7 +21,7 @@ export default class SettingsScreen extends Component {
  LogOut = () => {
   
   // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/log_out.php', {
+    fetch('http://csitrd.kutztown.edu/~smagr173/backend/log_out.php', {
     method:'POST',
     header:{
       'Accept': 'application/json',

@@ -39,7 +39,7 @@ export default class homeScreen extends Component{
 	profileView = () => {
   
 		// Networking for sending user inputs to PHP server
-		  fetch('http://csitrd.kutztown.edu/~smagr173/index.php', {
+		  fetch('http://csitrd.kutztown.edu/~smagr173/backend/index.php', {
 		  method:'POST',
 		  header:{
 			'Accept': 'application/json',
