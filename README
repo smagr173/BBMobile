@@ -31,4 +31,12 @@ There will be a QR code that you can scan with your device which will open the p
 send the link to your email address or have a linked sent using your phone number. Once sent the link will automatically open
 the project on the Expo Client app.
 The link below can be used to access the project:
+https://exp.host/@bagelbartest/csc355-sprint1-test
 
+Note that this method only works with Android devices due to Apple's signing policies. If you would like to view the project on an
+iOS device you have to use an account created by the developer. Please enter the following username and password to access the
+project with no restrictions on devices.
+Username: bagelbartest
+Password: easy123!
+
+The project will then be shown under "Published Projects" once you are signed into the test account.
