@@ -23,8 +23,8 @@ export default class homeScreen extends Component{
 			 headerRight:
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Settings')}
-			style={{margin:10,width:90,height:28, backgroundColor:'black'}}>
-			<Text style={{textAlign:'center',color:'white',fontSize:13,paddingTop:5}}>Settings</Text>
+			style={{margin:10,width:90,height:32, backgroundColor:'black'}}>
+			<Text style={{textAlign:'center',color:'white',fontSize:13,paddingTop:8}}>Settings</Text>
 			</TouchableOpacity>
 	});  
   

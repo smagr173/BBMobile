@@ -27,15 +27,12 @@ constructor(props) {
     emailPlace: 'Email Address',
     passPlace: 'Password',
     invalidCombo: '',
-  }
+  };
 }  // end constructor
 
 // On text change userSignIn gets called
 // Inputs get sent as JSON to PHP file, error msgs sent back
 SignIn = () => {
-  
-  const { userEmail } = this.state;
-  const { userPassword } = this.state;
   
   // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/sign_in.php', {
@@ -75,8 +72,19 @@ SignIn = () => {
   Keyboard.dismiss();
 }
 
+handleEmail = (text) => {
+  this.setState({ userEmail: text })
+  this.setState({ invalidCombo: ''})
+}
+handlePass = (text) => {
+  this.setState({ userPassword: text })
+  this.setState({ invalidCombo: ''})
+}
+
 // display input fields and buttons
 render() {
+  const { userEmail } = this.state;
+  const { userPassword } = this.state;
   const { emailPlace } = this.state;
   const { passPlace } = this.state;
   const { invalidCombo } = this.state;
@@ -95,7 +103,7 @@ render() {
   style={{paddingHorizontal:5,marginTop:17,width:300,height:35,margin:10, borderColor:"gray", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText= {userEmail => this.setState({userEmail})}  // on event set value for email
+  onChangeText= {this.handleEmail}  // on event set value for email
   />
   
   <TextInput
@@ -106,7 +114,7 @@ render() {
   style={{paddingHorizontal:5,marginBottom:27,width:300,height:35,margin:10, borderColor:"gray", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText= {userPassword => this.setState({userPassword})}  // on event set value for password
+  onChangeText= {this.handlePass}  // on event set value for password
   />
   
   <TouchableOpacity
