@@ -15,7 +15,6 @@
 import React, { Component } from 'react';
 import { Image, TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
 
-//const {navigate} = this.props.navigation;
 export default class homeScreen extends Component{
 
 		 static navigationOptions= ({navigation}) =>({ 
@@ -27,55 +26,11 @@ export default class homeScreen extends Component{
 			<Text style={{textAlign:'center',color:'white',fontSize:13,paddingTop:8}}>Settings</Text>
 			</TouchableOpacity>
 	});  
-  
-	constructor (props) {
-		super(props)
-		this.state = {
-		  record: ''
-		}
-	  }  // end constructor
-
-
-	profileView = () => {
-  
-		// Networking for sending user inputs to PHP server
-		  fetch('http://csitrd.kutztown.edu/~smagr173/backend/index.php', {
-		  method:'POST',
-		  header:{
-			'Accept': 'application/json',
-			'Content-type': 'application/json'
-		  }
-		  
-		})
-		.then((response) => response.json())
-		 .then((responseJson)=>{
-			if(responseJson != 0){
-				this.setState({ record: responseJson.email})
-			//console.warn(responseJson);  // gets displayed as console msg
-			}
-			else{
-				this.setState({ record: 'Not signed in!'})
-			}
-		   })
-		 .catch((error)=>{
-		 console.error(error);
-		 });
-	
-	  }
-  
+ 
 	render(){
-		const { record } = this.state;
 		const {navigate} = this.props.navigation;
 		return(
 	 	 <View style={styles.container}>
-        <Text style={styles.pageText}>{record}</Text>
-
-	    <TouchableOpacity
- 		 onPress={this.profileView}
-  		style={{marginTop:50,width:250,height:42,padding:10, justifyContent:'center',backgroundColor:'black',
-  		alignItems:'center'}}>
-  		<Text style={styles.buttonText}>View User</Text>
-  		</TouchableOpacity>  
 
 		  <Text style={styles.divider}>_____________________________</Text>
 

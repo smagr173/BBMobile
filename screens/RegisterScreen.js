@@ -40,11 +40,6 @@ constructor(props) {
 // Inputs get sent as JSON to PHP file, error msgs sent back
 userRegister = () => {
   
-  const {userFname} = this.state;
-  const {userLname} = this.state;
-  const {userEmail} = this.state;
-  const {userPassword1} = this.state;
-  
   // Networking for sending user inputs to PHP server
   fetch('http://csitrd.kutztown.edu/~smagr173/backend/create_account.php', {
     method: 'POST',
@@ -94,6 +89,20 @@ userRegister = () => {
     Keyboard.dismiss();
 }
 
+handleEmail = (text) => {
+  this.setState({ userEmail: text })
+  this.setState({ invalidEmail: ''})
+}
+handlePass = (text) => {
+  this.setState({ userPassword1: text })
+}
+handleFname = (text) => {
+  this.setState({ userFname: text })
+}
+handleLname = (text) => {
+  this.setState({ userLname: text })
+}
+
 // display input fields and buttons
 render() {
   const { fnamePlace } = this.state;
@@ -107,7 +116,7 @@ render() {
   return (
   <View style={styles.container}>
 
-    <Text style={styles.pageText}>Create a Bagel Bar account</Text>
+    <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
     
     <Text style={styles.errorText}>{invalidEmail}</Text>
     <Text style={styles.errorText}>{regFail}</Text>
@@ -120,7 +129,7 @@ render() {
   style={{paddingHorizontal:5,marginTop:1,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText = {userFname => this.setState({userFname})}  // on event set value for userName
+  onChangeText = {this.handleFname}  // on event set value for userName
   />
   
   <TextInput
@@ -131,7 +140,7 @@ render() {
   style={{paddingHorizontal:5,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText = {userLname => this.setState({userLname})}  // on event set value for userName
+  onChangeText = {this.handleLname}  // on event set value for userName
   />
 
   <TextInput
@@ -142,7 +151,7 @@ render() {
   style={{paddingHorizontal:5,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText= {userEmail => this.setState({userEmail})} // on event set value for email
+  onChangeText= {this.handleEmail} // on event set value for email
   />
   
   <TextInput
@@ -153,7 +162,7 @@ render() {
   style={{paddingHorizontal:5,marginBottom:27,width:300,height:35,margin:10, borderColor:"#333", 
   borderWidth:2}}	
   underlineColorAndroid="transparent"
-  onChangeText= {userPassword1 => this.setState({userPassword1})} // on event set value for password1
+  onChangeText= {this.handlePass} // on event set value for password1
   />
 
   <TouchableOpacity

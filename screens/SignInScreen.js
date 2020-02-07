@@ -83,8 +83,6 @@ handlePass = (text) => {
 
 // display input fields and buttons
 render() {
-  const { userEmail } = this.state;
-  const { userPassword } = this.state;
   const { emailPlace } = this.state;
   const { passPlace } = this.state;
   const { invalidCombo } = this.state;

@@ -30,11 +30,6 @@ render() {
 	 style={styles.image2} />
 
   <TouchableOpacity style={styles.topButton}
-  onPress={() => navigate('Menu')}>
-  <Text style={styles.buttonText}>View Menu</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity style={styles.button}
   onPress={() => navigate('Register')}>
   <Text style={styles.buttonText}>Create Account</Text>
   </TouchableOpacity>
@@ -71,7 +66,7 @@ buttonText: {
 },
 topButton: {
   marginTop:130,
-  marginBottom:25,
+  marginBottom:15,
   height:47,
   width:300,
   padding:10,
