@@ -2,7 +2,7 @@ This repository contains the code and information for the Bagel Bar Mobile app f
 an account, sign in, and update their information. Other features include viewing the menu and Bagel Bar information such as
 their phone number, address, and hours of operation.
 The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is
-accessible with any internet connection.
+accessible with any internet connection. Note that this project is still under development, it is hardly finished work.
 
 The 'screens' folder contains the bulk of the React Native code. The 'navigation' folder contains the tab bar navigation and
 main navigation files.
