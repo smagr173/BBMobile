@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     height: 44,
   },
-  })
+})
 
 MenuScreen.navigationOptions = {
   title: 'Menu',   /** Title Top of Page */
