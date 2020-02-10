@@ -115,7 +115,7 @@ export default class SignIn extends Component {
           autoCorrect={false}
           returnKeyType='done'
           placeholderTextColor={placeTextPass}
-          placeholder={passPlace}
+          placeholder={passPlace} secureTextEntry={true}
           style={{paddingHorizontal:5,marginBottom:27,width:Dimensions.get('window').width*.75,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
