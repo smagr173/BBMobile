@@ -41,9 +41,13 @@ const HomeStack = createStackNavigator(
 // Customize tab icon and label
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
+  tabBarOptions: {
+    activeTintColor: 'brown',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'} />
+    ),
 };
 
 HomeStack.path = '';
@@ -59,8 +63,12 @@ const MenuStack = createStackNavigator(
 // Customize tab icon and label
 MenuStack.navigationOptions = {
   tabBarLabel: 'Menu',
+  tabBarOptions: {
+    activeTintColor: 'brown',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-paper' : 'ios-paper'} />
   ),
 };
 
@@ -77,12 +85,16 @@ const AboutStack = createStackNavigator(
 // Customize tab icon and label
 AboutStack.navigationOptions = {
   tabBarLabel: 'Info',
+  tabBarOptions: {
+    activeTintColor: 'brown',
+    inactiveTintColor: 'gray',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
+          ? `ios-information-circle`
           : 'md-information-circle'
       }
     />
