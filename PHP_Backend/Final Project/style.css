@@ -1,0 +1,97 @@
+body {
+	font-family: Arial;
+	background-color: linen;
+	margin: 0 auto;
+	max-width: 960px;
+	padding-right: 20px;
+	padding-left: 60px;
+}
+
+h1 {
+	color: DimGray;
+	text-align: left;
+}
+
+.header h2 { 
+	color: white;
+	float: right;
+	margin-right: 30px;
+	font-weight: 500;
+}
+
+table {
+	width: 75%;
+	border-collapse: collapse;
+}
+
+th {
+	height: 50px;
+}
+
+table, th, td {
+	color: DarkBlue;
+	text-align: center;
+	border: 2px solid DimGray;
+}
+
+.header {
+	width:760px; 
+	height:120px;
+	background: DimGray;
+}
+
+.nav {
+    font-size: large;
+}
+
+label {
+	margin-right: 10px;
+}
+
+p {
+	font-family: Arial;
+	color: DimGray;
+}
+
+.button {
+	font-size: medium;
+	font-family: Arial;
+	border-radius: 45px;
+    border: 1px solid #999;
+    padding: 10px 15px;
+    color: DimGray;
+    cursor: pointer;
+}
+
+.button1 {
+	font-size: medium;
+	margin-left: 210px;
+	font-family: Arial;
+	border-radius: 45px;
+    border: 1px solid #999;
+    padding: 10px 15px;
+    color: DimGray;
+    cursor: pointer;
+}
+
+.button2 {
+	font-size: medium;
+	margin-left: 225px;
+	font-family: Arial;
+	border-radius: 45px;
+    border: 1px solid #999;
+    padding: 10px 15px;
+    color: DimGray;
+    cursor: pointer;
+}
+
+.button3 {
+	font-size: medium;
+	margin-left: 200px;
+	font-family: Arial;
+	border-radius: 45px;
+    border: 1px solid #999;
+    padding: 10px 15px;
+    color: DimGray;
+    cursor: pointer;
+}
