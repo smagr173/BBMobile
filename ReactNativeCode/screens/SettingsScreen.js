@@ -56,7 +56,7 @@ export default class SettingsScreen extends Component {
   	  	  <Text style={styles.buttonText}>Update Info</Text>
   	  	</TouchableOpacity> 
 
-        <Text style={styles.divider}>_______________________________________</Text>
+        <Text style={styles.divider}>_________________________________</Text>
 
         <TouchableOpacity
           onPress={this.LogOut}
@@ -73,7 +73,7 @@ export default class SettingsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white'
   },
@@ -99,5 +99,6 @@ const styles = StyleSheet.create({
     color:'black',
     textAlign:'center',
     fontSize:Dimensions.get('window').height*.025,
-  }
+  },
+  
 });

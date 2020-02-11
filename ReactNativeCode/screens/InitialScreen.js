@@ -82,13 +82,13 @@ button: {
   alignItems: 'center'
 },
 link: {
-  width: Dimensions.get('window').width*.25,
+  width: Dimensions.get('window').width*.3,
   padding: 10,
   alignItems: 'center'
 },
 image1: {
   width: Dimensions.get('window').width,
-  height: Dimensions.get('window').width * .5
+  height: Dimensions.get('window').width * .5,
 },
 image2: {
   marginTop: 32,

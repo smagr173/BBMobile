@@ -257,7 +257,7 @@ export default class SettingsScreen extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Text style={styles.divider}>__________________________________________</Text>
+          <Text style={styles.divider}>________________________________</Text>
      
           <Text style={styles.pageText}>Alter Your Email Address</Text>
 
@@ -298,7 +298,7 @@ export default class SettingsScreen extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Text style={styles.divider}>__________________________________________</Text>
+          <Text style={styles.divider}>________________________________</Text>
 
           <Text style={styles.pageText}>Alter Your Current Password</Text>
 
@@ -333,11 +333,10 @@ export default class SettingsScreen extends Component {
           <TouchableOpacity
             onPress={this.updatePass}   // when pressed call the userSignIn function
             style={{marginTop:20,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
-            padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
+            padding:10, justifyContent:'center',marginBottom: Dimensions.get('window').height*.35,backgroundColor:'black',alignItems:'center'}}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Text style={styles.dividerBot}>__________________________________________</Text>
         </View>
       </ScrollView>
     ); // end return

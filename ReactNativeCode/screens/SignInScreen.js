@@ -132,7 +132,7 @@ export default class SignIn extends Component {
 
         <TouchableOpacity
           onPress={() => navigate('Register')}
-          style={{marginBottom:275, width:Dimensions.get('window').width*.43, padding:10, alignItems:'center'}}>
+          style={{marginBottom:275, width:Dimensions.get('window').width*.5, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Create Account</Text>
         </TouchableOpacity>
 
