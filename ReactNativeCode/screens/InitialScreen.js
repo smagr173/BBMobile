@@ -23,7 +23,8 @@ export default class InitialScreen extends Component {
         <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/BagelTest.png'}}
   	    style={styles.image1} />
   
-        <Text style={styles.divider}>_____________________________</Text>
+       <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	    style={styles.divider} />
   
         <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/Order.png'}}
 	      style={styles.image2} />
@@ -96,10 +97,10 @@ image2: {
   height: Dimensions.get('window').width * .101
 },
 divider: {
-  color: 'black',
-  textAlign: 'center',
-  fontSize: Dimensions.get('window').height*.021,
-  marginBottom: 10,
+  marginTop:15,
+  width: Dimensions.get('window').width *.5,
+  height: Dimensions.get('window').width * .003,
+  marginBottom:10,
 }
 
 });

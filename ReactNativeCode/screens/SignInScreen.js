@@ -30,12 +30,65 @@ export default class SignIn extends Component {
         invalidCombo: '',
         placeTextEmail: 'gray',
         placeTextPass: 'gray',
+        invalidEmail: '',
+        invalidPass: '',
       };
   }  // end constructor
 
 // On text change userSignIn gets called
 // Inputs get sent as JSON to PHP file, error msgs sent back
   SignIn = () => {
+    const {userEmail,userPassword} = this.state;
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    if(userEmail=="" && userPassword.length < 8 && userPassword!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ placeTextEmail: 'red'})
+    }
+    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+    else if(userPassword.length < 8 && userPassword!="") {
+      this.setState({ invalidPass:'Password is at least 8 characters'})
+    }
+    else if(userPassword.length >= 8 && reg.test(userEmail) === false && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+
+    else if(reg.test(userEmail) === false && userPassword=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ placeTextPass: 'red'})
+      return false;
+      }
+    else if(userEmail=="" && userPassword=="") {
+		  this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ placeTextEmail: 'red'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ placeTextPass: 'red'})
+    }
+    else if(userEmail=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ placeTextEmail: 'red'})
+    }
+    else if(userPassword=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ placeTextPass: 'red'})
+    }
+    else if(userEmail=="" && userPassword.length < 8 && userPassword!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ placeTextEmail: 'red'})
+    }
+    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+    else if(userPassword.length < 8 && userPassword!="") {
+      this.setState({ invalidPass:'Password is at least 8 characters'})
+    }
+    else{
     // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/sign_in.php', {
       method: 'POST',
@@ -72,16 +125,19 @@ export default class SignIn extends Component {
       .catch((error)=>{
       console.error(error);
       });
+    } // end else
       Keyboard.dismiss();
   }
 
   handleEmail = (text) => {
     this.setState({ userEmail: text })
     this.setState({ invalidCombo: ''})
+    this.setState({ invalidEmail: ''})
   }
   handlePass = (text) => {
     this.setState({ userPassword: text })
     this.setState({ invalidCombo: ''})
+    this.setState({ invalidPass: ''})
   }
 
   // display input fields and buttons
@@ -91,6 +147,8 @@ export default class SignIn extends Component {
     const { emailPlace } = this.state;
     const { passPlace } = this.state;
     const { invalidCombo } = this.state;
+    const { invalidEmail } = this.state;
+    const { invalidPass } = this.state;
     const {navigate} = this.props.navigation;
 
     return (
@@ -98,6 +156,8 @@ export default class SignIn extends Component {
         <Text style={styles.pageText}>Sign in to your Bagel Bar Account</Text>
 
         <Text style={styles.errorText}>{invalidCombo}</Text>
+        <Text style={styles.errorText}>{invalidEmail}</Text>
+        <Text style={styles.errorText}>{invalidPass}</Text>
 
         <TextInput
           autoCorrect={false}

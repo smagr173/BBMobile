@@ -12,7 +12,7 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
   static navigationOptions = ({
@@ -56,7 +56,8 @@ export default class SettingsScreen extends Component {
   	  	  <Text style={styles.buttonText}>Update Info</Text>
   	  	</TouchableOpacity> 
 
-        <Text style={styles.divider}>_________________________________</Text>
+        <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	   			style={styles.divider} />
 
         <TouchableOpacity
           onPress={this.LogOut}
@@ -96,9 +97,10 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   divider: {
-    color:'black',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
-  },
+    marginTop:25,
+    width: Dimensions.get('window').width *.85,
+    height: Dimensions.get('window').width * .003,
+    marginBottom:5,
+    },
   
 });

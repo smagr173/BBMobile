@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
   static navigationOptions = ({
@@ -21,24 +21,26 @@ export default class SettingsScreen extends Component {
   constructor(props) {
     super(props)
       this.state = {
-        fName: null,
-        lName: null,
-        fnamePlace: null,
-        lnamePlace: null,
-        email: null,
-        pass: null,
+        fName: '',
+        lName: '',
+        fnamePlace: '',
+        lnamePlace: '',
+        email: '',
+        pass: '',
         passPlace: 'Enter current password',
-        emailPlace: null,
-        invalidCombo: null,
-        emailTaken: null,
+        emailPlace: '',
+        invalidCombo: '',
+        emailTaken: '',
         newPassPlace: 'Enter new password',
         passPlace2: 'Enter current password',
-        pass2: null,
-        NewPass: null,
-        wrongCurr: null,
+        pass2: '',
+        NewPass: '',
+        wrongCurr: '',
         newPassPlaceText: 'gray',
         currPlaceText: 'gray',
         curr2PlaceText: 'gray',
+        invalidEmail: '',
+        invalidNew: '',
       };
   }  // end constructor
 
@@ -61,6 +63,18 @@ export default class SettingsScreen extends Component {
   }
 
   updateNames = () => {
+    const {fName,lName} = this.state;
+    if(fName=="" && lName==""){
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ lnamePlace: 'Last name is required'})
+    }
+    else if(fName=="") {
+      this.setState({ fnamePlace: 'First name is required'})
+    }
+    else if(lName=="") {
+      this.setState({ lnamePlace: 'Last name is required'})
+    }
+    else {
     // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/update.php', {
       method:'POST',
@@ -92,10 +106,63 @@ export default class SettingsScreen extends Component {
       .catch((error) => {
       console.error(error);
       });
+    } // end else
       Keyboard.dismiss();
   }
 
   updateEmail = () => {
+    const {email, pass} = this.state;
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    if (email!="" && pass!="" && reg.test(email) === false && pass.length < 8){
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ passPlace: 'Password is required'})
+      this.setState({ currPlaceText: 'red'})
+      this.setState({ invalidCombo:'Password is at least 8 characters'})
+      return false;
+    }
+    else if(pass.length < 8 && reg.test(email) === false && email!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+    else if(pass.length >= 8 && reg.test(email) === false && email!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+
+    else if(pass.length < 8 && pass!="") {
+      this.setState({ invalidCombo:'Password is at least 8 characters'})
+    }
+    else if(reg.test(email) === false && pass=="" && email!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ currPlaceText: 'red'})
+      return false;
+    }
+    else if(email=="" && pass=="") {
+		  this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ currPlaceText: 'red'})
+    }
+    else if(email=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+    }
+    else if(pass=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ currPlaceText: 'red'})
+    }
+    else if(email=="" && pass.length < 8 && pass!="") {
+      this.setState({ invalidCombo:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+    }
+    else if(pass.length < 8 && reg.test(email) === false && email!="") {
+      this.setState({ invalidCombo:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      return false;
+    }
+    else if(pass.length < 8 && pass!="") {
+      this.setState({ invalidCombo:'Password is at least 8 characters'})
+    }
+    else{
     // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/updateEmail.php', {
       method:'POST',
@@ -134,10 +201,41 @@ export default class SettingsScreen extends Component {
       .catch((error)=>{
       console.error(error);
       });
+    } // end else
       Keyboard.dismiss();
   }
 
   updatePass = () => {
+    const {NewPass, pass2} = this.state;
+    if(pass2.length < 8 && pass2!="" && NewPass.length < 8 && NewPass !="") {
+      this.setState({ wrongCurr:'Current password is at least 8 characters'})
+      this.setState({ invalidNew:'New password must be at least 8 characters'})
+    }
+    else if(pass2.length < 8 && pass2!="" && NewPass=="") {
+      this.setState({ wrongCurr:'Current password is at least 8 characters'})
+      this.setState({ newPassPlace:'New password is required'})
+          this.setState({ newPassPlaceText: 'red'})
+    }
+    else if(NewPass.length < 8 && pass2=="" && NewPass!="") {
+      this.setState({ invalidNew:'New password must be at least 8 characters'})
+      this.setState({ passPlace2:'Current password is required'})
+      this.setState({ curr2PlaceText: 'red'})
+    }
+    else if(NewPass.length >= 8 && pass2=="") {
+      this.setState({ passPlace2:'Current password is required'})
+      this.setState({ curr2PlaceText: 'red'})
+    }
+    else if(pass2.length >= 8 && NewPass=="") {
+      this.setState({ newPassPlace:'New password is required'})
+      this.setState({ newPassPlaceText: 'red'})
+    }
+    else if(pass2.length >= 8 && NewPass.length < 8 && NewPass != '') {
+      this.setState({ invalidNew:'New password must be least 8 characters'})
+    }
+    else if(NewPass.length >= 8 && pass2.length < 8 && pass2 != '') {
+      this.setState({ wrongCurr:'Current password is at least 8 characters'})
+    }
+    else {
     // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/updatePass.php', {
       method:'POST',
@@ -174,6 +272,7 @@ export default class SettingsScreen extends Component {
       .catch((error)=>{
       console.error(error);
       });
+    } // end else
       Keyboard.dismiss();
   }
 
@@ -187,10 +286,12 @@ export default class SettingsScreen extends Component {
     this.setState({ email: text })
     this.setState({ invalidCombo: ''})
     this.setState({ emailTaken: ''})
+    this.setState({ invalidEmail: ''})
   }
   handlePass= (text) => {
     this.setState({ pass: text })
     this.setState({ invalidCombo: ''})
+    this.setState({ invalidPass: ''})
   }
   handlePass2= (text) => {
     this.setState({ pass2: text })
@@ -198,6 +299,7 @@ export default class SettingsScreen extends Component {
   }
   handleNewPass= (text) => {
     this.setState({ NewPass: text })
+    this.setState({ invalidNew: '' })
   }
 
   render() { 
@@ -216,6 +318,8 @@ export default class SettingsScreen extends Component {
     const { newPassPlaceText } = this.state;
     const { currPlaceText } = this.state;
     const { curr2PlaceText } = this.state;
+    const { invalidEmail } = this.state;
+    const { invalidNew } = this.state;
 
     return (
       <ScrollView style={styles.container}>
@@ -257,12 +361,14 @@ export default class SettingsScreen extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Text style={styles.divider}>________________________________</Text>
+          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	   			style={styles.divider} />
      
           <Text style={styles.pageText}>Alter Your Email Address</Text>
 
           <Text style={styles.errorText}>{invalidCombo}</Text>
           <Text style={styles.errorText}>{emailTaken}</Text>
+          <Text style={styles.errorText}>{invalidEmail}</Text>
 
           <Text style={styles.inputAbove}>Email Address</Text>
           <TextInput
@@ -298,11 +404,13 @@ export default class SettingsScreen extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Text style={styles.divider}>________________________________</Text>
+          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	   			style={styles.divider} />
 
           <Text style={styles.pageText}>Alter Your Current Password</Text>
 
           <Text style={styles.errorText}>{wrongCurr}</Text>
+          <Text style={styles.errorText}>{invalidNew}</Text>
 
           <Text style={styles.inputAboveCurr}>Current Password</Text>
           <TextInput
@@ -387,11 +495,10 @@ const styles = StyleSheet.create({
     fontSize:Dimensions.get('window').height*.02,
   },
   divider: {
-    marginTop:10,
+    marginTop:25,
+    width: Dimensions.get('window').width *.85,
+    height: Dimensions.get('window').width * .003,
     marginBottom:20,
-    color:'black',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
   },
   dividerBot: {
     marginTop:10,

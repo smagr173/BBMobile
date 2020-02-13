@@ -37,7 +37,8 @@ export default class AboutScreen extends Component {
           <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/BagelTest.png'}}
           style={styles.image1} />
       
-          <Text style={styles.divider}>_____________________________</Text>
+          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	   			style={styles.divider} />
 
           <Text style={styles.subtitle}>Contact</Text>
           <Text style={styles.bodyText}>610-683-5440</Text>
@@ -49,7 +50,8 @@ export default class AboutScreen extends Component {
           <Text style={styles.subtitle}>Address</Text>
           <Text style={styles.bodyText}>214 W. Main St. Kutztown, PA 19530</Text>
 
-          <Text style={styles.divider}>___________________________________________________</Text>
+          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+  	   			style={styles.dividerBottom} />
 
           <Text style={styles.subtitle}>Map Location</Text>
 
@@ -96,12 +98,17 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').width * .5
   },
   divider: {
-    marginTop: 5,
-    color:'black',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.021,
-    marginBottom: 25
-  },
+		marginTop:15,
+		width: Dimensions.get('window').width *.5,
+		height: Dimensions.get('window').width * .003,
+		marginBottom:25,
+    },
+    dividerBottom: {
+      marginTop:15,
+      width: Dimensions.get('window').width *.85,
+      height: Dimensions.get('window').width * .003,
+      marginBottom:20,
+    },
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * .62,

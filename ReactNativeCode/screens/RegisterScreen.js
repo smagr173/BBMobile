@@ -38,12 +38,285 @@ export default class register extends Component {
         lnamePlaceText: 'gray',
         emailPlaceText: 'gray',
         passPlaceText: 'gray',
+        invalidPass: '',
       }
   }  // end constructor
 
   // On text change userRegister gets called
   // Inputs get sent as JSON to PHP file, error msgs sent back
   userRegister = () => {
+    const {userEmail,userPassword1,userFname,userLname} = this.state;
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    if(reg.test(userEmail) === false && userPassword1=="" && userFname=="" && userLname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      return false;
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userFname=="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userFname==""&& userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userLname=="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userLname!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname!="" && userLname!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(reg.test(userEmail) === true && userEmail!="" && userPassword1 >=8 && userFname=="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && reg.test(userEmail) === false && userEmail!="" && userLname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && reg.test(userEmail) === false && userEmail!="" && userFname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && reg.test(userEmail) === false && userEmail!="" && userLname=="" && userFname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && reg.test(userEmail) === false && userEmail!="" && userLname!="" && userFname!="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+    else if(reg.test(userEmail) === false && userPassword1=="" && userFname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      return false;
+    }
+    else if(reg.test(userEmail) === false && userPassword1=="" && userLname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      return false;
+    }
+    else if(reg.test(userEmail) === false && userLname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      return false;
+    }
+    else if(reg.test(userEmail) === false  && userFname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      return false;
+    }
+    else if(reg.test(userEmail) === false && userLname=="" && userFname=="" && userEmail!="") {
+      this.setState({ invalidEmail: 'Email address must be valid'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+      return false;
+    }
+    else if(userEmail=="" && userPassword1=="" && userFname=="" && userLname=="") {
+		  this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userPassword1=="" && userFname=="") {
+		  this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && userFname=="" && userLname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userFname=="" && userLname=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userPassword1=="" && userLname=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userFname=="" && userLname=="") {
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && userLname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userPassword1=="" && userFname=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userFname=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userLname=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userEmail=="" && userPassword1=="") {
+		  this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+    }
+    else if(userFname=="") {
+      this.setState({ fnamePlace: 'First name is required'})
+      this.setState({ fnamePlaceText: 'red'})
+    }
+    else if(userFname=="") {
+      this.setState({ lnamePlace: 'Last name is required'})
+      this.setState({ lnamePlaceText: 'red'})
+    }
+    else if(userEmail=="") {
+      this.setState({ emailPlace: 'Email address is required'})
+      this.setState({ emailPlaceText: 'red'})
+    }
+    else if(userPassword1=="") {
+      this.setState({ passPlace:'Password is required'})
+      this.setState({ passPlaceText: 'red'})
+    }
+    else if(userPassword1.length < 8 && userEmail!="" && reg.test(userEmail)=== false && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+      this.setState({ invalidEmail: 'Email address must be valid'})
+    }
+    else if(userPassword1.length < 8 && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    }
+		else if(reg.test(userEmail) === false && userEmail!="") {
+    this.setState({ invalidEmail: 'Email address must be valid'})
+		return false;
+    }
+    else{
     // Networking for sending user inputs to PHP server
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/create_account.php', {
       method: 'POST',
@@ -94,6 +367,7 @@ export default class register extends Component {
       .catch((error) => {
         console.error(error);
       });
+    } // end else
       Keyboard.dismiss();
   }  // End userRegister
 
@@ -103,6 +377,7 @@ export default class register extends Component {
   }
   handlePass = (text) => {
     this.setState({ userPassword1: text })
+    this.setState({ invalidPass: ''})
   }
   handleFname = (text) => {
     this.setState({ userFname: text })
@@ -124,12 +399,14 @@ export default class register extends Component {
     const { invalidEmail } = this.state;
     const { regFail } = this.state;
     const { navigate } = this.props.navigation;
+    const { invalidPass } = this.state;
 
     return (
       <View style={styles.container}>
         <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
     
         <Text style={styles.errorText}>{invalidEmail}</Text>
+        <Text style={styles.errorText}>{invalidPass}</Text>
         <Text style={styles.errorText}>{regFail}</Text>
 
         <TextInput
@@ -185,7 +462,7 @@ export default class register extends Component {
   
         <TouchableOpacity
           onPress={() => navigate('SignIn')}
-          style={{marginBottom:260, width:Dimensions.get('window').width*.24, padding:10, alignItems:'center'}}>
+          style={{marginBottom:260, width:Dimensions.get('window').width*.3, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Sign In</Text>
         </TouchableOpacity>
 
