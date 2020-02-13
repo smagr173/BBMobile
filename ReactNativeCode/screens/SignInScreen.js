@@ -45,7 +45,7 @@ export default class SignIn extends Component {
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ placeTextEmail: 'red'})
     }
-    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="") {
+    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="" && userPassword!="") {
       this.setState({ invalidPass:'Password must be at least 8 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
