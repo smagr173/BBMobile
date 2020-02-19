@@ -12,7 +12,7 @@
 /********************************************************************/
 
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -23,20 +23,45 @@ import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import UpdateScreen from '../screens/UpdateScreen';
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
-
 // Home screen stack
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Settings: SettingsScreen,
-    Update: UpdateScreen,
+  Home:  {
+    screen: HomeScreen,
+    navigationOptions: {
+      title: 'Home',
+    },
   },
-  config
+  Settings: {
+    screen: SettingsScreen,
+    navigationOptions: {
+      title: 'Settings',
+    },
+  },
+  Update: {
+    screen: UpdateScreen,
+    navigationOptions: {
+      title: 'Update Info',
+    },
+  },
+},
+{
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: '#202020',
+          height: Dimensions.get('window').height*.07,
+          
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+          fontWeight: 'bold',
+          color: 'white',
+          fontSize:Dimensions.get('window').height*.025,
+      }
+  }
+}
 );
+
 
 // Customize tab icon and label
 HomeStack.navigationOptions = {
@@ -55,9 +80,27 @@ HomeStack.path = '';
 // Menu screen stack
 const MenuStack = createStackNavigator(
   {
-    Menu: MenuScreen,
+    Menu: {
+      screen: MenuScreen,
+      navigationOptions: {
+        title: 'Menu',
+      },
+    },
   },
-  config
+  {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#202020',
+            height: Dimensions.get('window').height*.07,
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize:Dimensions.get('window').height*.025,
+        }
+    }
+  }
 );
 
 // Customize tab icon and label
@@ -77,9 +120,27 @@ MenuStack.path = '';
 // About screen stack
 const AboutStack = createStackNavigator(
   {
-    About: AboutScreen,
+    About: {
+      screen: AboutScreen,
+      navigationOptions: {
+        title: 'Information',
+      },
+    },
   },
-  config
+  {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#202020',
+            height: Dimensions.get('window').height*.07,
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize:Dimensions.get('window').height*.025,
+        }
+    }
+  }
 );
 
 // Customize tab icon and label

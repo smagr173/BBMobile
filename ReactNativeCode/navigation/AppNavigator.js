@@ -10,6 +10,7 @@
 /*                                                                  */
 /********************************************************************/
 
+import { Dimensions } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -17,16 +18,46 @@ import InitialScreen from '../screens/InitialScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import SignInScreen from '../screens/SignInScreen';
 
-
 import MainTabNavigator from './MainTabNavigator';  // Import navigation tab
 
 // Main navigation stack
 // If its in here it does not get a navigation tab
 const MainStack = createStackNavigator(
   {
-    Initial: InitialScreen,
-    Register: RegisterScreen,
-    SignIn: SignInScreen,
+    Initial:  {
+      screen: InitialScreen,
+      navigationOptions: {
+        title: '',
+      },
+    },
+    Register: {
+      screen: RegisterScreen,
+      navigationOptions: {
+        title: 'Register',
+      },
+    },
+    SignIn: {
+      screen: SignInScreen,
+      navigationOptions: {
+        title: 'Sign In',
+      },
+    },
+  },
+  {
+    initialRouteName: 'Initial',
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#202020',
+            height: Dimensions.get('window').height*.07,
+            
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize:Dimensions.get('window').height*.025,
+        }
+    }
   }
 );
 
