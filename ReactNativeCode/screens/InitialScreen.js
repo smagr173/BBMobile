@@ -12,21 +12,28 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
+  static navigationOptions= ({navigation}) =>({ 
+    headerRight:
+			<View style={styles.navBar}>
+          <Image source={require('../assets/images/bagelIcon.jpg')}
+        style={styles.logo} />
+			</View>
+  });
+  
   render() {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/BagelTest.png'}}
-  	    style={styles.image1} />
+        <Image source={require('../assets/images/mainLogo.png')}
+  	      style={styles.image1} />
   
-       <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+        <Image source={require('../assets/images/divider.png')}
   	    style={styles.divider} />
   
-        <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/Order.png'}}
+        <Image source={require('../assets/images/grayOrder.png')}
 	      style={styles.image2} />
 
         <TouchableOpacity style={styles.topButton}
@@ -66,7 +73,7 @@ buttonText: {
 },
 topButton: {
   marginTop: 130,
-  marginBottom: 10,
+  marginBottom: 7,
   width: Dimensions.get('window').width*.55,
   height: Dimensions.get('window').height*.065,
   padding: 10,
@@ -92,7 +99,7 @@ image1: {
   height: Dimensions.get('window').width * .5,
 },
 image2: {
-  marginTop: 32,
+  marginTop: 65,
   width: Dimensions.get('window').width * .63,
   height: Dimensions.get('window').width * .101
 },
@@ -100,7 +107,14 @@ divider: {
   marginTop:15,
   width: Dimensions.get('window').width *.5,
   height: Dimensions.get('window').width * .003,
-  marginBottom:10,
-}
+
+},
+navBar: {
+  marginRight:Dimensions.get('window').width *.438,
+},
+logo: {
+  width: Dimensions.get('window').width *.12,
+  height: Dimensions.get('window').width * .09,
+},
 
 });

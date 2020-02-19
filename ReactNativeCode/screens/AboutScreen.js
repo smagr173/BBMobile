@@ -16,9 +16,6 @@ import MapView from 'react-native-maps';
 import { ScrollView, StyleSheet, Text, View, Image} from 'react-native';
 
 export default class AboutScreen extends Component {
-  static navigationOptions = {
-    title: 'Information',
-  };
 
   render() {
     var region = {
@@ -34,10 +31,10 @@ export default class AboutScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.contentContainer}>
-          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/BagelTest.png'}}
-          style={styles.image1} />
+          <Image source={require('../assets/images/mainLogo.png')}
+            style={styles.image1} />
       
-          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+          <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
 
           <Text style={styles.subtitle}>Contact</Text>
@@ -50,7 +47,7 @@ export default class AboutScreen extends Component {
           <Text style={styles.subtitle}>Address</Text>
           <Text style={styles.bodyText}>214 W. Main St. Kutztown, PA 19530</Text>
 
-          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+          <Image source={require('../assets/images/divider.png')}
   	   			style={styles.dividerBottom} />
 
           <Text style={styles.subtitle}>Map Location</Text>

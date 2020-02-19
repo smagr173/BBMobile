@@ -16,9 +16,6 @@ import { Dimensions } from 'react-native';
 import { AppRegistry, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SignIn extends Component {
-  static navigationOptions = ({
-    title: 'Sign In'  // displayed at top of screen
-  });
 
   constructor(props) {
     super(props)
@@ -156,36 +153,40 @@ export default class SignIn extends Component {
         <Text style={styles.pageText}>Sign in to your Bagel Bar Account</Text>
 
         <Text style={styles.errorText}>{invalidCombo}</Text>
-        <Text style={styles.errorText}>{invalidEmail}</Text>
-        <Text style={styles.errorText}>{invalidPass}</Text>
+        
+        
 
         <TextInput
           autoCorrect={false}
           returnKeyType='done'
           placeholder={emailPlace}
           placeholderTextColor={placeTextEmail}
-          style={{paddingHorizontal:5,marginTop:17,width:Dimensions.get('window').width*.75,
+          style={{marginBottom: 5,paddingHorizontal:5,marginTop:7,width:Dimensions.get('window').width*.75,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handleEmail}  // on event set value for email
         />
   
+          <Text style={styles.errorText}>{invalidEmail}</Text>
+
         <TextInput
           autoCorrect={false}
           returnKeyType='done'
           placeholderTextColor={placeTextPass}
           placeholder={passPlace} secureTextEntry={true}
-          style={{paddingHorizontal:5,marginBottom:27,width:Dimensions.get('window').width*.75,
+          style={{marginTop:13,paddingHorizontal:5,marginBottom:5,width:Dimensions.get('window').width*.75,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handlePass}  // on event set value for password
         />
+
+          <Text style={styles.errorText}>{invalidPass}</Text>
   
         <TouchableOpacity
           onPress={this.SignIn}   // when pressed call the userSignIn function
-          style={{ width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
+          style={{ marginTop: 20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
           justifyContent:'center',backgroundColor:'black', alignItems:'center',marginBottom:7}}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
@@ -209,7 +210,7 @@ container: {
   backgroundColor: 'white',
 },
 pageText: {
-  marginBottom:10,
+  marginBottom:20,
   fontWeight:'bold',
   color:'gray',
   textAlign:'center',
@@ -229,7 +230,6 @@ buttonText: {
   fontSize:Dimensions.get('window').height*.023,
 },
 errorText: {
-  fontWeight:'bold',
   color:'red',
   textAlign:'center',
   fontSize:Dimensions.get('window').height*.02,

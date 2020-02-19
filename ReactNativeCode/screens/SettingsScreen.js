@@ -15,9 +15,6 @@ import { Dimensions } from 'react-native';
 import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
-  static navigationOptions = ({
-    title: 'Settings'   // displayed at top of screen
-  });
 
   LogOut = () => {
     // Networking for sending user inputs to PHP server
@@ -56,7 +53,7 @@ export default class SettingsScreen extends Component {
   	  	  <Text style={styles.buttonText}>Update Info</Text>
   	  	</TouchableOpacity> 
 
-        <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+        <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
 
         <TouchableOpacity

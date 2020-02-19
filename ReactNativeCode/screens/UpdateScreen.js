@@ -14,9 +14,6 @@ import { Dimensions } from 'react-native';
 import { Image, ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
-  static navigationOptions = ({
-    title: 'Update Info'   // displayed at top of screen
-  }); 
 
   constructor(props) {
     super(props)
@@ -30,7 +27,7 @@ export default class SettingsScreen extends Component {
         passPlace: 'Enter current password',
         emailPlace: '',
         invalidCombo: '',
-        emailTaken: '',
+        invalidLen: '',
         newPassPlace: 'Enter new password',
         passPlace2: 'Enter current password',
         pass2: '',
@@ -118,11 +115,11 @@ export default class SettingsScreen extends Component {
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ passPlace: 'Password is required'})
       this.setState({ currPlaceText: 'red'})
-      this.setState({ invalidCombo:'Password is at least 8 characters'})
+      this.setState({ invalidLen:'Password is at least 8 characters'})
       return false;
     }
-    else if(pass.length < 8 && reg.test(email) === false && email!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(pass.length < 8 && reg.test(email) === false && email!="" && pass!="") {
+      this.setState({ invalidLen:'Password must be at least 8 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
     else if(pass.length >= 8 && reg.test(email) === false && email!="") {
@@ -130,7 +127,7 @@ export default class SettingsScreen extends Component {
     }
 
     else if(pass.length < 8 && pass!="") {
-      this.setState({ invalidCombo:'Password is at least 8 characters'})
+      this.setState({ invalidLen:'Password is at least 8 characters'})
     }
     else if(reg.test(email) === false && pass=="" && email!="") {
       this.setState({ invalidEmail: 'Email address must be valid'})
@@ -151,11 +148,11 @@ export default class SettingsScreen extends Component {
       this.setState({ currPlaceText: 'red'})
     }
     else if(email=="" && pass.length < 8 && pass!="") {
-      this.setState({ invalidCombo:'Password must be at least 8 characters'})
+      this.setState({ invalidLen:'Password must be at least 8 characters'})
       this.setState({ emailPlace: 'Email address is required'})
     }
-    else if(pass.length < 8 && reg.test(email) === false && email!="") {
-      this.setState({ invalidCombo:'Password must be at least 8 characters'})
+    else if(pass.length < 8 && reg.test(email) === false && email!="" && pass!="") {
+      this.setState({ invalidLen:'Password must be at least 8 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
       return false;
     }
@@ -185,7 +182,7 @@ export default class SettingsScreen extends Component {
           this.setState({ emailPlace: responseJson.eErr})
         }
         if(responseJson.eTaken == "The email address entered is already taken") {
-          this.setState({ emailTaken: responseJson.eTaken})
+          this.setState({ invalidEmail: responseJson.eTaken})
         }
         if(responseJson.emptPass == "Current password is required") {
           this.setState({ passPlace: responseJson.emptPass})
@@ -285,13 +282,13 @@ export default class SettingsScreen extends Component {
   handleEmail = (text) => {
     this.setState({ email: text })
     this.setState({ invalidCombo: ''})
-    this.setState({ emailTaken: ''})
     this.setState({ invalidEmail: ''})
   }
   handlePass= (text) => {
     this.setState({ pass: text })
     this.setState({ invalidCombo: ''})
     this.setState({ invalidPass: ''})
+    this.setState({ invalidLen: ''})
   }
   handlePass2= (text) => {
     this.setState({ pass2: text })
@@ -311,7 +308,7 @@ export default class SettingsScreen extends Component {
     const { emailPlace } = this.state;
     const { passPlace } = this.state;
     const { invalidCombo } = this.state;
-    const { emailTaken } = this.state;
+    const { invalidLen } = this.state;
     const { passPlace2 } = this.state;
     const { newPassPlace } = this.state;
     const { wrongCurr } = this.state;
@@ -340,7 +337,7 @@ export default class SettingsScreen extends Component {
             value={fName}
           />
 
-          <Text style={styles.inputAbove}>Last name</Text>
+          <Text style={styles.inputMiddle}>Last name</Text>
           <TextInput
             autoCorrect={false}
             returnKeyType='done'
@@ -361,22 +358,21 @@ export default class SettingsScreen extends Component {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+          <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
      
           <Text style={styles.pageText}>Alter Your Email Address</Text>
 
           <Text style={styles.errorText}>{invalidCombo}</Text>
-          <Text style={styles.errorText}>{emailTaken}</Text>
-          <Text style={styles.errorText}>{invalidEmail}</Text>
-
+          
           <Text style={styles.inputAbove}>Email Address</Text>
+          
           <TextInput
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor="red"
             placeholder={emailPlace}
-            style={{paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
+            style={{marginBottom: 5,paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
@@ -384,33 +380,35 @@ export default class SettingsScreen extends Component {
             value={email}
           />
 
-          <Text style={styles.inputAbove}>Current Password</Text>
+            <Text style={styles.errorText}>{invalidEmail}</Text>
+
+          <Text style={styles.inputMiddle}>Current Password</Text>
+          
           <TextInput
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor={currPlaceText}
             placeholder={passPlace}
-            style={{paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
+            style={{marginBottom: 5,paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
             onChangeText={this.handlePass}
           />
 
+            <Text style={styles.errorText}>{invalidLen}</Text>
+
           <TouchableOpacity
             onPress={this.updateEmail}   // when pressed call the userSignIn function
-            style={{marginTop:20,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
+            style={{marginTop:8,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
             padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
 
-          <Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+          <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
 
           <Text style={styles.pageText}>Alter Your Current Password</Text>
-
-          <Text style={styles.errorText}>{wrongCurr}</Text>
-          <Text style={styles.errorText}>{invalidNew}</Text>
 
           <Text style={styles.inputAboveCurr}>Current Password</Text>
           <TextInput
@@ -418,29 +416,33 @@ export default class SettingsScreen extends Component {
             returnKeyType='done'
             placeholderTextColor={curr2PlaceText}
             placeholder={passPlace2}
-            style={{paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
+            style={{marginBottom: 5,paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
             onChangeText={this.handlePass2}
           />
 
-          <Text style={styles.inputAbove}>New Password</Text>
+            <Text style={styles.errorText}>{wrongCurr}</Text>
+
+          <Text style={styles.inputMiddle}>New Password</Text>
           <TextInput
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor={newPassPlaceText}
             placeholder={newPassPlace}
-            style={{paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
+            style={{marginBottom: 5,paddingHorizontal:5,marginTop:8,width:Dimensions.get('window').width*.75,
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
             onChangeText={this.handleNewPass}
           />
 
+            <Text style={styles.errorText}>{invalidNew}</Text>
+
           <TouchableOpacity
             onPress={this.updatePass}   // when pressed call the userSignIn function
-            style={{marginTop:20,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
+            style={{marginTop:8,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
             padding:10, justifyContent:'center',marginBottom: Dimensions.get('window').height*.35,backgroundColor:'black',alignItems:'center'}}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
@@ -489,7 +491,6 @@ const styles = StyleSheet.create({
     fontSize:14
   },
   errorText: {
-    fontWeight:'bold',
     color:'red',
     textAlign:'center',
     fontSize:Dimensions.get('window').height*.02,
@@ -514,6 +515,12 @@ const styles = StyleSheet.create({
     fontSize:Dimensions.get('window').height*.022,
   },
   inputAbove: {
+    fontWeight:'bold',
+    color:'black',
+    fontSize:Dimensions.get('window').height*.024,
+  },
+  inputMiddle: {
+    marginTop:6,
     fontWeight:'bold',
     color:'black',
     fontSize:Dimensions.get('window').height*.024,

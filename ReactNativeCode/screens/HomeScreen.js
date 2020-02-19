@@ -19,7 +19,6 @@ import { Image,TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-n
 
 export default class homeScreen extends Component {
 	static navigationOptions= ({navigation}) =>({ 
-		title: 'Home',
 		headerRight:
 			<View style ={styles.settingsIcon}>
 				<Ionicons
@@ -38,7 +37,7 @@ export default class homeScreen extends Component {
 				<Text style={styles.subtitleTop}>Favorite Items</Text>
 				<Text style={styles.bodyText}>You have not added any favorite items</Text>
 				
-				<Image source={{uri: 'http://csitrd.kutztown.edu/~smagr173/divider.png'}}
+				<Image source={require('../assets/images/divider.png')}
   	   			 style={styles.divider} />
 
 				<Text style={styles.subtitle}>Order History</Text>

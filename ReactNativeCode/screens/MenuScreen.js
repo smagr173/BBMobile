@@ -10,23 +10,45 @@
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Image, Dimensions, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Text, View } from 'react-native';
 
 export default class MenuScreen extends Component {
   render() {
+    const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <SectionList
-          sections={[
-            {title: 'Bagels', data: ['Everything', 'Plain']},
-            {title: 'Drinks', data: ['Coffee', 'Tea', 'Water']},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>
-          {section.title}</Text>}
-          keyExtractor={(item, index) => index}
-          />
-      </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.tileContainer}>
+        
+          <TouchableWithoutFeedback 
+            onPress={() => navigate('Home')}>
+              <View style={{backgroundColor:'black',marginBottom:10}}>
+             <Text style={styles.buttonText}>Breakfast</Text>
+             <Image source={require('../assets/images/breakfast.png')} style={styles.image1} />
+          </View>
+          </TouchableWithoutFeedback>
+
+          <TouchableOpacity style={{backgroundColor:'gray', marginBottom:10}}
+            onPress={() => navigate('Home')}>
+            <Text style={styles.buttonText}>Lunch</Text>
+            <Image source={require('../assets/images/grounds.png')} style={styles.image1} />
+          </TouchableOpacity>
+ 
+
+        <TouchableOpacity style={{backgroundColor:'gray', marginBottom:10}}
+          onPress={() => navigate('Home')}>
+          <Text style={styles.buttonText}>Coffee</Text>
+          <Image source={require('../assets/images/coffee.png')} style={styles.image1} />
+        </TouchableOpacity>
+
+          
+        <TouchableOpacity style={{backgroundColor:'black'}}
+          onPress={() => navigate('Home')}>
+          <Text style={styles.buttonText}>Speciality Drinks</Text>
+          <Image source={require('../assets/images/special.png')} style={styles.image1} />
+        </TouchableOpacity>
+   
+       </View>
+      </ScrollView>
     );
   }
 }
@@ -34,20 +56,28 @@ export default class MenuScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
-  sectionHeader: {  /** For Category Header */
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 18,
+  tileContainer: {
+    margin: 20,
+  },
+  image1: {
+    width: Dimensions.get('window').width * .9,
+    height: Dimensions.get('window').width * .7
+  },
+  buttonText: {
     fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.022,
   },
-  item: {   /** For each item in list */
+  topButton: {
+    width: Dimensions.get('window').width*.5,
+    height: Dimensions.get('window').height*.25,
     padding: 10,
-    fontSize: 14,
-    height: 44,
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    alignItems: 'center'
   },
 })
 

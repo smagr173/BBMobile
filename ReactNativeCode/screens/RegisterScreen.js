@@ -17,9 +17,6 @@ import { Dimensions } from 'react-native';
 import { Keyboard, AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class register extends Component {
-  static navigationOptions = ({
-    title: 'Register'  // displayed at top of screen
-  });
 
   constructor(props) {
     super(props)
@@ -293,7 +290,7 @@ export default class register extends Component {
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
     }
-    else if(userFname=="") {
+    else if(userLname=="") {
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
     }
@@ -405,9 +402,10 @@ export default class register extends Component {
       <View style={styles.container}>
         <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
     
-        <Text style={styles.errorText}>{invalidEmail}</Text>
-        <Text style={styles.errorText}>{invalidPass}</Text>
+        
+        
         <Text style={styles.errorText}>{regFail}</Text>
+        
 
         <TextInput
           autoCorrect={false}
@@ -416,7 +414,7 @@ export default class register extends Component {
           placeholderTextColor={fnamePlaceText}
           style={{paddingHorizontal:5,marginTop:0,width:Dimensions.get('window').width*.75,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
-          fontSize:Dimensions.get('window').height*.02}}	
+          fontSize:Dimensions.get('window').height*.02,marginBottom:10}}	
           underlineColorAndroid="transparent"
           onChangeText = {this.handleFname}  // on event set value for userName
         />
@@ -430,33 +428,38 @@ export default class register extends Component {
           underlineColorAndroid="transparent"
           onChangeText = {this.handleLname}  // on event set value for userName
         />
+        
+          <Text style={styles.errorText}>{invalidEmail}</Text>
 
         <TextInput
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ emailPlace }
           placeholderTextColor={emailPlaceText}
-          style={styles.inField}	
+          style={{paddingHorizontal:5, width:Dimensions.get('window').width*.75, height:Dimensions.get('window').height*.058,
+                  margin:10,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.02, marginTop:5}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handleEmail} // on event set value for email
         />
-  
+
         <TextInput
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ passPlace }
           placeholderTextColor={passPlaceText}
-          style={{paddingHorizontal:5,marginBottom:27,width:Dimensions.get('window').width*.75,
+          style={{paddingHorizontal:5,marginBottom:4,width:Dimensions.get('window').width*.75,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handlePass} // on event set value for password1
         />
 
+          <Text style={styles.errorText}>{invalidPass}</Text>
+
         <TouchableOpacity
           onPress={this.userRegister}  // when pressed call the userRegister function
           style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
-          justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
+          justifyContent:'center',backgroundColor:'black',alignItems:'center',marginTop:15}}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
   
@@ -487,10 +490,11 @@ inField: {
   borderColor:"gray",
   borderWidth:2,
   fontSize:Dimensions.get('window').height*.02,
+  marginBottom:15
 },
 pageText: {
-  marginTop:35,
-  marginBottom:10,
+  marginTop:45,
+  marginBottom:5,
   fontWeight:'bold',
   color:'gray',
   textAlign:'center',
@@ -503,13 +507,12 @@ buttonText: {
   fontSize:Dimensions.get('window').height*.021,
 },
 errorText: {
-  fontWeight:'bold',
   color:'red',
   textAlign:'center',
   fontSize:Dimensions.get('window').height*.02,
 },
 link: {
-  margin:10,
+  margin:7,
   fontWeight:'bold',
   color:'gray',
   textAlign:'center',
