@@ -12,7 +12,6 @@ If you wish to view the published app please follow the instructions below:
 Requirements:
  - Smartphone or tablet(iOS or Android)
  - Expo Client app
- - Expo Client account
  
 The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play
 store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client
@@ -31,7 +30,7 @@ There will be a QR code that you can scan with your device which will open the p
 send the link to your email address or have a linked sent using your phone number. Once sent the link will automatically open
 the project on the Expo Client app.
 The link below can be used to access the project:
-https://exp.host/@bagelbartest/csc355-sprint1-test
+exp.host/@bagelbartest/bagel_bar_mobile
 
 Note that this method only works with Android devices due to Apple's signing policies. If you would like to view the project on an
 iOS device you have to use an account created by the developer. Please enter the following username and password to access the
