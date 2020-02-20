@@ -16,7 +16,7 @@ import { Dimensions } from 'react-native';
 import { AppRegistry, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SignIn extends Component {
-
+  // Initialize default states for variables
   constructor(props) {
     super(props)
       this.state = {
@@ -30,10 +30,10 @@ export default class SignIn extends Component {
         invalidEmail: '',
         invalidPass: '',
       };
-  }  // end constructor
+  }  // End constructor
 
 // On text change userSignIn gets called
-// Inputs get sent as JSON to PHP file, error msgs sent back
+// Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   SignIn = () => {
     const {userEmail,userPassword} = this.state;
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
@@ -94,16 +94,17 @@ export default class SignIn extends Component {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        // we will pass our input data to server
+        // Inputs converted to JSON here
         email: this.state.userEmail,
         password: this.state.userPassword
       })
     
     }) // End fetch
+    // Handle response from PHP
     .then((response) => response.json())
       .then((responseJson)=> {
        if(responseJson.succ == "Success"){
-        // redirect to home page
+        // If the login succeeds, redirect to home page
         const {navigate} = this.props.navigation;
         navigate('Home')
         }
@@ -137,7 +138,7 @@ export default class SignIn extends Component {
     this.setState({ invalidPass: ''})
   }
 
-  // display input fields and buttons
+  // Display input fields and buttons
   render() {
     const {placeTextEmail} = this.state;
     const {placeTextPass} = this.state;
@@ -154,9 +155,7 @@ export default class SignIn extends Component {
 
         <Text style={styles.errorText}>{invalidCombo}</Text>
         
-        
-
-        <TextInput
+        <TextInput   // Email input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={emailPlace}
@@ -165,12 +164,12 @@ export default class SignIn extends Component {
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
-          onChangeText= {this.handleEmail}  // on event set value for email
+          onChangeText= {this.handleEmail}  // On event set value for email
         />
   
-          <Text style={styles.errorText}>{invalidEmail}</Text>
+        <Text style={styles.errorText}>{invalidEmail}</Text>
 
-        <TextInput
+        <TextInput   // Password input field
           autoCorrect={false}
           returnKeyType='done'
           placeholderTextColor={placeTextPass}
@@ -179,61 +178,61 @@ export default class SignIn extends Component {
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
-          onChangeText= {this.handlePass}  // on event set value for password
+          onChangeText= {this.handlePass}  // On event set value for password
         />
 
-          <Text style={styles.errorText}>{invalidPass}</Text>
+        <Text style={styles.errorText}>{invalidPass}</Text>
   
-        <TouchableOpacity
-          onPress={this.SignIn}   // when pressed call the userSignIn function
+        <TouchableOpacity  // Button for sign in
+          onPress={this.SignIn}   // When pressed call the userSignIn function
           style={{ marginTop: 20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
           justifyContent:'center',backgroundColor:'black', alignItems:'center',marginBottom:7}}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        <TouchableOpacity  // Create account link
           onPress={() => navigate('Register')}
           style={{marginBottom:275, width:Dimensions.get('window').width*.5, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Create Account</Text>
         </TouchableOpacity>
 
-      </View>    // end style view
-    ); // end return
-  }   // end render
-}   // end SignIn class component
+      </View>    // End style view
+    );  // End return
+  }   // End render
+}   // End SignIn class component
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'white',
-},
-pageText: {
-  marginBottom:20,
-  fontWeight:'bold',
-  color:'gray',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.025,
-},
-link: {
-  margin:10,
-  fontWeight:'bold',
-  color:'gray',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.025,
-},
-buttonText: {
-  fontWeight:'bold',
-  color:'white',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.023,
-},
-errorText: {
-  color:'red',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.02,
-},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  pageText: {
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
+  },
+  link: {
+    margin: 10,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.023,
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.02,
+  },
 });
 
 AppRegistry.registerComponent('SignIn', () => SignIn);

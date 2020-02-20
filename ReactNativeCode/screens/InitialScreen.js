@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import { Dimensions, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class InitialScreen extends Component {
+  // Static logo at top of page
   static navigationOptions= ({navigation}) =>({ 
     headerRight:
 			<View style={styles.navBar}>
@@ -26,6 +27,7 @@ export default class InitialScreen extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
+      // Image of the main logo and Bagel Bar name
       <View style={styles.container}>
         <Image source={require('../assets/images/mainLogo.png')}
   	      style={styles.image1} />
@@ -36,12 +38,12 @@ export default class InitialScreen extends Component {
         <Image source={require('../assets/images/grayOrder.png')}
 	      style={styles.image2} />
 
-        <TouchableOpacity style={styles.topButton}
+        <TouchableOpacity style={styles.topButton}  // Create account button
           onPress={() => navigate('Register')}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.link}
+        <TouchableOpacity style={styles.link}  // Sign in button
           onPress={() => navigate('SignIn')}>
           <Text style={styles.linkText}>Sign In</Text>
         </TouchableOpacity>
@@ -110,11 +112,11 @@ divider: {
 
 },
 navBar: {
-  marginRight:Dimensions.get('window').width *.438,
+  marginRight: Dimensions.get('window').width *.438,
 },
 logo: {
-  width: Dimensions.get('window').width *.12,
-  height: Dimensions.get('window').width * .09,
+  width: Dimensions.get('window').width *.13,
+  height: Dimensions.get('window').width * .094,
 },
 
 });

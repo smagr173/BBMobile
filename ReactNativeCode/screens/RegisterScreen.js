@@ -17,7 +17,7 @@ import { Dimensions } from 'react-native';
 import { Keyboard, AppRegistry, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class register extends Component {
-
+  // Initialize default states for variables
   constructor(props) {
     super(props)
       this.state = {
@@ -37,10 +37,10 @@ export default class register extends Component {
         passPlaceText: 'gray',
         invalidPass: '',
       }
-  }  // end constructor
+  }  // End constructor
 
   // On text change userRegister gets called
-  // Inputs get sent as JSON to PHP file, error msgs sent back
+  // Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   userRegister = () => {
     const {userEmail,userPassword1,userFname,userLname} = this.state;
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
@@ -321,7 +321,6 @@ export default class register extends Component {
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },
-
       // Input values get converted to JSON here
       body: JSON.stringify({
         fname: this.state.userFname,
@@ -331,12 +330,12 @@ export default class register extends Component {
       })
     
     }) // End fetch
-    // handle response from PHP
+    // Handle response from PHP
     .then((response) => response.json())
       .then((responseJson) => {      // responseJson contains error msgs
         if(responseJson.suc == "Success") {
           const {navigate} = this.props.navigation;
-          navigate('SignIn') // redirect to sign in page
+          navigate('SignIn') // Redirect to sign in page
         }
         if(responseJson.fnameErr == "First name is required") {
           this.setState({ fnamePlace: responseJson.fnameErr})
@@ -364,7 +363,7 @@ export default class register extends Component {
       .catch((error) => {
         console.error(error);
       });
-    } // end else
+    }  // End else
       Keyboard.dismiss();
   }  // End userRegister
 
@@ -383,7 +382,7 @@ export default class register extends Component {
     this.setState({ userLname: text })
   }
 
-  // display input fields and buttons
+  // Display input fields and buttons
   render() {
     const { fnamePlaceText } = this.state;
     const { lnamePlaceText } = this.state;
@@ -401,13 +400,10 @@ export default class register extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
-    
-        
         
         <Text style={styles.errorText}>{regFail}</Text>
-        
 
-        <TextInput
+        <TextInput  // First name input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ fnamePlace }
@@ -416,33 +412,33 @@ export default class register extends Component {
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
           fontSize:Dimensions.get('window').height*.02,marginBottom:10}}	
           underlineColorAndroid="transparent"
-          onChangeText = {this.handleFname}  // on event set value for userName
+          onChangeText = {this.handleFname}  // On event set value for first name
         />
   
-        <TextInput
+        <TextInput  // Last name input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ lnamePlace }
           placeholderTextColor={lnamePlaceText}
           style={styles.inField}	
           underlineColorAndroid="transparent"
-          onChangeText = {this.handleLname}  // on event set value for userName
+          onChangeText = {this.handleLname}  // On event set value for last name
         />
         
-          <Text style={styles.errorText}>{invalidEmail}</Text>
+        <Text style={styles.errorText}>{invalidEmail}</Text>
 
-        <TextInput
+        <TextInput  // Email input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ emailPlace }
           placeholderTextColor={emailPlaceText}
           style={{paddingHorizontal:5, width:Dimensions.get('window').width*.75, height:Dimensions.get('window').height*.058,
-                  margin:10,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.02, marginTop:5}}	
+          margin:10,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.02, marginTop:5}}	
           underlineColorAndroid="transparent"
-          onChangeText= {this.handleEmail} // on event set value for email
+          onChangeText= {this.handleEmail} // On event set value for email
         />
 
-        <TextInput
+        <TextInput   // Create password input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ passPlace }
@@ -451,29 +447,28 @@ export default class register extends Component {
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
-          onChangeText= {this.handlePass} // on event set value for password1
+          onChangeText= {this.handlePass} // On event set value for password
         />
 
-          <Text style={styles.errorText}>{invalidPass}</Text>
+        <Text style={styles.errorText}>{invalidPass}</Text>
 
-        <TouchableOpacity
-          onPress={this.userRegister}  // when pressed call the userRegister function
+        <TouchableOpacity  // Register button
+          onPress={this.userRegister}  // When pressed call the userRegister function
           style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
           justifyContent:'center',backgroundColor:'black',alignItems:'center',marginTop:15}}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
   
-        <TouchableOpacity
+        <TouchableOpacity  // Sign in link
           onPress={() => navigate('SignIn')}
           style={{marginBottom:260, width:Dimensions.get('window').width*.3, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Sign In</Text>
         </TouchableOpacity>
 
       </View>
-
-    ); // end return
-  } // end render
-} // end register class component
+    );  // End return
+  }  // End render
+}  // End register class component
 
 const styles = StyleSheet.create({
 container: {
@@ -483,40 +478,40 @@ container: {
   backgroundColor: 'white',
 },
 inField: {
-  paddingHorizontal:5,
-  width:Dimensions.get('window').width*.75,
-  height:Dimensions.get('window').height*.058,
-  margin:10,
-  borderColor:"gray",
-  borderWidth:2,
-  fontSize:Dimensions.get('window').height*.02,
-  marginBottom:15
+  paddingHorizontal: 5,
+  width: Dimensions.get('window').width*.75,
+  height: Dimensions.get('window').height*.058,
+  margin: 10,
+  borderColor: 'gray',
+  borderWidth: 2,
+  fontSize: Dimensions.get('window').height*.02,
+  marginBottom: 15
 },
 pageText: {
-  marginTop:45,
-  marginBottom:5,
-  fontWeight:'bold',
-  color:'gray',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.025,
+  marginTop: 45,
+  marginBottom: 5,
+  fontWeight: 'bold',
+  color: 'gray',
+  textAlign: 'center',
+  fontSize: Dimensions.get('window').height*.025,
 },
 buttonText: {
-  fontWeight:'bold',
-  color:'white',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.021,
+  fontWeight: 'bold',
+  color: 'white',
+  textAlign: 'center',
+  fontSize: Dimensions.get('window').height*.021,
 },
 errorText: {
-  color:'red',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.02,
+  color: 'red',
+  textAlign: 'center',
+  fontSize: Dimensions.get('window').height*.02,
 },
 link: {
-  margin:7,
-  fontWeight:'bold',
-  color:'gray',
-  textAlign:'center',
-  fontSize:Dimensions.get('window').height*.024,
+  margin: 7,
+  fontWeight: 'bold',
+  color: 'gray',
+  textAlign: 'center',
+  fontSize: Dimensions.get('window').height*.024,
 },
 });
 

@@ -16,14 +16,15 @@ import MapView from 'react-native-maps';
 import { ScrollView, StyleSheet, Text, View, Image} from 'react-native';
 
 export default class AboutScreen extends Component {
-
   render() {
+    // Set the map view location using coordinates
     var region = {
       latitude: 40.5170,
       longitude: -75.7771,
       latitudeDelta: .03,
       longitudeDelta: .03,
     }
+    // Set a pin on the map using coordinates
     var pin = {
       latitude: 40.5171,
       longitude: -75.7772,
@@ -59,14 +60,13 @@ export default class AboutScreen extends Component {
             <MapView.Marker
               coordinate={pin}
                title={'The Bagel Bar Cafe'}
-               //description={'Welcome to the Bagel Bar Cafe!'}
             />
           </MapView>
         </View>
       </ScrollView>
-    ); // end return
-  } // end render
-} // end class component
+    );  // End return
+  }  // End render
+}  // End class component
 
 const styles = StyleSheet.create({
   container: {
@@ -77,17 +77,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bodyText:{
-    color:'gray',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
-    marginBottom:5,
+  bodyText: {
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
+    marginBottom: 5,
   },
-  subtitle:{
-    fontWeight:'bold',
-    color:'black',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.03,
+  subtitle: {
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.03,
     marginBottom: 10,
   },
   image1: {
@@ -95,16 +95,16 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').width * .5
   },
   divider: {
-		marginTop:15,
+		marginTop: 15,
 		width: Dimensions.get('window').width *.5,
 		height: Dimensions.get('window').width * .003,
-		marginBottom:25,
+		marginBottom: 25,
     },
     dividerBottom: {
-      marginTop:15,
+      marginTop: 15,
       width: Dimensions.get('window').width *.85,
       height: Dimensions.get('window').width * .003,
-      marginBottom:20,
+      marginBottom: 20,
     },
   mapStyle: {
     width: Dimensions.get('window').width,

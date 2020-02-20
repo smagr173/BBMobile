@@ -20,14 +20,15 @@ import { Image,TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-n
 export default class homeScreen extends Component {
 	static navigationOptions= ({navigation}) =>({ 
 		headerRight:
-			<View style ={styles.settingsIcon}>
-				<Ionicons
-					name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
-					size={Dimensions.get('window').height*.045}
-					color={'brown'}
-					onPress={() => navigation.navigate('Settings')}
-				/>
-			</View>
+		// Settings icon at top of page on the right side
+		<View style ={styles.settingsIcon}>
+			<Ionicons
+				name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+				size={Dimensions.get('window').height*.045}
+				color={'brown'}
+				onPress={() => navigation.navigate('Settings')}
+			/>
+		</View>
 	});  
  
 	render() {
@@ -43,74 +44,71 @@ export default class homeScreen extends Component {
 				<Text style={styles.subtitle}>Order History</Text>
           		<Text style={styles.bodyTextBottom}>You have not placed an order yet</Text>
 
-				
-
 				<TouchableOpacity
           			onPress={() => navigate('Menu')}  // when pressed call the userRegister function
          			style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
          			justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
          			<Text style={styles.buttonText}>View Menu</Text>
       		    </TouchableOpacity>
-
       		</View>
-		); // end return
-	} // end render
-} // end homeScreen component
+		);  // End return
+	}  // End render
+}  // End homeScreen component
 
 const styles = StyleSheet.create({
 	container: {
-		display:'flex',
-		alignItems:'center',
-		justifyContent:'center',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 		backgroundColor: 'white'
 	},
 	settingsIcon: {
-		marginRight:13,
+		marginRight: 13,
 	},
 	pageText: {
-		margin:10,
-		fontWeight:'bold',
-		color:'gray',
-		textAlign:'center',
-		fontSize:15
+		margin: 10,
+		fontWeight: 'bold',
+		color: 'gray',
+		textAlign: 'center',
+		fontSize: 15
 	  },
 	  buttonText: {
-		fontWeight:'bold',
-		color:'white',
-		textAlign:'center',
-		fontSize:Dimensions.get('window').height*.023,
+		fontWeight: 'bold',
+		color: 'white',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.023,
 	  },
 	  divider: {
-		marginTop:15,
+		marginTop: 15,
 		width: Dimensions.get('window').width *.8,
 		height: Dimensions.get('window').width * .003,
-		marginBottom:30,
+		marginBottom: 30,
 	  },
-	  bodyText:{
-		color:'gray',
-		textAlign:'center',
-		fontSize:Dimensions.get('window').height*.023,
-		marginBottom:20,
+	  bodyText: {
+		color: 'gray',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.023,
+		marginBottom: 20,
 	  },
-	  bodyTextBottom:{
-		color:'gray',
-		textAlign:'center',
-		fontSize:Dimensions.get('window').height*.023,
-		marginBottom:25,
+	  bodyTextBottom: {
+		color: 'gray',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.023,
+		marginBottom: 25,
 	  },
-	  subtitle:{
-		fontWeight:'bold',
-		color:'black',
-		textAlign:'center',
-		fontSize:Dimensions.get('window').height*.026,
+	  subtitle: {
+		fontWeight: 'bold',
+		color: 'black',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.026,
 		marginBottom: 10,
 	  },
-	  subtitleTop:{
+	  subtitleTop: {
 		marginTop: 100,
-		fontWeight:'bold',
-		color:'black',
-		textAlign:'center',
-		fontSize:Dimensions.get('window').height*.026,
+		fontWeight: 'bold',
+		color: 'black',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.026,
 		marginBottom: 10,
 	  },
 });

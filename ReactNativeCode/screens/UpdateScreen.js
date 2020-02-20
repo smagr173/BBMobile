@@ -14,7 +14,7 @@ import { Dimensions } from 'react-native';
 import { Image, ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
-
+  // Initialize default states for variables
   constructor(props) {
     super(props)
       this.state = {
@@ -39,25 +39,26 @@ export default class SettingsScreen extends Component {
         invalidEmail: '',
         invalidNew: '',
       };
-  }  // end constructor
+  }  // End constructor
 
   // Gets the user information for input field values
   componentDidMount() {
-    // Networking for sending user inputs to PHP server
+    // Networking for retrieving the user information
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/fetchRecord.php', {
       method:'POST',
       header:{
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },  
-    }) // end fetch
+    }) // End fetch
+    // Handle the response from PHP
     .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ fName: responseJson.fname})
         this.setState({ lName: responseJson.lname})
         this.setState({ email: responseJson.email})
       })
-  }
+  }  // End componentDidMount()
 
   updateNames = () => {
     const {fName,lName} = this.state;
@@ -79,12 +80,13 @@ export default class SettingsScreen extends Component {
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },
+      // Convert inputs to JSON
       body: JSON.stringify({
-      // we will pass our input data to server
         fNameUp: this.state.fName,
         lNameUp: this.state.lName,
       })  
     })
+    // Handle the response from PHP
     .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.succ == "Successfully Updated"){
@@ -103,10 +105,12 @@ export default class SettingsScreen extends Component {
       .catch((error) => {
       console.error(error);
       });
-    } // end else
+    }  // End else
       Keyboard.dismiss();
   }
 
+  // On text change updateEmail gets called
+  // Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   updateEmail = () => {
     const {email, pass} = this.state;
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
@@ -167,12 +171,13 @@ export default class SettingsScreen extends Component {
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },
+      // Convert inputs to JSON
       body: JSON.stringify({
-        // we will pass our input data to server
         emailUp: this.state.email,
         currPass: this.state.pass,
       })
-    }) // end fetch
+    })  // End fetch
+    // Handle response from PHP
     .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.succ == "Successfully Updated"){
@@ -198,10 +203,12 @@ export default class SettingsScreen extends Component {
       .catch((error)=>{
       console.error(error);
       });
-    } // end else
+    }  // End else
       Keyboard.dismiss();
   }
 
+  // On text change updatePass gets called
+  // Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   updatePass = () => {
     const {NewPass, pass2} = this.state;
     if(pass2.length < 8 && pass2!="" && NewPass.length < 8 && NewPass !="") {
@@ -240,12 +247,13 @@ export default class SettingsScreen extends Component {
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },
+      // Convert inputs to JSON
       body: JSON.stringify({
-        // we will pass our input data to server
         currPass2: this.state.pass2,
         NewPass: this.state.NewPass,
       })
-    }) // end fetch
+    })  // End fetch
+    // Handle response from PHP
     .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.succ == "Successfully Updated"){
@@ -269,7 +277,7 @@ export default class SettingsScreen extends Component {
       .catch((error)=>{
       console.error(error);
       });
-    } // end else
+    }  // End else
       Keyboard.dismiss();
   }
 
@@ -324,7 +332,7 @@ export default class SettingsScreen extends Component {
           <Text style={styles.pageTextTop}>Alter Your Name</Text>
 
           <Text style={styles.inputAbove}>First name</Text>
-          <TextInput
+          <TextInput  // Input field for first name
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor="red"
@@ -333,12 +341,12 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02, marginBottom:5}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handleFname}
-            value={fName}
+            onChangeText={this.handleFname}  // On event, set the new value for first name
+            value={fName}  // Set the input field value to the response from PHP
           />
 
           <Text style={styles.inputMiddle}>Last name</Text>
-          <TextInput
+          <TextInput  // Last name input field
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor="red"
@@ -347,12 +355,12 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handleLname}
-            value={lName}
+            onChangeText={this.handleLname}  // On event, set the new value for last name
+            value={lName}  // Set the input field value to the response from PHP
           />
 
-          <TouchableOpacity
-            onPress={this.updateNames}   // when pressed call the userSignIn function
+          <TouchableOpacity  // Button for saving the name fields
+            onPress={this.updateNames}   // When pressed call the updateNames function
             style={{marginTop:26,padding:10, justifyContent:'center',backgroundColor:'black',
             alignItems:'center', width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06}}>
             <Text style={styles.buttonText}>Save</Text>
@@ -366,8 +374,7 @@ export default class SettingsScreen extends Component {
           <Text style={styles.errorText}>{invalidCombo}</Text>
           
           <Text style={styles.inputAbove}>Email Address</Text>
-          
-          <TextInput
+          <TextInput  // Input field for email address
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor="red"
@@ -376,15 +383,14 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handleEmail}
-            value={email}
+            onChangeText={this.handleEmail}  // On event, set the new value for email
+            value={email}  // Set the input field value to the response from PHP
           />
 
-            <Text style={styles.errorText}>{invalidEmail}</Text>
+          <Text style={styles.errorText}>{invalidEmail}</Text>
 
           <Text style={styles.inputMiddle}>Current Password</Text>
-          
-          <TextInput
+          <TextInput  // Input field for current password
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor={currPlaceText}
@@ -393,12 +399,12 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handlePass}
+            onChangeText={this.handlePass}  // On event, set value for current password
           />
 
-            <Text style={styles.errorText}>{invalidLen}</Text>
+          <Text style={styles.errorText}>{invalidLen}</Text>
 
-          <TouchableOpacity
+          <TouchableOpacity  // Button for saving the email address field
             onPress={this.updateEmail}   // when pressed call the userSignIn function
             style={{marginTop:8,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
             padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
@@ -411,7 +417,7 @@ export default class SettingsScreen extends Component {
           <Text style={styles.pageText}>Alter Your Current Password</Text>
 
           <Text style={styles.inputAboveCurr}>Current Password</Text>
-          <TextInput
+          <TextInput  // Input field for altering current password
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor={curr2PlaceText}
@@ -420,13 +426,13 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handlePass2}
+            onChangeText={this.handlePass2}  // On event, set value for the current password
           />
 
-            <Text style={styles.errorText}>{wrongCurr}</Text>
+          <Text style={styles.errorText}>{wrongCurr}</Text>
 
           <Text style={styles.inputMiddle}>New Password</Text>
-          <TextInput
+          <TextInput  // Input field for new password
             autoCorrect={false}
             returnKeyType='done'
             placeholderTextColor={newPassPlaceText}
@@ -435,13 +441,13 @@ export default class SettingsScreen extends Component {
             height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
             fontSize:Dimensions.get('window').height*.02}}	
             underlineColorAndroid="transparent"
-            onChangeText={this.handleNewPass}
+            onChangeText={this.handleNewPass}  // On event, set value for the new password
           />
 
-            <Text style={styles.errorText}>{invalidNew}</Text>
+          <Text style={styles.errorText}>{invalidNew}</Text>
 
-          <TouchableOpacity
-            onPress={this.updatePass}   // when pressed call the userSignIn function
+          <TouchableOpacity  // Button for saving the password field
+            onPress={this.updatePass}   // When pressed call the updatePass function
             style={{marginTop:8,width: Dimensions.get('window').width*.5,height:Dimensions.get('window').height*.06,
             padding:10, justifyContent:'center',marginBottom: Dimensions.get('window').height*.35,backgroundColor:'black',alignItems:'center'}}>
             <Text style={styles.buttonText}>Save</Text>
@@ -449,9 +455,9 @@ export default class SettingsScreen extends Component {
 
         </View>
       </ScrollView>
-    ); // end return
-  } // end render
-} // end class component
+    );  // End return
+  }  // End render
+}  // End class component
 
 const styles = StyleSheet.create({
   container: {
@@ -463,72 +469,72 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pageText: {
-    marginBottom:7,
-    fontWeight:'bold',
-    color:'gray',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
+    marginBottom: 7,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
   },
   pageTextTop: {
-    marginTop:10,
-    marginBottom:18,
-    fontWeight:'bold',
-    color:'gray',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
+    marginTop: 10,
+    marginBottom: 18,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
   },
   link: {
-    margin:10,
-    fontWeight:'bold',
-    color:'gray',
-    textAlign:'center',
-    fontSize:16
+    margin: 10,
+    fontWeight: 'bold',
+    color: 'gray',
+    textAlign: 'center',
+    fontSize: 16
   },
   buttonText: {
-    fontWeight:'bold',
-    color:'white',
-    textAlign:'center',
-    fontSize:14
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 14
   },
   errorText: {
-    color:'red',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.02,
+    color: 'red',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.02,
   },
   divider: {
-    marginTop:25,
+    marginTop: 25,
     width: Dimensions.get('window').width *.85,
     height: Dimensions.get('window').width * .003,
-    marginBottom:20,
+    marginBottom: 20,
   },
   dividerBot: {
-    marginTop:10,
+    marginTop: 10,
     marginBottom: Dimensions.get('window').height*.35,
-    color:'black',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.025,
+    color: 'black',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.025,
   },
   buttonText: {
-    fontWeight:'bold',
-    color:'white',
-    textAlign:'center',
-    fontSize:Dimensions.get('window').height*.022,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.022,
   },
   inputAbove: {
-    fontWeight:'bold',
-    color:'black',
-    fontSize:Dimensions.get('window').height*.024,
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: Dimensions.get('window').height*.024,
   },
   inputMiddle: {
-    marginTop:6,
-    fontWeight:'bold',
-    color:'black',
-    fontSize:Dimensions.get('window').height*.024,
+    marginTop: 6,
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: Dimensions.get('window').height*.024,
   },
   inputAboveCurr: {
     marginTop: 10,
-    fontWeight:'bold',
-    color:'black',
-    fontSize:Dimensions.get('window').height*.024,
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: Dimensions.get('window').height*.024,
   },
 });
