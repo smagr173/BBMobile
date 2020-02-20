@@ -46,6 +46,7 @@ const HomeStack = createStackNavigator(
   },
 },
 {
+  headerLayoutPreset: 'center',
   defaultNavigationOptions: {
       headerStyle: {
           backgroundColor: '#202020',
@@ -88,6 +89,7 @@ const MenuStack = createStackNavigator(
     },
   },
   {
+    headerLayoutPreset: 'center',
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#202020',
@@ -128,6 +130,7 @@ const AboutStack = createStackNavigator(
     },
   },
   {
+    headerLayoutPreset: 'center',
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#202020',
@@ -164,7 +167,7 @@ AboutStack.navigationOptions = {
 
 AboutStack.path = '';
 
-// create tab navigator from stack values
+// Create tab navigator from stack values
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   MenuStack,

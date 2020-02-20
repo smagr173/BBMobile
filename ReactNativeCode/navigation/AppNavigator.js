@@ -44,18 +44,19 @@ const MainStack = createStackNavigator(
     },
   },
   {
+    headerLayoutPreset: 'center',
     initialRouteName: 'Initial',
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#202020',
-            height: Dimensions.get('window').height*.07,
+            height: Dimensions.get('window').height*.084,
             
         },
         headerTintColor: 'white',
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-            fontSize:Dimensions.get('window').height*.025,
+            fontSize: Dimensions.get('window').height*.025,
         }
     }
   }
