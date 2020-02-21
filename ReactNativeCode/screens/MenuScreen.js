@@ -29,52 +29,75 @@ export default class MenuScreen extends Component {
         </View>
 
         <View style={styles.tileContainer}>
-          <Text style={styles.subtitle}>Breakfast & Bagels</Text>
-          <Text style={styles.bodyText}>Choose from our selection of bagels and sandwiches</Text>
 
-        <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", marginBottom: Dimensions.get('window').height*.2,}}>
-          <TouchableWithoutFeedback 
+          <Text style={styles.subtitleTop}>Breakfast Bagelwiches</Text>
+          <Text style={styles.bodyText}>Choose from our selection of breakfast sandwiches</Text>
+
+          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", }}>
+           <TouchableWithoutFeedback 
             onPress={() => navigate('Home')}>
             <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/breakfast.png')} style={styles.image1} />
+              <Image source={require('../assets/images/breakSand.jpg')} style={styles.image1} />
             </View>
-          </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
           </View>
        
           <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
 
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", marginBottom: Dimensions.get('window').height*.2,}}></View>
+          <Text style={styles.subtitle}>Lunch Bagelwiches & Wraps</Text>
+          <Text style={styles.bodyText}>Grab an afternoon bagel sandwich or wrap</Text>
+
+          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",}}>
           <TouchableWithoutFeedback
             onPress={() => navigate('Home')}>
             <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/grounds.png')} style={styles.image1} />
+              <Image source={require('../assets/images/wrap.jpg')} style={styles.image1} />
             </View>
           </TouchableWithoutFeedback>
+          </View>
 
           <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
 
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", marginBottom: Dimensions.get('window').height*.2,}}></View>
+          <Text style={styles.subtitle}>Fresh Baked Bagels</Text>
+          <Text style={styles.bodyText}>Choose from a variety of bagels and toppings</Text>
+
+          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",}}>
           <TouchableWithoutFeedback
             onPress={() => navigate('Home')}>
             <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/coffee.png')} style={styles.image1} />
+              <Image source={require('../assets/images/bagels.jpg')} style={styles.image1} />
             </View>
           </TouchableWithoutFeedback>
-
+          </View>
           <Image source={require('../assets/images/divider.png')}
   	   			style={styles.divider} />
           
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", marginBottom: Dimensions.get('window').height*.2,}}></View>
-          <TouchableWithoutFeedback
-            onPress={() => navigate('Home')}>
-            <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/special.png')} style={styles.image1} />
-            </View>
-          </TouchableWithoutFeedback>
-   
+          <Text style={styles.subtitle}>Beverages</Text>
+          <Text style={styles.bodyText}>A range of iced or hot beverages await you</Text>
+
+          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",marginBottom:Dimensions.get('window').height*.05,}}>
+            <TouchableWithoutFeedback
+              onPress={() => navigate('Home')}>
+              <View style={styles.tileStlye}>
+                <Image source={require('../assets/images/coffeeTea.png')} style={styles.image1} />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+
         </View>
+
+        <View style={styles.cornerBLeft}>
+          <Image source={require('../assets/images/decoCornerBL.png')}
+  	   			  style={styles.decoCorner} /> 
+        </View>
+
+        <View style={styles.cornerBRight}>
+          <Image source={require('../assets/images/decoCornerBR.png')}
+  	   			  style={styles.decoCorner} /> 
+        </View>
+
       </ScrollView>
     );  // End return
   }  // End render
@@ -84,23 +107,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    marginBottom: 5
   },
   tileContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: Dimensions.get('window').width*.0033,
+    borderColor: 'black',
+    marginRight: 5,
+    marginLeft: 5
   },
   cornerRight: {
     alignItems: 'flex-end',
-    marginRight: 5
+    marginRight: 5,
+    marginTop:0
   },
   cornerLeft: {
     alignItems: 'flex-start',
-    marginLeft: 5
+    marginLeft: 5,
+    marginTop:5
+  },
+  cornerBRight: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginRight: 5,
+    marginBottom:0
+  },
+  cornerBLeft: {
+    justifyContent: 'flex-end',
+    marginLeft:4.5,
+    marginBottom:0
   },
   image1: {
-    width: Dimensions.get('window').width * .6,
-    height: Dimensions.get('window').width * .5,
-    borderWidth: 10,
-    borderColor: '#404040',
+    width: '100%',
+    height: '100%',
   },
   buttonText: {
     fontWeight: 'bold',
@@ -109,21 +148,32 @@ const styles = StyleSheet.create({
     fontSize: Dimensions.get('window').height*.022,
   },
   tileStlye: {
-    backgroundColor: 'gray',
+    backgroundColor: 'black',
     width: Dimensions.get('window').width*.7,
-    height: Dimensions.get('window').width*.6,
+    height: Dimensions.get('window').width*.7,
+    borderWidth: 5,
+    borderColor: '#404040',
+    marginBottom: Dimensions.get('window').height*.013,
   },
   divider: {
     marginTop: 20,
     width: Dimensions.get('window').width *.85,
     height: Dimensions.get('window').width * .003,
-    marginBottom: 20,
+    marginBottom: Dimensions.get('window').height*.02,
+  },
+  decoDivider: {
+    marginTop: 20,
+    width: Dimensions.get('window').width *.85,
+    height: Dimensions.get('window').width * .09,
+    marginBottom: Dimensions.get('window').height*.02,
   },
   bodyText: {
     color: 'gray',
     textAlign: 'center',
     fontSize: Dimensions.get('window').height*.025,
-    marginBottom: 10,
+    marginBottom: 15,
+    marginLeft: 20,
+    marginRight: 20,
   },
   subtitle: {
     fontWeight: 'bold',
@@ -131,7 +181,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: Dimensions.get('window').height*.03,
     marginBottom: 7,
-    marginTop: 14,
+    marginTop: 10,
+  },
+  subtitleTop: {
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height*.03,
+    marginBottom: 7,
+    marginTop: 25,
   },
   decoCorner: {
     width: Dimensions.get('window').width * .2,
