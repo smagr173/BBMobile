@@ -56,8 +56,12 @@ const MainStack = createStackNavigator(
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-            fontSize: Dimensions.get('window').height*.025,
-        }
+            fontSize: Dimensions.get('window').height*.027,
+        },
+        headerBackTitleStyle: {
+          color: 'white',
+          fontSize: Dimensions.get('window').height*.025,
+      }
     }
   }
 );

@@ -22,6 +22,7 @@ import MenuScreen from '../screens/MenuScreen';
 import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import UpdateScreen from '../screens/UpdateScreen';
+import CartScreen from '../screens/CartScreen';
 
 // Home screen stack
 const HomeStack = createStackNavigator(
@@ -57,8 +58,12 @@ const HomeStack = createStackNavigator(
       headerTitleStyle: {
           fontWeight: 'bold',
           color: 'white',
-          fontSize:Dimensions.get('window').height*.025,
-      }
+          fontSize:Dimensions.get('window').height*.027,
+      },
+      headerBackTitleStyle: {
+        color: 'white',
+        fontSize: Dimensions.get('window').height*.025,
+    }
   }
 }
 );
@@ -99,7 +104,7 @@ const MenuStack = createStackNavigator(
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-            fontSize:Dimensions.get('window').height*.025,
+            fontSize:Dimensions.get('window').height*.027,
         }
     }
   }
@@ -140,7 +145,7 @@ const AboutStack = createStackNavigator(
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-            fontSize:Dimensions.get('window').height*.025,
+            fontSize:Dimensions.get('window').height*.027,
         }
     }
   }
@@ -167,10 +172,54 @@ AboutStack.navigationOptions = {
 
 AboutStack.path = '';
 
+const CartStack = createStackNavigator(
+  {
+    Cart: {
+      screen: CartScreen,
+      navigationOptions: {
+        title: 'Your Order',
+      },
+    },
+  },
+  {
+    headerLayoutPreset: 'center',
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#202020',
+            height: Dimensions.get('window').height*.07,
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize:Dimensions.get('window').height*.027,
+        }
+    }
+  }
+);
+
+// Customize tab icon and label
+CartStack.navigationOptions = {
+  tabBarLabel: 'Cart',
+  tabBarOptions: {
+    activeTintColor: 'brown',
+    inactiveTintColor: 'gray',
+  },
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name= 'ios-briefcase'
+    />
+  ),
+};
+
+CartStack.path = '';
+
 // Create tab navigator from stack values
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   MenuStack,
+  CartStack,
   AboutStack,
 });
 
