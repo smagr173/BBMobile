@@ -16,6 +16,78 @@ import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
 
+  constructor(props) {
+		super(props)
+		  this.state = {
+			loggedIn: false
+		  };
+	  }  // End constructor
+	  componentDidMount() {
+		// Networking for retrieving the user information
+		fetch('http://csitrd.kutztown.edu/~smagr173/backend/fetchRecord.php', {
+		  method:'POST',
+		  header:{
+			'Accept': 'application/json',
+			'Content-type': 'application/json'
+		  },  
+		}) // End fetch
+		// Handle the response from PHP
+		.then((response) => response.json())
+		  .then((responseJson) => {
+			if(responseJson.empty == 0) {
+				this.setState({ loggedIn: false})
+			  }
+			else if (responseJson.empty != 0) {
+				this.setState({ loggedIn: true})
+        }
+      })
+      .catch((error)=>{
+        console.error(error);
+        });
+	  }  // End componentDidMount
+
+    showButtons = () => {
+      const {navigate} = this.props.navigation;
+      const { loggedIn } = this.state;
+      if (loggedIn == true) {
+        return (
+          <View style={styles.container}>
+          <TouchableOpacity  // Update information button
+          onPress={() => navigate('Update')}  // When pressed navigate to the update info page
+         style={{marginTop:20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,
+         padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
+         <Text style={styles.buttonText}>Update Info</Text>
+       </TouchableOpacity> 
+
+<Image source={require('../assets/images/divider.png')}
+style={styles.divider} />
+
+<TouchableOpacity  // Log out button
+onPress={this.LogOut}  // When pressed, call the log out function
+style={{marginTop:20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
+justifyContent:'center',backgroundColor:'black', alignItems:'center'}}>
+<Text style={styles.buttonText}>Log Out</Text>
+</TouchableOpacity> 
+</View>
+        );
+      } else {
+        return (
+          <View style={styles.container}>
+          <Text style={styles.pageText}>
+            You are not logged in
+          </Text>
+
+<TouchableOpacity  // Update information button
+onPress={() => navigate('SignIn')}  // When pressed navigate to the update info page
+style={{marginTop:20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,
+padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
+<Text style={styles.buttonText}>Sign In</Text>
+</TouchableOpacity> 
+</View>
+        );
+      }
+    }
+
   LogOut = () => {
     // Networking for logging out of the session
     fetch('http://csitrd.kutztown.edu/~smagr173/backend/log_out.php', {
@@ -32,7 +104,7 @@ export default class SettingsScreen extends Component {
             const {navigate} = this.props.navigation;
             navigate('Initial')  // Navigate to the initial screen if log out succeeds
           }
-          else {
+          else if (responseJson != 0) {
             console.warn(responseJson);
           }
         })
@@ -45,22 +117,9 @@ export default class SettingsScreen extends Component {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <TouchableOpacity  // Update information button
- 	    	  onPress={() => navigate('Update')}  // When pressed navigate to the update info page
-          style={{marginTop:20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,
-          padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
-  	  	  <Text style={styles.buttonText}>Update Info</Text>
-  	  	</TouchableOpacity> 
+        {this.showButtons()}
 
-        <Image source={require('../assets/images/divider.png')}
-  	   			style={styles.divider} />
-
-        <TouchableOpacity  // Log out button
-          onPress={this.LogOut}  // When pressed, call the log out function
-          style={{marginTop:20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
-          justifyContent:'center',backgroundColor:'black', alignItems:'center'}}>
-  	  	  <Text style={styles.buttonText}>Log Out</Text>
-  	  	</TouchableOpacity>  
+     
       </View>
     );  // End return 
   }  // End render
@@ -73,11 +132,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   pageText: {
-    margin:10,
-    fontWeight:'bold',
-    color:'gray',
-    textAlign:'center',
-    fontSize:12
+      color: 'gray',
+      textAlign: 'center',
+      fontSize: Dimensions.get('window').height*.025,
+      marginBottom: 5,
   },
   buttonText: {
 		fontWeight: 'bold',

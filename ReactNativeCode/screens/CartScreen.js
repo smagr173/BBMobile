@@ -14,22 +14,9 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Image,TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
+import { Image,TouchableOpacity,View,Text,StyleSheet } from 'react-native';
 
 export default class homeScreen extends Component {
-static navigationOptions= ({navigation}) =>({ 
-		headerRight:
-		// Settings icon at top of page on the right side
-		<View style ={styles.settingsIcon}>
-			<Ionicons
-				name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
-				size={Dimensions.get('window').height*.045}
-				color={'brown'}
-				onPress={() => navigation.navigate('Settings')}
-			/>
-		</View>
-	});
  
 	render() {
 		const {navigate} = this.props.navigation;
@@ -65,6 +52,13 @@ const styles = StyleSheet.create({
 	settingsIcon: {
 		marginRight: 13,
 	},
+	pageText: {
+		margin: 10,
+		fontWeight: 'bold',
+		color: 'gray',
+		textAlign: 'center',
+		fontSize: 15
+	  },
 	  buttonText: {
 		fontWeight: 'bold',
 		color: 'white',

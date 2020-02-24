@@ -334,6 +334,10 @@ export default class register extends Component {
     .then((response) => response.json())
       .then((responseJson) => {      // responseJson contains error msgs
         if(responseJson.suc == "Success") {
+          this.setState({ userFname: ''})
+          this.setState({ userLname: ''})
+          this.setState({ userEmail: ''})
+          this.setState({ userPassword1: ''})
           const {navigate} = this.props.navigation;
           navigate('SignIn') // Redirect to sign in page
         }
@@ -396,6 +400,10 @@ export default class register extends Component {
     const { regFail } = this.state;
     const { navigate } = this.props.navigation;
     const { invalidPass } = this.state;
+    const { userFname } = this.state;
+    const { userLname } = this.state;
+    const { userEmail } = this.state;
+    const { userPassword1 } = this.state;
 
     return (
       <View style={styles.container}>
@@ -413,6 +421,7 @@ export default class register extends Component {
           fontSize:Dimensions.get('window').height*.02,marginBottom:10}}	
           underlineColorAndroid="transparent"
           onChangeText = {this.handleFname}  // On event set value for first name
+          value = {userFname}
         />
   
         <TextInput  // Last name input field
@@ -423,6 +432,7 @@ export default class register extends Component {
           style={styles.inField}	
           underlineColorAndroid="transparent"
           onChangeText = {this.handleLname}  // On event set value for last name
+          value = {userLname}
         />
         
         <Text style={styles.errorText}>{invalidEmail}</Text>
@@ -436,6 +446,7 @@ export default class register extends Component {
           margin:10,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.02, marginTop:5}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handleEmail} // On event set value for email
+          value = {userEmail}
         />
 
         <TextInput   // Create password input field
@@ -448,6 +459,7 @@ export default class register extends Component {
           fontSize:Dimensions.get('window').height*.02}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handlePass} // On event set value for password
+          value = {userPassword1}
         />
 
         <Text style={styles.errorText}>{invalidPass}</Text>

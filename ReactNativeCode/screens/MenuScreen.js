@@ -107,34 +107,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginBottom: 5
+    marginBottom: 10
   },
   tileContainer: {
     alignItems: 'center',
     borderWidth: Dimensions.get('window').width*.0033,
     borderColor: 'black',
-    marginRight: 5,
-    marginLeft: 5
+    marginRight: 10,
+    marginLeft: 10
   },
   cornerRight: {
     alignItems: 'flex-end',
-    marginRight: 5,
+    marginRight: 10,
     marginTop:0
   },
   cornerLeft: {
     alignItems: 'flex-start',
-    marginLeft: 5,
-    marginTop:5
+    marginLeft: 10,
+    marginTop:10
   },
   cornerBRight: {
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    marginRight: 5,
+    marginRight: 10,
     marginBottom:0
   },
   cornerBLeft: {
     justifyContent: 'flex-end',
-    marginLeft:4.5,
+    marginLeft: 9.5,
     marginBottom:0
   },
   image1: {

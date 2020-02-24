@@ -38,7 +38,13 @@ export default class InitialScreen extends Component {
         <Image source={require('../assets/images/grayOrder.png')}
 	      style={styles.image2} />
 
+
         <TouchableOpacity style={styles.topButton}  // Create account button
+          onPress={() => navigate('Menu')}>
+          <Text style={styles.buttonText}>View Menu</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button}  // Create account button
           onPress={() => navigate('Register')}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
@@ -74,8 +80,8 @@ buttonText: {
   fontSize: Dimensions.get('window').height*.022,
 },
 topButton: {
-  marginTop: 130,
-  marginBottom: 7,
+  marginTop: Dimensions.get('window').height*.1,
+  marginBottom: 17,
   width: Dimensions.get('window').width*.55,
   height: Dimensions.get('window').height*.065,
   padding: 10,
@@ -84,8 +90,10 @@ topButton: {
   alignItems: 'center'
 },
 button: {
-  width: 300,
-  height: 47,
+  marginTop: 5,
+  marginBottom: 5,
+  width: Dimensions.get('window').width*.55,
+  height: Dimensions.get('window').height*.065,
   padding: 10,
   justifyContent: 'center',
   backgroundColor: 'black',
@@ -101,12 +109,12 @@ image1: {
   height: Dimensions.get('window').width * .5,
 },
 image2: {
-  marginTop: 65,
+  marginTop: Dimensions.get('window').height*.075,
   width: Dimensions.get('window').width * .63,
   height: Dimensions.get('window').width * .101
 },
 divider: {
-  marginTop:15,
+  marginTop: Dimensions.get('window').height*.03,
   width: Dimensions.get('window').width *.5,
   height: Dimensions.get('window').width * .003,
 
