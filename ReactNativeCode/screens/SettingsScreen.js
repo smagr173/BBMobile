@@ -12,19 +12,20 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Image,StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
 
   constructor(props) {
 		super(props)
 		  this.state = {
-			loggedIn: false
+      loggedIn: false,
+      isLoading: true,
 		  };
 	  }  // End constructor
 	  componentDidMount() {
 		// Networking for retrieving the user information
-		fetch('http://csitrd.kutztown.edu/~smagr173/backend/fetchRecord.php', {
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
 		  method:'POST',
 		  header:{
 			'Accept': 'application/json',
@@ -35,10 +36,16 @@ export default class SettingsScreen extends Component {
 		.then((response) => response.json())
 		  .then((responseJson) => {
 			if(responseJson.empty == 0) {
-				this.setState({ loggedIn: false})
+				this.setState ({ 
+          loggedIn: false,
+          isLoading: false,
+        })
 			  }
 			else if (responseJson.empty != 0) {
-				this.setState({ loggedIn: true})
+        this.setState ({
+          loggedIn: true,
+          isLoading: false,
+        })
         }
       })
       .catch((error)=>{
@@ -74,7 +81,7 @@ justifyContent:'center',backgroundColor:'black', alignItems:'center'}}>
         return (
           <View style={styles.container}>
           <Text style={styles.pageText}>
-            You are not logged in
+            Sign in or create an account to view full features
           </Text>
 
 <TouchableOpacity  // Update information button
@@ -90,7 +97,7 @@ padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}
 
   LogOut = () => {
     // Networking for logging out of the session
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/log_out.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/log_out.php', {
       method:'POST',
       header: {
         'Accept': 'application/json',
@@ -114,6 +121,13 @@ padding:10, justifyContent:'center',backgroundColor:'black',alignItems:'center'}
   }  // End log out function
   
   render() {
+    if (this.state.isLoading) {
+			return (
+				<View style={{flex: 1, paddingTop: 20}}>
+					<ActivityIndicator />
+				</View>
+			);
+		}
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>

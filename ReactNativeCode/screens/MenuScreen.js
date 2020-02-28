@@ -1,200 +1,178 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
-/*  Created:    Febuary 1, 2020                                     */
+/*  Created:    January 25, 2020                                    */
 /*  Course:     CSC 355-020                                         */
 /*  Professor:  Dr. Tan                                             */
-/*  Filename:   MenuScreen.js                                       */
-/*  Purpose:    This file contains the Bagel Bar menu organized     */
-/*              by category.                                        */
+/*  Filename:   HomeScreen.js                                       */
+/*  Purpose:    This file contains the user dashboard or home       */
+/*              screen. Once a user has logged into their           */
+/*              existing account this screen is displayed.          */
+/*              It contains information such as previous orders     */
+/*              and favorite items.                                 */
 /*                                                                  */
 /********************************************************************/
 
 import React, { Component } from 'react';
-import { ScrollView, Image, Dimensions, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, Text, View } from 'react-native';
+import { Dimensions } from 'react-native';
+import { Image, ActivityIndicator, TouchableOpacity, FlatList, View, Text, StyleSheet, ScrollView } from 'react-native';
 
-// Displays the menu's main categories using a scrollable tile view
-export default class MenuScreen extends Component {
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <ScrollView style={styles.container}>
+export default class SubMenu extends Component {
+	render() {
+		const {navigate} = this.props.navigation;
+		return (
+			<ScrollView style={styles.container}>
+				<Image source={require('../assets/images/bagels.jpg')} style={styles.image1} />
+				<View style={styles.categoryHeader}>
+					<Text style={styles.categoryTitle}>Breakfast</Text>
+				</View>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Classic Breakfast Bagelwiches</Text>
+					<Text style={styles.subtitle}>With a wide selection of bagels, you can't go wrong with a classic</Text>
+	  			</TouchableOpacity>
 
-        <View style={styles.cornerLeft}>
-          <Image source={require('../assets/images/decoCorner.jpg')}
-  	   			style={styles.decoCorner} /> 
-        </View>
-        <View style={styles.cornerRight}>
-          <Image source={require('../assets/images/decoCorner2.jpg')}
-  	   			style={styles.decoCorner} /> 
-        </View>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Speciality Breakfast Bagelwiches</Text>
+					<Text style={styles.subtitle}>Available only at the Bagel Bar Cafe</Text>
+	  			</TouchableOpacity>
+				
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Toasted Bagels, Split & Topped</Text>
+					<Text style={styles.subtitle}>Your favorite bagel toasted and topped with your favorite spread</Text>
+	  			</TouchableOpacity>
 
-        <View style={styles.tileContainer}>
+				<Image source={require('../assets/images/lox.jpg')} style={styles.image1} />
+				<View style={styles.categoryHeader}>
+					<Text style={styles.categoryTitle}>Lunch</Text>
+				</View>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Lunch Bagelwiches</Text>
+					<Text style={styles.subtitle}>The perfect lunch break sandwich</Text>
+	  			</TouchableOpacity>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Pizza Bagels</Text>
+					<Text style={styles.subtitle}>A Bagel Bar specialty: open-faced bagel with all kinds of goodies freshly oven-baked on top</Text>
+	  			</TouchableOpacity>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Wraps</Text>
+					<Text style={styles.subtitle}>12" wraps stuff with all kinds of goodness</Text>
+	  			</TouchableOpacity>
 
-          <Text style={styles.subtitleTop}>Breakfast Bagelwiches</Text>
-          <Text style={styles.bodyText}>Choose from our selection of breakfast sandwiches</Text>
-
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between", }}>
-           <TouchableWithoutFeedback 
-            onPress={() => navigate('Home')}>
-            <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/breakSand.jpg')} style={styles.image1} />
-            </View>
-            </TouchableWithoutFeedback>
-          </View>
-       
-          <Image source={require('../assets/images/divider.png')}
-  	   			style={styles.divider} />
-
-          <Text style={styles.subtitle}>Lunch Bagelwiches & Wraps</Text>
-          <Text style={styles.bodyText}>Grab an afternoon bagel sandwich or wrap</Text>
-
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",}}>
-          <TouchableWithoutFeedback
-            onPress={() => navigate('Home')}>
-            <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/wrap.jpg')} style={styles.image1} />
-            </View>
-          </TouchableWithoutFeedback>
-          </View>
-
-          <Image source={require('../assets/images/divider.png')}
-  	   			style={styles.divider} />
-
-          <Text style={styles.subtitle}>Fresh Baked Bagels</Text>
-          <Text style={styles.bodyText}>Choose from a variety of bagels and toppings</Text>
-
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",}}>
-          <TouchableWithoutFeedback
-            onPress={() => navigate('Home')}>
-            <View style={styles.tileStlye}>
-              <Image source={require('../assets/images/bagels.jpg')} style={styles.image1} />
-            </View>
-          </TouchableWithoutFeedback>
-          </View>
-          <Image source={require('../assets/images/divider.png')}
-  	   			style={styles.divider} />
-          
-          <Text style={styles.subtitle}>Beverages</Text>
-          <Text style={styles.bodyText}>A range of iced or hot beverages await you</Text>
-
-          <View style={{flex:2,flexDirection:'row',justifyContent: "space-between",marginBottom:Dimensions.get('window').height*.05,}}>
-            <TouchableWithoutFeedback
-              onPress={() => navigate('Home')}>
-              <View style={styles.tileStlye}>
-                <Image source={require('../assets/images/coffeeTea.png')} style={styles.image1} />
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-
-        </View>
-
-        <View style={styles.cornerBLeft}>
-          <Image source={require('../assets/images/decoCornerBL.png')}
-  	   			  style={styles.decoCorner} /> 
-        </View>
-
-        <View style={styles.cornerBRight}>
-          <Image source={require('../assets/images/decoCornerBR.png')}
-  	   			  style={styles.decoCorner} /> 
-        </View>
-
-      </ScrollView>
-    );  // End return
-  }  // End render
-}  // End class component
+				<Image source={require('../assets/images/coffeeTea.png')} style={styles.image1} />
+				<View style={styles.categoryHeader}>
+					<Text style={styles.categoryTitle}>Beverages</Text>
+				</View>
+				<TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Hot Coffees & Steamers</Text>
+					<Text style={styles.subtitle}>Coffee, Espresso, and whatnot. And we've got plenty of whatnot to offer</Text>
+	  		</TouchableOpacity>
+        <TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Iced Coffees</Text>
+					<Text style={styles.subtitle}>From cold brew to iced lattes, we've got your covered</Text>
+	  		</TouchableOpacity>
+        <TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Frozen Beverages</Text>
+					<Text style={styles.subtitle}>Frappes, smoothies, and other frozen whatnot</Text>
+	  		</TouchableOpacity>
+        <TouchableOpacity
+	 			 onPress={() => navigate('BreakfastDetail')}
+	 			 style={styles.item}>
+		
+					<Text style={styles.title}>Teas & Tea Lattes</Text>
+					<Text style={styles.subtitle}>Who knew you could do so much with tea?!</Text>
+	  		</TouchableOpacity>
+      		</ScrollView>
+			
+		);  // End return
+	}  // End render
+}  // End homeScreen component
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    marginBottom: 10
-  },
-  tileContainer: {
-    alignItems: 'center',
-    borderWidth: Dimensions.get('window').width*.0033,
-    borderColor: 'black',
-    marginRight: 10,
-    marginLeft: 10
-  },
-  cornerRight: {
-    alignItems: 'flex-end',
-    marginRight: 10,
-    marginTop:0
-  },
-  cornerLeft: {
-    alignItems: 'flex-start',
-    marginLeft: 10,
-    marginTop:10
-  },
-  cornerBRight: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    marginRight: 10,
-    marginBottom:0
-  },
-  cornerBLeft: {
-    justifyContent: 'flex-end',
-    marginLeft: 9.5,
-    marginBottom:0
-  },
-  image1: {
-    width: '100%',
-    height: '100%',
-  },
-  buttonText: {
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    fontSize: Dimensions.get('window').height*.022,
-  },
-  tileStlye: {
-    backgroundColor: 'black',
-    width: Dimensions.get('window').width*.7,
-    height: Dimensions.get('window').width*.7,
-    borderWidth: 5,
-    borderColor: '#404040',
-    marginBottom: Dimensions.get('window').height*.013,
-  },
-  divider: {
-    marginTop: 20,
-    width: Dimensions.get('window').width *.85,
-    height: Dimensions.get('window').width * .003,
-    marginBottom: Dimensions.get('window').height*.02,
-  },
-  decoDivider: {
-    marginTop: 20,
-    width: Dimensions.get('window').width *.85,
-    height: Dimensions.get('window').width * .09,
-    marginBottom: Dimensions.get('window').height*.02,
-  },
-  bodyText: {
-    color: 'gray',
-    textAlign: 'center',
-    fontSize: Dimensions.get('window').height*.025,
-    marginBottom: 15,
-    marginLeft: 20,
-    marginRight: 20,
-  },
-  subtitle: {
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
-    fontSize: Dimensions.get('window').height*.03,
-    marginBottom: 7,
-    marginTop: 10,
-  },
-  subtitleTop: {
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
-    fontSize: Dimensions.get('window').height*.03,
-    marginBottom: 7,
-    marginTop: 25,
-  },
-  decoCorner: {
-    width: Dimensions.get('window').width * .2,
-    height: Dimensions.get('window').width * .2,
-    position: 'absolute'
-  },
-})
-
+	container: {
+		flex: 1,
+		backgroundColor: '#404040',
+	},
+	categoryHeader: {
+		backgroundColor: 'brown',
+		width: Dimensions.get('window').width*.995,
+		height: Dimensions.get('window').height*.1,
+		alignSelf: 'center',
+    marginBottom: Dimensions.get('window').width*.004,
+    justifyContent: 'center'
+	},
+	categoryTitle: {
+		fontWeight: 'bold',
+		fontSize: Dimensions.get('window').height*.038,
+		color: 'white',
+		textAlign: 'center'
+	  },
+	image1: {
+		width: Dimensions.get('window').width,
+		height: Dimensions.get('window').width*.4,
+		borderWidth: 2,
+		borderColor: '#404040',
+	  },
+	item: {
+		backgroundColor: '#202020',
+		padding: 30,
+		marginBottom: 1,
+		alignItems: 'center',
+	  },
+	  title: {
+		fontWeight: 'bold',
+		fontSize: Dimensions.get('window').height*.028,
+		color: 'white',
+		alignItems: 'center',
+		marginBottom: 5
+	  },
+	  subtitle: {
+		color: 'darkgray',
+		fontSize: Dimensions.get('window').height*.023,
+		textAlign: 'center',
+	  },
+	  buttonText: {
+		fontWeight: 'bold',
+		color: 'white',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.023,
+	  },
+	  divider: {
+		marginTop: 15,
+		width: Dimensions.get('window').width *.8,
+		height: Dimensions.get('window').width * .003,
+	  },
+	  subtitleTop: {
+		marginTop: 10,
+		fontWeight: 'bold',
+		color: 'black',
+		textAlign: 'center',
+		fontSize: Dimensions.get('window').height*.03,
+		marginBottom: 0,
+	  },
+});

@@ -38,11 +38,7 @@ export default class InitialScreen extends Component {
         <Image source={require('../assets/images/grayOrder.png')}
 	      style={styles.image2} />
 
-
-        <TouchableOpacity style={styles.topButton}  // Create account button
-          onPress={() => navigate('Menu')}>
-          <Text style={styles.buttonText}>View Menu</Text>
-        </TouchableOpacity>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
 
         <TouchableOpacity style={styles.button}  // Create account button
           onPress={() => navigate('Register')}>
@@ -53,7 +49,7 @@ export default class InitialScreen extends Component {
           onPress={() => navigate('SignIn')}>
           <Text style={styles.linkText}>Sign In</Text>
         </TouchableOpacity>
-
+       </View>
       </View>  // end style container
     );
   }  // end render
@@ -80,7 +76,7 @@ buttonText: {
   fontSize: Dimensions.get('window').height*.022,
 },
 topButton: {
-  marginTop: Dimensions.get('window').height*.1,
+
   marginBottom: 17,
   width: Dimensions.get('window').width*.55,
   height: Dimensions.get('window').height*.065,
@@ -102,9 +98,11 @@ button: {
 link: {
   width: Dimensions.get('window').width*.3,
   padding: 10,
-  alignItems: 'center'
+  alignItems: 'center',
+  marginBottom: 30
 },
 image1: {
+  marginTop: 30,
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').width * .5,
 },

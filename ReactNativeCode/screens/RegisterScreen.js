@@ -315,7 +315,7 @@ export default class register extends Component {
     }
     else{
     // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/create_account.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/create_account.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

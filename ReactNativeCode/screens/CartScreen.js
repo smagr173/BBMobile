@@ -14,29 +14,31 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Image,TouchableOpacity,View,Text,StyleSheet } from 'react-native';
+import { Image,TouchableOpacity,View,Text,StyleSheet,ActivityIndicator,FlatList } from 'react-native';
 
-export default class homeScreen extends Component {
- 
+export default class CartScreen extends Component {
+
+
+	
+
 	render() {
+		
 		const {navigate} = this.props.navigation;
 		return (
 	 		<View style={styles.container}>
-				<Text style={styles.subtitleTop}>Favorite Items</Text>
-				<Text style={styles.bodyText}>You have not added any favorite items</Text>
-				
+				<Text style={styles.subtitleTop}>Your bag is empty</Text>
+				<Text style={styles.bodyTextBottom}>View the menu to add an item to your bag</Text>
 				<Image source={require('../assets/images/divider.png')}
   	   			 style={styles.divider} />
-
-				<Text style={styles.subtitle}>Order History</Text>
-          		<Text style={styles.bodyTextBottom}>You have not placed an order yet</Text>
-
+          		
 				<TouchableOpacity
           			onPress={() => navigate('Menu')}  // when pressed call the userRegister function
          			style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
          			justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
          			<Text style={styles.buttonText}>View Menu</Text>
-      		    </TouchableOpacity>
+      		    </TouchableOpacity> 
+				
+				
       		</View>
 		);  // End return
 	}  // End render
@@ -44,14 +46,31 @@ export default class homeScreen extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'white'
+		flex: 1,
+		backgroundColor: 'white',
+		alignItems: 'center'
 	},
 	settingsIcon: {
 		marginRight: 13,
 	},
+	item: {
+		backgroundColor: 'white',
+		padding: 15,
+	},
+	itemName: {
+		marginTop: 15,
+		marginLeft: 13,
+		fontWeight: 'bold',
+		fontSize: Dimensions.get('window').height*.028,
+		color: 'black',
+	},
+	itemPrice: {
+		marginTop: 15,
+		marginRight: 13,
+		fontWeight: 'bold',
+		fontSize: Dimensions.get('window').height*.026,
+		color: 'black',
+	}, 
 	pageText: {
 		margin: 10,
 		fontWeight: 'bold',

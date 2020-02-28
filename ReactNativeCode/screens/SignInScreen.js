@@ -87,7 +87,7 @@ export default class SignIn extends Component {
     }
     else{
     // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/sign_in.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/sign_in.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Image, ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, View, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 
 export default class SettingsScreen extends Component {
   // Initialize default states for variables
@@ -38,13 +38,14 @@ export default class SettingsScreen extends Component {
         curr2PlaceText: 'gray',
         invalidEmail: '',
         invalidNew: '',
+        isLoading: true,
       };
   }  // End constructor
 
   // Gets the user information for input field values
   componentDidMount() {
     // Networking for retrieving the user information
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/fetchRecord.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
       method:'POST',
       header:{
         'Accept': 'application/json',
@@ -54,9 +55,12 @@ export default class SettingsScreen extends Component {
     // Handle the response from PHP
     .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ fName: responseJson.fname})
-        this.setState({ lName: responseJson.lname})
-        this.setState({ email: responseJson.email})
+        this.setState ({
+          fName: responseJson.fname,
+          lName: responseJson.lname,
+          email: responseJson.email,
+          isLoading: false,
+        });
       })
   }  // End componentDidMount()
 
@@ -74,7 +78,7 @@ export default class SettingsScreen extends Component {
     }
     else {
     // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/update.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/update.php', {
       method:'POST',
       header: {
         'Accept': 'application/json',
@@ -165,7 +169,7 @@ export default class SettingsScreen extends Component {
     }
     else{
     // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/updateEmail.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/updateEmail.php', {
       method:'POST',
       header: {
         'Accept': 'application/json',
@@ -241,7 +245,7 @@ export default class SettingsScreen extends Component {
     }
     else {
     // Networking for sending user inputs to PHP server
-    fetch('http://csitrd.kutztown.edu/~smagr173/backend/updatePass.php', {
+    fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/updatePass.php', {
       method:'POST',
       header: {
         'Accept': 'application/json',
@@ -308,6 +312,13 @@ export default class SettingsScreen extends Component {
   }
 
   render() { 
+    if (this.state.isLoading) {
+			return (
+				<View style={{flex: 1, paddingTop: 20}}>
+					<ActivityIndicator />
+				</View>
+			);
+		}
     const { fName } = this.state;
     const { lName } = this.state;
     const { fnamePlace } = this.state;
