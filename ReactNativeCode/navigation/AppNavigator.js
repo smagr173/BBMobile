@@ -49,7 +49,7 @@ const MainStack = createStackNavigator(
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#202020',
-            height: Dimensions.get('window').height*.084,
+            height: Dimensions.get('window').width*.115,
             
         },
         headerTintColor: 'white',

@@ -23,6 +23,7 @@ import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import UpdateScreen from '../screens/UpdateScreen';
 import CartScreen from '../screens/CartScreen';
+import BreakfastDetail from '../screens/BreakfastDetail';
 
 // Home screen stack
 const HomeStack = createStackNavigator(
@@ -68,7 +69,6 @@ const HomeStack = createStackNavigator(
 }
 );
 
-
 // Customize tab icon and label
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
@@ -92,6 +92,12 @@ const MenuStack = createStackNavigator(
         title: 'Menu',
       },
     },
+    BreakfastDetail: {
+      screen: BreakfastDetail,
+      navigationOptions: {
+        title: 'Classic Bagelwiches',
+      },
+    },
   },
   {
     headerLayoutPreset: 'center',
@@ -104,8 +110,12 @@ const MenuStack = createStackNavigator(
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-            fontSize:Dimensions.get('window').height*.027,
-        }
+            fontSize: Dimensions.get('window').height*.027,
+        },
+        headerBackTitleStyle: {
+          color: 'white',
+          fontSize: Dimensions.get('window').height*.025,
+      }
     }
   }
 );
@@ -118,7 +128,7 @@ MenuStack.navigationOptions = {
     inactiveTintColor: 'gray',
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-paper' : 'ios-paper'} />
+    <TabBarIcon focused={focused} name={'ios-paper'} />
   ),
 };
 
@@ -200,7 +210,7 @@ const CartStack = createStackNavigator(
 
 // Customize tab icon and label
 CartStack.navigationOptions = {
-  tabBarLabel: 'Cart',
+  tabBarLabel: 'Bag',
   tabBarOptions: {
     activeTintColor: 'brown',
     inactiveTintColor: 'gray',
@@ -208,7 +218,11 @@ CartStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name= 'ios-briefcase'
+      name={
+        Platform.OS === 'ios'
+          ? `ios-briefcase`
+          : 'md-briefcase'
+      }
     />
   ),
 };
