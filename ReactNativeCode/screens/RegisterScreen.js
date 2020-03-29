@@ -31,10 +31,10 @@ export default class register extends Component {
         passPlace: 'Password',
         invalidEmail: '',
         regFail: '',
-        fnamePlaceText: 'gray',
-        lnamePlaceText: 'gray',
-        emailPlaceText: 'gray',
-        passPlaceText: 'gray',
+        fnamePlaceText: '#606060',
+        lnamePlaceText: '#606060',
+        emailPlaceText: '#606060',
+        passPlaceText: '#606060',
         invalidPass: '',
       }
   }  // End constructor
@@ -54,35 +54,35 @@ export default class register extends Component {
       this.setState({ lnamePlaceText: 'red'})
       return false;
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userFname=="" && userLname=="" && userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === false && userEmail!="" && userFname=="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userFname==""&& userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === false && userEmail!="" && userFname==""&& userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === false && userEmail!="" && userLname=="" && userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === false && userEmail!="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userLname=="" && userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userLname=="" && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userLname=="" && userPassword1!="" && userFname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userLname=="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
       this.setState({ emailPlace: 'Email address is required'})
@@ -90,30 +90,30 @@ export default class register extends Component {
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userPassword1!="" && userFname!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userLname!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userPassword1!="" && userLname!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail=="" && userPassword1!="" && userFname!="" && userLname!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail=="" && userPassword1!="" && userFname!="" && userLname!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="" && userLname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
       this.setState({ fnamePlace: 'First name is required'})
@@ -121,22 +121,22 @@ export default class register extends Component {
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userLname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
       this.setState({ lnamePlace: 'Last name is required'})
       this.setState({ lnamePlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && reg.test(userEmail) === true && userEmail!="" && userPassword1!="" && userFname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
       this.setState({ fnamePlace: 'First name is required'})
       this.setState({ fnamePlaceText: 'red'})
     }
-    else if(reg.test(userEmail) === true && userEmail!="" && userPassword1 >=8 && userFname=="" && userLname=="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(reg.test(userEmail) === true && userEmail!="" && userPassword1 >=6 && userFname=="" && userLname=="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ emailPlaceText: 'red'})
       this.setState({ fnamePlace: 'First name is required'})
@@ -302,12 +302,12 @@ export default class register extends Component {
       this.setState({ passPlace:'Password is required'})
       this.setState({ passPlaceText: 'red'})
     }
-    else if(userPassword1.length < 8 && userEmail!="" && reg.test(userEmail)=== false && userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userEmail!="" && reg.test(userEmail)=== false && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
-    else if(userPassword1.length < 8 && userPassword1!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword1.length < 6 && userPassword1!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
     }
 		else if(reg.test(userEmail) === false && userEmail!="") {
     this.setState({ invalidEmail: 'Email address must be valid'})
@@ -338,6 +338,17 @@ export default class register extends Component {
           this.setState({ userLname: ''})
           this.setState({ userEmail: ''})
           this.setState({ userPassword1: ''})
+          this.setState({fnamePlace: 'First Name'})
+          this.setState({lnamePlace: 'Last Name'})
+          this.setState({emailPlace: 'Email Address'})
+          this.setState({passPlace: 'Password'})
+          this.setState({invalidEmail: ''})
+          this.setState({regFail: ''})
+          this.setState({fnamePlaceText: 'gray'})
+          this.setState({lnamePlaceText: 'gray'})
+          this.setState({emailPlaceText: 'gray'})
+          this.setState({passPlaceText: 'gray'})
+          this.setState({invalidPass: ''})
           const {navigate} = this.props.navigation;
           navigate('SignIn') // Redirect to sign in page
         }
@@ -408,22 +419,22 @@ export default class register extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
-        
         <Text style={styles.errorText}>{regFail}</Text>
 
+        <View style={{ alignItems: 'center'}}>
         <TextInput  // First name input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ fnamePlace }
           placeholderTextColor={fnamePlaceText}
-          style={{paddingHorizontal:5,marginTop:0,width:Dimensions.get('window').width*.75,
-          height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
-          fontSize:Dimensions.get('window').height*.02,marginBottom:10}}	
+          style={{paddingHorizontal:7,marginTop:0,width:Dimensions.get('window').width*.93,
+          height:Dimensions.get('window').height*.058, borderColor:"gray", borderWidth:2,
+          fontSize:Dimensions.get('window').height*.023,marginBottom:27}}	
           underlineColorAndroid="transparent"
           onChangeText = {this.handleFname}  // On event set value for first name
           value = {userFname}
         />
-  
+        
         <TextInput  // Last name input field
           autoCorrect={false}
           returnKeyType='done'
@@ -434,36 +445,46 @@ export default class register extends Component {
           onChangeText = {this.handleLname}  // On event set value for last name
           value = {userLname}
         />
-        
-        <Text style={styles.errorText}>{invalidEmail}</Text>
+        </View>
 
+        <View style={{ alignItems: 'center'}}>
         <TextInput  // Email input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ emailPlace }
           placeholderTextColor={emailPlaceText}
-          style={{paddingHorizontal:5, width:Dimensions.get('window').width*.75, height:Dimensions.get('window').height*.058,
-          margin:10,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.02, marginTop:5}}	
+          style={{paddingHorizontal:7, width:Dimensions.get('window').width*.93, height:Dimensions.get('window').height*.058,
+          marginBottom:4,borderColor:"gray", borderWidth:2,fontSize:Dimensions.get('window').height*.023}}	
           underlineColorAndroid="transparent"
-          onChangeText= {this.handleEmail} // On event set value for email
-          value = {userEmail}
+          onChangeText={this.handleEmail} // On event set value for email
+          value={userEmail}
         />
+        </View>
 
+        <View style={{ alignItems: 'flex-start'}}>
+           <Text style={styles.errorText}>{invalidEmail}</Text>
+        </View>
+
+        <View style={{ alignItems: 'center'}}>
         <TextInput   // Create password input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={ passPlace }
           placeholderTextColor={passPlaceText}
-          style={{paddingHorizontal:5,marginBottom:4,width:Dimensions.get('window').width*.75,
-          height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray", borderWidth:2,
-          fontSize:Dimensions.get('window').height*.02}}	
+          style={{paddingHorizontal:7,marginBottom:4,width:Dimensions.get('window').width*.93,
+          height:Dimensions.get('window').height*.058,borderColor:"gray", borderWidth:2,
+          fontSize:Dimensions.get('window').height*.023, marginTop: 10}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handlePass} // On event set value for password
           value = {userPassword1}
         />
+        </View>
 
-        <Text style={styles.errorText}>{invalidPass}</Text>
+        <View style={{ alignItems: 'flex-start'}}>
+          <Text style={styles.errorText}>{invalidPass}</Text>
+        </View>
 
+        <View style={{ alignItems: 'center'}}>
         <TouchableOpacity  // Register button
           onPress={this.userRegister}  // When pressed call the userRegister function
           style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
@@ -476,7 +497,7 @@ export default class register extends Component {
           style={{marginBottom:260, width:Dimensions.get('window').width*.3, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Sign In</Text>
         </TouchableOpacity>
-
+        </View>
       </View>
     );  // End return
   }  // End render
@@ -485,23 +506,21 @@ export default class register extends Component {
 const styles = StyleSheet.create({
 container: {
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
   backgroundColor: 'white',
+  justifyContent: 'flex-start'
 },
 inField: {
-  paddingHorizontal: 5,
-  width: Dimensions.get('window').width*.75,
+  paddingHorizontal: 7,
+  width: Dimensions.get('window').width*.93,
   height: Dimensions.get('window').height*.058,
-  margin: 10,
   borderColor: 'gray',
   borderWidth: 2,
-  fontSize: Dimensions.get('window').height*.02,
-  marginBottom: 15
+  fontSize: Dimensions.get('window').height*.023,
+  marginBottom: 27
 },
 pageText: {
-  marginTop: 45,
-  marginBottom: 5,
+  marginTop: 5,
+  marginBottom: 15,
   fontWeight: 'bold',
   color: 'gray',
   textAlign: 'center',
@@ -515,8 +534,8 @@ buttonText: {
 },
 errorText: {
   color: 'red',
-  textAlign: 'center',
   fontSize: Dimensions.get('window').height*.02,
+  marginLeft: 14
 },
 link: {
   margin: 7,

@@ -14,9 +14,23 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Image, ActivityIndicator, TouchableOpacity, FlatList, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Image, TouchableOpacity, FlatList, View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
 
 export default class SubMenu extends Component {
+   // Initialize default states for variables
+   constructor(props) {
+    super(props)
+      this.state = {
+       categoryChoice: ''
+      };
+    }  // End constructor
+
+	handleChoice = () => {
+		global.category = this.state.categoryChoice;
+		const {navigate} = this.props.navigation;
+        navigate('MenuDetail') // Redirect to sign in page
+	}
+
 	render() {
 		const {navigate} = this.props.navigation;
 		return (
@@ -25,88 +39,106 @@ export default class SubMenu extends Component {
 				<View style={styles.categoryHeader}>
 					<Text style={styles.categoryTitle}>Breakfast</Text>
 				</View>
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				<TouchableWithoutFeedback
+				
+				  onPressIn={() => {this.setState({ categoryChoice: 'Classic Breakfast Bagelwiches' })}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Classic Breakfast Bagelwiches</Text>
 					<Text style={styles.subtitle}>With a wide selection of bagels, you can't go wrong with a classic</Text>
-	  			</TouchableOpacity>
+				  </View>
+	  			</TouchableWithoutFeedback>
 
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
-					<Text style={styles.title}>Speciality Breakfast Bagelwiches</Text>
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Speciality Breakfast Bagels'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
+					<Text style={styles.title}>Speciality Breakfast Bagels</Text>
 					<Text style={styles.subtitle}>Available only at the Bagel Bar Cafe</Text>
-	  			</TouchableOpacity>
+				  </View>
+				</TouchableWithoutFeedback>
 				
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Toasted Bagels, Split & Topped'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Toasted Bagels, Split & Topped</Text>
 					<Text style={styles.subtitle}>Your favorite bagel toasted and topped with your favorite spread</Text>
-	  			</TouchableOpacity>
+				  </View>
+				</TouchableWithoutFeedback>
 
 				<Image source={require('../assets/images/lox.jpg')} style={styles.image1} />
 				<View style={styles.categoryHeader}>
 					<Text style={styles.categoryTitle}>Lunch</Text>
 				</View>
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Lunch Bagelwiches'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Lunch Bagelwiches</Text>
 					<Text style={styles.subtitle}>The perfect lunch break sandwich</Text>
-	  			</TouchableOpacity>
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				  </View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Pizza Bagels'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Pizza Bagels</Text>
 					<Text style={styles.subtitle}>A Bagel Bar specialty: open-faced bagel with all kinds of goodies freshly oven-baked on top</Text>
-	  			</TouchableOpacity>
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				  </View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Wraps'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Wraps</Text>
 					<Text style={styles.subtitle}>12" wraps stuff with all kinds of goodness</Text>
-	  			</TouchableOpacity>
+				  </View>
+				</TouchableWithoutFeedback>
 
 				<Image source={require('../assets/images/coffeeTea.png')} style={styles.image1} />
 				<View style={styles.categoryHeader}>
 					<Text style={styles.categoryTitle}>Beverages</Text>
 				</View>
-				<TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
-					<Text style={styles.title}>Hot Coffees & Steamers</Text>
+
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Hot Coffee & Steamers'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
+					<Text style={styles.title}>Hot Coffee & Steamers</Text>
 					<Text style={styles.subtitle}>Coffee, Espresso, and whatnot. And we've got plenty of whatnot to offer</Text>
-	  		</TouchableOpacity>
-        <TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				  </View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Iced Coffees'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Iced Coffees</Text>
 					<Text style={styles.subtitle}>From cold brew to iced lattes, we've got your covered</Text>
-	  		</TouchableOpacity>
-        <TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+	  		      </View>
+				</TouchableWithoutFeedback>
+
+		        <TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Frozen Beverages'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Frozen Beverages</Text>
 					<Text style={styles.subtitle}>Frappes, smoothies, and other frozen whatnot</Text>
-	  		</TouchableOpacity>
-        <TouchableOpacity
-	 			 onPress={() => navigate('BreakfastDetail')}
-	 			 style={styles.item}>
-		
+				  </View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback
+				  onPressIn={() => {this.setState({ categoryChoice: 'Teas & Tea Lattes'})}}
+				  onPress={this.handleChoice}>
+				  <View style={styles.item}>
 					<Text style={styles.title}>Teas & Tea Lattes</Text>
 					<Text style={styles.subtitle}>Who knew you could do so much with tea?!</Text>
-	  		</TouchableOpacity>
+				  </View>
+				</TouchableWithoutFeedback>
       		</ScrollView>
 			
 		);  // End return
@@ -149,7 +181,8 @@ const styles = StyleSheet.create({
 		fontSize: Dimensions.get('window').height*.028,
 		color: 'white',
 		alignItems: 'center',
-		marginBottom: 5
+		marginBottom: 5,
+		textAlign: 'center'
 	  },
 	  subtitle: {
 		color: 'darkgray',

@@ -25,31 +25,54 @@ export default class SignIn extends Component {
         emailPlace: 'Email Address',
         passPlace: 'Password',
         invalidCombo: '',
-        placeTextEmail: 'gray',
-        placeTextPass: 'gray',
+        placeTextEmail: '#606060',
+        placeTextPass: '#606060',
         invalidEmail: '',
         invalidPass: '',
       };
   }  // End constructor
+
+  componentDidMount() {
+		// Networking for retrieving the user information
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
+		  method:'POST',
+		  header:{
+			'Accept': 'application/json',
+			'Content-type': 'application/json'
+		  }
+		}) // End fetch
+		// Handle the response from PHP
+		.then((response) => response.json())
+		  .then((responseJson) => {
+        if(responseJson.email != null) {
+			  this.setState({
+				 userEmail: responseJson.email
+      });
+    }
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+	  }  // End componentDidMount()
 
 // On text change userSignIn gets called
 // Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   SignIn = () => {
     const {userEmail,userPassword} = this.state;
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-    if(userEmail=="" && userPassword.length < 8 && userPassword!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    if(userEmail=="" && userPassword.length < 6 && userPassword!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ placeTextEmail: 'red'})
     }
-    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="" && userPassword!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword.length < 6 && reg.test(userEmail) === false && userEmail!="" && userPassword!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
-    else if(userPassword.length < 8 && userPassword!="") {
-      this.setState({ invalidPass:'Password is at least 8 characters'})
+    else if(userPassword.length < 6 && userPassword!="") {
+      this.setState({ invalidPass:'Password is at least 6 characters'})
     }
-    else if(userPassword.length >= 8 && reg.test(userEmail) === false && userEmail!="") {
+    else if(userPassword.length >= 6 && reg.test(userEmail) === false && userEmail!="") {
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
 
@@ -73,17 +96,17 @@ export default class SignIn extends Component {
       this.setState({ passPlace:'Password is required'})
       this.setState({ placeTextPass: 'red'})
     }
-    else if(userEmail=="" && userPassword.length < 8 && userPassword!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userEmail=="" && userPassword.length < 6 && userPassword!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ placeTextEmail: 'red'})
     }
-    else if(userPassword.length < 8 && reg.test(userEmail) === false && userEmail!="") {
-      this.setState({ invalidPass:'Password must be at least 8 characters'})
+    else if(userPassword.length < 6 && reg.test(userEmail) === false && userEmail!="") {
+      this.setState({ invalidPass:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
-    else if(userPassword.length < 8 && userPassword!="") {
-      this.setState({ invalidPass:'Password is at least 8 characters'})
+    else if(userPassword.length < 6 && userPassword!="") {
+      this.setState({ invalidPass:'Password is at least 6 characters'})
     }
     else{
     // Networking for sending user inputs to PHP server
@@ -153,36 +176,48 @@ export default class SignIn extends Component {
       <View style={styles.container}>
         <Text style={styles.pageText}>Sign in to your Bagel Bar Account</Text>
 
-        <Text style={styles.errorText}>{invalidCombo}</Text>
+        <View style={{ alignItems: 'flex-start'}}>
+          <Text style={styles.errorText}>{invalidCombo}</Text>
+        </View>
         
+        <View style={{ alignItems: 'center'}}>
         <TextInput   // Email input field
           autoCorrect={false}
           returnKeyType='done'
           placeholder={emailPlace}
           placeholderTextColor={placeTextEmail}
-          style={{marginBottom: 5,paddingHorizontal:5,marginTop:7,width:Dimensions.get('window').width*.75,
+          style={{marginBottom: 5,paddingHorizontal:5,marginTop:7,width:Dimensions.get('window').width*.93,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
-          fontSize:Dimensions.get('window').height*.02}}	
+          fontSize:Dimensions.get('window').height*.023}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handleEmail}  // On event set value for email
+          value= {this.state.userEmail}
         />
-  
-        <Text style={styles.errorText}>{invalidEmail}</Text>
+        </View>
+        
+        <View style={{ alignItems: 'flex-start'}}>
+          <Text style={styles.errorText}>{invalidEmail}</Text>
+        </View>
 
+        <View style={{ alignItems: 'center'}}>
         <TextInput   // Password input field
           autoCorrect={false}
           returnKeyType='done'
           placeholderTextColor={placeTextPass}
           placeholder={passPlace} secureTextEntry={true}
-          style={{marginTop:13,paddingHorizontal:5,marginBottom:5,width:Dimensions.get('window').width*.75,
+          style={{marginTop:13,paddingHorizontal:5,marginBottom:5,width:Dimensions.get('window').width*.93,
           height:Dimensions.get('window').height*.058,margin:10, borderColor:"gray",borderWidth:2,
-          fontSize:Dimensions.get('window').height*.02}}	
+          fontSize:Dimensions.get('window').height*.023}}	
           underlineColorAndroid="transparent"
           onChangeText= {this.handlePass}  // On event set value for password
         />
+        </View>
 
-        <Text style={styles.errorText}>{invalidPass}</Text>
-  
+        <View style={{ alignItems: 'flex-start'}}>
+          <Text style={styles.errorText}>{invalidPass}</Text>
+        </View>
+
+        <View style={{ alignItems: 'center'}}>
         <TouchableOpacity  // Button for sign in
           onPress={this.SignIn}   // When pressed call the userSignIn function
           style={{ marginTop: 20,width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
@@ -195,6 +230,7 @@ export default class SignIn extends Component {
           style={{marginBottom:275, width:Dimensions.get('window').width*.5, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Create Account</Text>
         </TouchableOpacity>
+        </View>
 
       </View>    // End style view
     );  // End return
@@ -205,7 +241,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
   },
   pageText: {
@@ -230,8 +265,8 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    textAlign: 'center',
-    fontSize: Dimensions.get('window').height*.02,
+    marginLeft: 14,
+    fontSize: Dimensions.get('window').height*.021,
   },
 });
 

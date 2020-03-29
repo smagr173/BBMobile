@@ -118,24 +118,24 @@ export default class SettingsScreen extends Component {
   updateEmail = () => {
     const {email, pass} = this.state;
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-    if (email!="" && pass!="" && reg.test(email) === false && pass.length < 8){
+    if (email!="" && pass!="" && reg.test(email) === false && pass.length < 6){
       this.setState({ invalidEmail: 'Email address must be valid'})
       this.setState({ emailPlace: 'Email address is required'})
       this.setState({ passPlace: 'Password is required'})
       this.setState({ currPlaceText: 'red'})
-      this.setState({ invalidLen:'Password is at least 8 characters'})
+      this.setState({ invalidLen:'Password is at least 6 characters'})
       return false;
     }
-    else if(pass.length < 8 && reg.test(email) === false && email!="" && pass!="") {
-      this.setState({ invalidLen:'Password must be at least 8 characters'})
+    else if(pass.length < 6 && reg.test(email) === false && email!="" && pass!="") {
+      this.setState({ invalidLen:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
-    else if(pass.length >= 8 && reg.test(email) === false && email!="") {
+    else if(pass.length >= 6 && reg.test(email) === false && email!="") {
       this.setState({ invalidEmail: 'Email address must be valid'})
     }
 
-    else if(pass.length < 8 && pass!="") {
-      this.setState({ invalidLen:'Password is at least 8 characters'})
+    else if(pass.length < 6 && pass!="") {
+      this.setState({ invalidLen:'Password is at least 6 characters'})
     }
     else if(reg.test(email) === false && pass=="" && email!="") {
       this.setState({ invalidEmail: 'Email address must be valid'})
@@ -155,17 +155,17 @@ export default class SettingsScreen extends Component {
       this.setState({ passPlace:'Password is required'})
       this.setState({ currPlaceText: 'red'})
     }
-    else if(email=="" && pass.length < 8 && pass!="") {
-      this.setState({ invalidLen:'Password must be at least 8 characters'})
+    else if(email=="" && pass.length < 6 && pass!="") {
+      this.setState({ invalidLen:'Password must be at least 6 characters'})
       this.setState({ emailPlace: 'Email address is required'})
     }
-    else if(pass.length < 8 && reg.test(email) === false && email!="" && pass!="") {
-      this.setState({ invalidLen:'Password must be at least 8 characters'})
+    else if(pass.length < 6 && reg.test(email) === false && email!="" && pass!="") {
+      this.setState({ invalidLen:'Password must be at least 6 characters'})
       this.setState({ invalidEmail: 'Email address must be valid'})
       return false;
     }
-    else if(pass.length < 8 && pass!="") {
-      this.setState({ invalidCombo:'Password is at least 8 characters'})
+    else if(pass.length < 6 && pass!="") {
+      this.setState({ invalidCombo:'Password is at least 6 characters'})
     }
     else{
     // Networking for sending user inputs to PHP server
@@ -215,33 +215,33 @@ export default class SettingsScreen extends Component {
   // Inputs get checked, then sent as JSON to PHP file, error msgs sent back
   updatePass = () => {
     const {NewPass, pass2} = this.state;
-    if(pass2.length < 8 && pass2!="" && NewPass.length < 8 && NewPass !="") {
-      this.setState({ wrongCurr:'Current password is at least 8 characters'})
-      this.setState({ invalidNew:'New password must be at least 8 characters'})
+    if(pass2.length < 6 && pass2!="" && NewPass.length < 6 && NewPass !="") {
+      this.setState({ wrongCurr:'Current password is at least 6 characters'})
+      this.setState({ invalidNew:'New password must be at least 6 characters'})
     }
-    else if(pass2.length < 8 && pass2!="" && NewPass=="") {
-      this.setState({ wrongCurr:'Current password is at least 8 characters'})
+    else if(pass2.length < 6 && pass2!="" && NewPass=="") {
+      this.setState({ wrongCurr:'Current password is at least 6 characters'})
       this.setState({ newPassPlace:'New password is required'})
           this.setState({ newPassPlaceText: 'red'})
     }
-    else if(NewPass.length < 8 && pass2=="" && NewPass!="") {
-      this.setState({ invalidNew:'New password must be at least 8 characters'})
+    else if(NewPass.length < 6 && pass2=="" && NewPass!="") {
+      this.setState({ invalidNew:'New password must be at least 6 characters'})
       this.setState({ passPlace2:'Current password is required'})
       this.setState({ curr2PlaceText: 'red'})
     }
-    else if(NewPass.length >= 8 && pass2=="") {
+    else if(NewPass.length >= 6 && pass2=="") {
       this.setState({ passPlace2:'Current password is required'})
       this.setState({ curr2PlaceText: 'red'})
     }
-    else if(pass2.length >= 8 && NewPass=="") {
+    else if(pass2.length >= 6 && NewPass=="") {
       this.setState({ newPassPlace:'New password is required'})
       this.setState({ newPassPlaceText: 'red'})
     }
-    else if(pass2.length >= 8 && NewPass.length < 8 && NewPass != '') {
-      this.setState({ invalidNew:'New password must be least 8 characters'})
+    else if(pass2.length >= 6 && NewPass.length < 6 && NewPass != '') {
+      this.setState({ invalidNew:'New password must be least 6 characters'})
     }
-    else if(NewPass.length >= 8 && pass2.length < 8 && pass2 != '') {
-      this.setState({ wrongCurr:'Current password is at least 8 characters'})
+    else if(NewPass.length >= 6 && pass2.length < 6 && pass2 != '') {
+      this.setState({ wrongCurr:'Current password is at least 6 characters'})
     }
     else {
     // Networking for sending user inputs to PHP server

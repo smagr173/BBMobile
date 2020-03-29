@@ -40,6 +40,11 @@ export default class InitialScreen extends Component {
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
 
+      <TouchableOpacity style={styles.button}  // Create account button
+          onPress={() => navigate('Menu')}>
+          <Text style={styles.buttonText}>View Menu</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.button}  // Create account button
           onPress={() => navigate('Register')}>
           <Text style={styles.buttonText}>Create Account</Text>
