@@ -23,7 +23,8 @@ import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import UpdateScreen from '../screens/UpdateScreen';
 import CartScreen from '../screens/CartScreen';
-import BreakfastDetail from '../screens/BreakfastDetail';
+import MenuDetail from '../screens/MenuDetail';
+import MenuModal from '../screens/MenuModal';
 
 // Home screen stack
 const HomeStack = createStackNavigator(
@@ -92,12 +93,16 @@ const MenuStack = createStackNavigator(
         title: 'Menu',
       },
     },
-    BreakfastDetail: {
-      screen: BreakfastDetail,
-      navigationOptions: {
-        title: 'Classic Bagelwiches',
-      },
+    MenuDetail: {
+      screen: MenuDetail,
     },
+    MenuModal: {
+      screen: MenuModal,
+      navigationOptions: {
+        title: 'Menu Item',
+        mode: 'modal'
+      }
+    }
   },
   {
     headerLayoutPreset: 'center',
