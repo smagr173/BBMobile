@@ -11,6 +11,46 @@
  *
 */
 
+function addBag($email, $name, $price, $quantity, $item_id, $notes, $options) {
+    $db = new PDO("sqlite:content.db");
+	
+	// Insert into the specific user's table
+    $sql = "INSERT INTO cart (email, name, price, quantity, item_id, notes, option) VALUES (?,?,?,?,?,?,?)";
+	
+    $stmt= $db->prepare($sql);
+    $stmt->execute([$email, $name, $price, $quantity, $item_id, $notes, $options]);
+	
+    $db = NULL;
+}
+
+function checkCart($email) {
+    $db = new PDO("sqlite:content.db");
+        $sql = "SELECT * FROM cart WHERE email='$email' ORDER BY item_id DESC LIMIT 1";
+        $stmt = $db->query($sql);
+        // return cart as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+   $db = NULL;
+}
+
+function deleteItem($email, $item_id) {
+    $db = new PDO("sqlite:content.db");
+	
+    $sql = "DELETE FROM cart WHERE email=? AND item_id=?";
+	
+    $stmt = $db->prepare($sql);
+    $bool=$stmt->execute([$email,$item_id]);
+    $db = NULL;
+}
+
+function changeQuantity($quantity, $email, $item_id) {
+    $db = new PDO("sqlite:content.db");
+    $sql = "UPDATE cart SET quantity=? WHERE item_id=? AND email=?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array($quantity, $item_id, $email));
+    
+    $db=NULL;	
+}
+
 /* Function Name: insertUserRecord
  * Description: insert user information into the database
  * Parameters: (string) $fname: the user's first name

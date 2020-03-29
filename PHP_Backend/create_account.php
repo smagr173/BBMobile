@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "functions.php";
 
 	// Get JSON inputs, store in variable
@@ -57,6 +58,8 @@ include "functions.php";
 		$inserted = insertUserRecord($fname, $lname, $email, $hashed);  // Call function to insert into DB
 		if ($inserted) {
 		$msgs['suc'] = "Success";
+		$record = getUserRecord($email);
+		$_SESSION['record'] = $record;
 		}
 		else {
 			$msgs['fail'] = "Register failed: Check connection";
