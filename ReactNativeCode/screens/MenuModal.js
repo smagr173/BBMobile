@@ -163,8 +163,15 @@ export default class SubMenu extends Component {
 			itemNotes: '',
 			option1:'',
 			option2:'',
-			checkboxClicked: false,
-			checkboxShape: 'ios-radio-button-off',
+			extra1: null,
+			extra2: null,
+			extra3: null,
+			checkboxClicked1: false,
+			checkboxClicked2: false,
+			checkboxClicked3: false,
+			checkboxShape1: 'ios-radio-button-off',
+			checkboxShape2: 'ios-radio-button-off',
+			checkboxShape3: 'ios-radio-button-off',
 		}
 	}
 	incrementQuantity = () => {
@@ -179,14 +186,54 @@ export default class SubMenu extends Component {
 		}
 	};
 
-	handlePress = () => {
-		if (this.state.checkboxClicked == false) {
-			this.setState({checkboxClicked: true})
-			this.setState({checkboxShape: 'ios-radio-button-on'})
+	handlePress1 = (extraItem1) => {
+		if (this.state.checkboxClicked1 == false) {
+			this.setState({
+				checkboxClicked1: true,
+				checkboxShape1: 'ios-radio-button-on',
+				extra1: extraItem1
+		    })
 		}
 		else {
-			this.setState({checkboxClicked: false})
-			this.setState({checkboxShape: 'ios-radio-button-off'})
+			this.setState({
+				checkboxClicked1: false,
+				checkboxShape1: 'ios-radio-button-off',
+				extra1: null
+		    })
+		}
+	};
+
+	handlePress2 = (extraItem2) => {
+		if (this.state.checkboxClicked2 == false) {
+			this.setState({
+				checkboxClicked2: true,
+				checkboxShape2: 'ios-radio-button-on',
+				extra2: extraItem2
+		    })
+		}
+		else {
+			this.setState({
+				checkboxClicked2: false,
+				checkboxShape2: 'ios-radio-button-off',
+				extra2: null
+		    })
+		}
+	};
+
+	handlePress3 = (extraItem3) => {
+		if (this.state.checkboxClicked3 == false) {
+			this.setState({
+				checkboxClicked3: true,
+				checkboxShape3: 'ios-radio-button-on',
+				extra3: extraItem3
+		    })
+		}
+		else {
+			this.setState({
+				checkboxClicked3: false,
+				checkboxShape3: 'ios-radio-button-off',
+				extra3: null
+		    })
 		}
 	};
 
@@ -213,7 +260,11 @@ export default class SubMenu extends Component {
 			  quantity: this.state.itemQuantity,
 			  price: this.state.itemPrice,
 			  notes: this.state.itemNotes,
-			  options: this.state.option1
+			  option1: this.state.option1,
+			  option2: this.state.option2,
+			  extra1: this.state.extra1,
+			  extra2: this.state.extra2,
+			  extra3: this.state.extra3,
 			}) 
 		  }) // End fetch
 		  // Handle the response from PHP
@@ -359,11 +410,11 @@ export default class SubMenu extends Component {
 
 					<View style={{flexDirection: 'row', marginBottom: 7}}>
 						<View style={{ alignItems: 'flex-start', marginLeft: 17, marginTop: -5}}>
-							<Ionicons name={this.state.checkboxShape} size={29} color="black" onPress={this.handlePress}/>
+							<Ionicons name={this.state.checkboxShape1} size={29} color="black" onPress={this.handlePress1}/>
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={this.handlePress}>
+				        	onPress={() => {this.handlePress1("Extra Cheese")}}>
 							<Text style={styles.itemDescription}>Extra Cheese</Text>
 						</TouchableWithoutFeedback>
 						</View>
@@ -371,11 +422,11 @@ export default class SubMenu extends Component {
 
 					<View style={{flexDirection: 'row', marginBottom: 7}}>
 						<View style={{ alignItems: 'flex-start', marginLeft: 17, marginTop: -5}}>
-							<Ionicons name={this.state.checkboxShape} size={29} color="black" onPress={this.handlePress}/>
+							<Ionicons name={this.state.checkboxShape2} size={29} color="black" onPress={this.handlePress2}/>
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={this.handlePress}>
+				        	onPress={() => {this.handlePress2("Extra Egg")}}>
 							<Text style={styles.itemDescription}>Extra Egg</Text>
 						</TouchableWithoutFeedback>
 						</View>
@@ -383,11 +434,11 @@ export default class SubMenu extends Component {
 
 					<View style={{flexDirection: 'row', marginBottom: 7}}>
 						<View style={{ alignItems: 'flex-start', marginLeft: 17, marginTop: -5}}>
-							<Ionicons name={this.state.checkboxShape} size={29} color="black" onPress={this.handlePress}/>
+							<Ionicons name={this.state.checkboxShape3} size={29} color="black" onPress={this.handlePress3}/>
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={this.handlePress}>
+				        	onPress={() => {this.handlePress3("Cream Cheese")}}>
 							<Text style={styles.itemDescription}>Add Cream Cheese</Text>
 						</TouchableWithoutFeedback>
 						</View>
@@ -735,6 +786,7 @@ export default class SubMenu extends Component {
 								  onValueChange={value => {
 									this.setState({
 									  option1: value,
+									  option2: null
 									});
 								  }}
 								  style={{

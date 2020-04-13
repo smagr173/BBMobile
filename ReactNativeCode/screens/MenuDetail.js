@@ -171,17 +171,10 @@ const styles = StyleSheet.create({
 		color: '#505050',
 		fontSize: Dimensions.get('window').height*.023,
 	},
-    itemPrice: {
-		marginTop: 15,
-		marginRight: 13,
-		fontWeight: 'bold',
-		fontSize: Dimensions.get('window').height*.026,
-		color: 'black',
-	}, 
 	price: {
 		fontWeight: 'bold',
 		fontSize: Dimensions.get('window').height*.026,
-		color: 'white',
+		color: 'white'
 	}, 
 	subtitle: {
 		color: 'darkgray',
