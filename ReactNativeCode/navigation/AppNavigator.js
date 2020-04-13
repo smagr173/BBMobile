@@ -17,6 +17,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import InitialScreen from '../screens/InitialScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import SignInScreen from '../screens/SignInScreen';
+import CheckoutScreen from '../screens/CheckoutScreen';
 
 import MainTabNavigator from './MainTabNavigator';  // Import navigation tab
 
@@ -66,9 +67,37 @@ const MainStack = createStackNavigator(
   }
 );
 
+const CheckoutStack = createStackNavigator(
+  {
+    Checkout: {
+      screen: CheckoutScreen,
+      navigationOptions: {
+        title: 'Checkout',
+        mode: 'modal'
+      }
+    }
+  },
+  {
+    headerLayoutPreset: 'center',
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#202020',
+            height: Dimensions.get('window').height*.07,
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize:Dimensions.get('window').height*.027,
+        }
+    }
+  }
+);
+
 export default createAppContainer(
   createSwitchNavigator({
     User: MainStack,
     Main: MainTabNavigator,
+    CheckoutStack,
   })
 );
