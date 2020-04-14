@@ -15,7 +15,7 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Image,TouchableOpacity,AppRegistry,View,Text,StyleSheet } from 'react-native';
+import { Image,TouchableOpacity,View,Text,StyleSheet,ScrollView } from 'react-native';
 
 export default class homeScreen extends Component {
 static navigationOptions= ({navigation}) =>({ 
@@ -30,37 +30,71 @@ static navigationOptions= ({navigation}) =>({
 			/>
 		</View>
 	});
+
+	constructor(props) {
+		super(props);
+		    this.state = {
+			   userName: '',
+		    }
+	}  // End constructor
  
+	componentDidMount() {
+		// Networking for retrieving the user information
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
+		  method:'POST',
+		  header:{
+			'Accept': 'application/json',
+			'Content-type': 'application/json'
+		  },  
+		}) // End fetch
+		// Handle the response from PHP
+		.then((response) => response.json())
+		  .then((responseJson) => {
+				this.setState ({ 
+					userName: responseJson.fname,
+        })
+      })
+      .catch((error)=>{
+        console.log(error);
+        });
+	  }  // End componentDidMount
+
 	render() {
 		const {navigate} = this.props.navigation;
 		return (
-	 		<View style={styles.container}>
-				<Text style={styles.subtitleTop}>Favorite Items</Text>
-				<Text style={styles.bodyText}>You have not added any favorite items</Text>
-				
-				<Image source={require('../assets/images/divider.png')}
-  	   			 style={styles.divider} />
+			<ScrollView style={styles.container}>
+				<View style={{backgroundColor: 'white',width: Dimensions.get('window').width,
+				      height: Dimensions.get('window').width*.35}}>
+					<View style={{ flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+						<Image source={require('../assets/images/icon.png')}
+  	   				 	 style={styles.image1} />
+						<View style={{ marginLeft: 25, marginTop: -30}}>
+					    	<Text style={styles.subtitle}>Welcome, {this.state.userName}!</Text>
+						</View>
+					</View>
+				</View>
 
-				<Text style={styles.subtitle}>Order History</Text>
-          		<Text style={styles.bodyTextBottom}>You have not placed an order yet</Text>
+				<View style={{justifyContent: 'flex-end',backgroundColor: '#D8D8D8',width: Dimensions.get('window').width,
+				      height: Dimensions.get('window').width*.7, borderTopWidth: 1.25, borderColor: '#404040'}}>
+					<View style={{ alignItems: 'flex-start', marginLeft: 20, marginBottom: 10}}>
+						<Text style={styles.bodyText}>Your orders</Text>
+					</View>
+					<View style={{ alignItems: 'center'}}>
+						<View style={{width: Dimensions.get('window').width*.9, height: Dimensions.get('window').width*.6,
+					  	    borderWidth: 2,borderColor: '#404040',borderRadius: 8}}>
 
-				<TouchableOpacity
-          			onPress={() => navigate('Menu')}  // when pressed call the userRegister function
-         			style={{width: Dimensions.get('window').width*.55,height:Dimensions.get('window').height*.065,padding:10,
-         			justifyContent:'center',backgroundColor:'black',alignItems:'center'}}>
-         			<Text style={styles.buttonText}>View Menu</Text>
-      		    </TouchableOpacity>
-      		</View>
+						</View>
+					</View>
+				</View>
+			</ScrollView>
 		);  // End return
 	}  // End render
 }  // End homeScreen component
 
 const styles = StyleSheet.create({
 	container: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'white'
+		flex: 1,
+        backgroundColor: 'white',
 	},
 	settingsIcon: {
 		marginRight: 13,
@@ -71,6 +105,11 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: Dimensions.get('window').height*.023,
 	  },
+	  image1: {
+		marginLeft: 10,
+		width: Dimensions.get('window').width *.3,
+		height: '100%',
+	  },
 	  divider: {
 		marginTop: 15,
 		width: Dimensions.get('window').width *.8,
@@ -78,10 +117,9 @@ const styles = StyleSheet.create({
 		marginBottom: 30,
 	  },
 	  bodyText: {
-		color: 'gray',
-		textAlign: 'center',
-		fontSize: Dimensions.get('window').height*.023,
-		marginBottom: 20,
+		fontWeight: 'bold',
+		color: 'black',
+		fontSize: Dimensions.get('window').height*.025,
 	  },
 	  bodyTextBottom: {
 		color: 'gray',
@@ -92,9 +130,7 @@ const styles = StyleSheet.create({
 	  subtitle: {
 		fontWeight: 'bold',
 		color: 'black',
-		textAlign: 'center',
-		fontSize: Dimensions.get('window').height*.026,
-		marginBottom: 10,
+		fontSize: Dimensions.get('window').height*.029,
 	  },
 	  subtitleTop: {
 		marginTop: 100,

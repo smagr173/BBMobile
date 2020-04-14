@@ -41,7 +41,7 @@ export default class SettingsScreen extends Component {
           isLoading: false,
         })
 			  }
-			else if (responseJson.empty != 0) {
+			else {
         this.setState ({
           loggedIn: true,
           isLoading: false,

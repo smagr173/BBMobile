@@ -24,6 +24,32 @@ export default class InitialScreen extends Component {
 			</View>
   });
   
+
+  startSesh = () => {
+  fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
+    method:'POST',
+    header:{
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      task: "start",
+    }) 
+    }) // End fetch
+    // Handle the response from PHP
+    .then((response) => response.json())
+    .then((responseJson) => {
+    if(responseJson.succ == "Success") {
+      // If the add item succeeds, close modal
+      const {navigate} = this.props.navigation;
+      navigate('Menu') // Redirect to sign in page
+    }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   render() {
     const {navigate} = this.props.navigation;
     return (
@@ -38,23 +64,22 @@ export default class InitialScreen extends Component {
         <Image source={require('../assets/images/grayOrder.png')}
 	      style={styles.image2} />
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 43}}>
+           <TouchableOpacity style={styles.topButton}  // Create account button
+              onPress={this.startSesh}>
+              <Text style={styles.buttonText}>View Menu</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}  // Create account button
-          onPress={() => navigate('Menu')}>
-          <Text style={styles.buttonText}>View Menu</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.button}  // Create account button
+              onPress={() => navigate('Register')}>
+              <Text style={styles.buttonText}>Create Account</Text>
+            </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}  // Create account button
-          onPress={() => navigate('Register')}>
-          <Text style={styles.buttonText}>Create Account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.link}  // Sign in button
-          onPress={() => navigate('SignIn')}>
-          <Text style={styles.linkText}>Sign In</Text>
-        </TouchableOpacity>
-       </View>
+            <TouchableOpacity style={styles.link}  // Sign in button
+              onPress={() => navigate('SignIn')}>
+              <Text style={styles.linkText}>Sign In</Text>
+            </TouchableOpacity>
+        </View>
       </View>  // end style container
     );
   }  // end render
@@ -68,7 +93,6 @@ container: {
   backgroundColor: 'white'
 },
 linkText: {
-  margin: 10,
   fontWeight: 'bold',
   color: 'gray',
   textAlign: 'center',
@@ -81,7 +105,6 @@ buttonText: {
   fontSize: Dimensions.get('window').height*.022,
 },
 topButton: {
-
   marginBottom: 17,
   width: Dimensions.get('window').width*.55,
   height: Dimensions.get('window').height*.065,
@@ -91,8 +114,7 @@ topButton: {
   alignItems: 'center'
 },
 button: {
-  marginTop: 5,
-  marginBottom: 5,
+  marginBottom: 10,
   width: Dimensions.get('window').width*.55,
   height: Dimensions.get('window').height*.065,
   padding: 10,
@@ -104,7 +126,6 @@ link: {
   width: Dimensions.get('window').width*.3,
   padding: 10,
   alignItems: 'center',
-  marginBottom: 30
 },
 image1: {
   marginTop: 30,

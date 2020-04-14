@@ -15,12 +15,33 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
 import { TouchableOpacity,View,Text,StyleSheet,ActivityIndicator,FlatList,Image } from 'react-native';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Ionicons } from '@expo/vector-icons';
 
 export default class CartScreen extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
+		this.navigationWillFocusListener = props.navigation.addListener('willFocus', () => {
+		// Networking for retrieving the user information
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
+			method:'POST',
+			header:{
+			  'Accept': 'application/json',
+			  'Content-type': 'application/json'
+			}
+		  }) // End fetch
+		  // Handle the response from PHP
+		  .then((response) => response.json())
+			.then((responseJson) => {
+				this.setState({
+				  isLoading: false,
+				  dataSource: responseJson,
+			});
+		  })
+		  .catch((error) => {
+			  console.log(error);
+		  });
+		  }) // end listener event
+
 		this.state = {
 			isLoading: true,
 			itemName: '',
@@ -53,27 +74,6 @@ export default class CartScreen extends Component {
 			console.log(error);
 		});
 	}  // End componentDidMount()
-
-	componentDidUpdate() {
-		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
-			method:'POST',
-			header:{
-			  'Accept': 'application/json',
-			  'Content-type': 'application/json'
-			}
-		  }) // End fetch
-		  // Handle the response from PHP
-		  .then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({
-				  isLoading: false,
-				  dataSource: responseJson,
-			});
-		  })
-		  .catch((error) => {
-			console.log(error);
-		});
-	}
 
 	renderSeparator = () => {
 		return (
@@ -246,23 +246,23 @@ export default class CartScreen extends Component {
 								</View>
 							</View>
 							
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
+							<View style={{ alignItems: 'flex-start'}}>
 									<Text style={styles.itemOpts}>{item.option1}</Text>
 							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 3}}>
-									<Text style={styles.itemOpts}>{item.option2}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 3}}>
-									<Text style={styles.itemOpts}>{item.extra1}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
-									<Text style={styles.itemOpts}>{item.extra2}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
-									<Text style={styles.itemOpts}>{item.extra3}</Text>
+							<View style={{ alignItems: 'flex-start'}}>
+							        {(null != item.option2) ? <Text style={styles.itemOpts}>{item.option2}</Text> : null}
 							</View>
 							<View style={{ alignItems: 'flex-start'}}>
-									<Text style={styles.itemNotes}>{item.notes}</Text>
+							        {(null != item.extra1) ? <Text style={styles.itemOpts}>{item.extra1}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+							        {(null != item.extra2) ? <Text style={styles.itemOpts}>{item.extra2}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+									{(null != item.extra3) ? <Text style={styles.itemOpts}>{item.extra3}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+									{('' != item.notes) ? <Text style={styles.itemNotes}>{item.notes}</Text> : null}
 							</View>
 					
 							<View style={{ alignItems: 'flex-start', marginLeft: 10}}>
@@ -353,14 +353,11 @@ const styles = StyleSheet.create({
 	},
 	itemOpts: {
 		marginLeft: 42,
-		marginBottom: -5,
-		marginTop: -3,
 		fontSize: Dimensions.get('window').height*.023,
 		color: '#303030',
 	},
 	itemNotes: {
 		marginLeft: 42,
-		marginTop: -15,
 		fontSize: Dimensions.get('window').height*.023,
 		color: 'black',
 	},

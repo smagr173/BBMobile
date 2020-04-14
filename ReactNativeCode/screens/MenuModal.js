@@ -172,6 +172,7 @@ export default class SubMenu extends Component {
 			checkboxShape1: 'ios-radio-button-off',
 			checkboxShape2: 'ios-radio-button-off',
 			checkboxShape3: 'ios-radio-button-off',
+			added: 0,
 		}
 	}
 	incrementQuantity = () => {
@@ -238,6 +239,28 @@ export default class SubMenu extends Component {
 	};
 
 	componentDidMount() {
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
+			method:'POST',
+			header:{
+			  'Accept': 'application/json',
+			  'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				getCart: 'getQuant'
+			  })
+		  }) // End fetch
+		  // Handle the response from PHP
+		  .then((response) => response.json())
+			.then((responseJson) => {
+				this.setState({
+				  added: responseJson,
+			});
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+		global.prevCount = this.state.added;
+
 		this.setState({
 			isLoading: false,
 			itemName: global.itemName,
@@ -271,6 +294,7 @@ export default class SubMenu extends Component {
 		  .then((response) => response.json())
 			.then((responseJson) => {
 			if(responseJson.succ == "Success") {
+				global.itemsTotal = this.state.added + this.state.itemQuantity;
 				// If the add item succeeds, close modal
 				const {navigate} = this.props.navigation;
 				navigate('MenuDetail') // Redirect to sign in page

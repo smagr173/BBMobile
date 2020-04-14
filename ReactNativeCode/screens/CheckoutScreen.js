@@ -106,6 +106,33 @@ export default class CartScreen extends Component {
 		
 	}  // End componentDidMount()
 
+	sendOrder = () => {
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/addOrder.php', {
+			method:'POST',
+			header:{
+			  'Accept': 'application/json',
+			  'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				pickup: this.state.pickUpText,
+			})
+		  }) // End fetch
+		  // Handle the response from PHP
+		  .then((response) => response.json())
+			.then((responseJson) => {
+				if (responseJson.succ == 'Success') {
+					const {navigate} = this.props.navigation;
+		            navigate('Home') // Redirect to sign in page
+				}
+				else {
+					alert("Please sign in to place an order");
+				}
+		  })
+	.catch((error) => {
+		console.warn(error);
+	});
+	}
+
 	renderSeparator = () => {
 		return (
 		  <View
@@ -221,7 +248,6 @@ export default class CartScreen extends Component {
 	    this.hideDatePicker();
 	};
 
-
 	render() {
 		if (this.state.isLoading) {
 			return (
@@ -330,7 +356,7 @@ export default class CartScreen extends Component {
 				<View style={{ alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'white',
 					height: Dimensions.get('window').height * .1, width: Dimensions.get('window').width}}>
 					<TouchableOpacity
-          				onPress={() => navigate('Home')}  // when pressed call the userRegister function
+          				onPress={this.sendOrder}
          				style={styles.button}>
          				<Text style={styles.buttonText}>Place Order</Text>
       		    	</TouchableOpacity>
