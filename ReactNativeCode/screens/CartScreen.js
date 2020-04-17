@@ -1,9 +1,7 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
-/*  Filename:   HomeScreen.js                                       */
+/*  Filename:   CartScreen.js                                       */
 /*  Purpose:    This file contains the user dashboard or home       */
 /*              screen. Once a user has logged into their           */
 /*              existing account this screen is displayed.          */
@@ -82,7 +80,8 @@ export default class CartScreen extends Component {
 			  backgroundColor: 'darkgray',
 			  width: Dimensions.get('window').width *.9,
 			  height: 1,
-			  alignSelf: 'center'
+			  alignSelf: 'center',
+			  marginTop: Dimensions.get('window').height*.02
 			}}
 		  />
 		);
@@ -106,6 +105,40 @@ export default class CartScreen extends Component {
 				  isLoading: false,
 				  dataSource: responseJson,
 			});
+		  })
+		  .catch((error) => {
+			console.log(error);
+		});
+	};
+
+	favItem = (name,price,option1,option2,extra1,extra2,extra3) => {
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/addFav.php', {
+			method:'POST',
+			header:{
+			  'Accept': 'application/json',
+			  'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				name: name,
+				price: price,
+				option1: option1,
+				option2: option2,
+				extra1: extra1,
+				extra2: extra2,
+				extra3: extra3
+			})
+		  }) // End fetch
+		  .then((response) => response.json())
+			.then((responseJson) => {
+				if (responseJson.succ == 'Item has been favorited') {
+					alert(responseJson.succ);
+				}
+				if (responseJson.succ == 'Item is already a favorite') {
+					alert(responseJson.succ);
+				}
+				if (responseJson.succ == 'Please sign in to favorite an item') {
+					alert(responseJson.succ);
+				}
 		  })
 		  .catch((error) => {
 			console.log(error);
@@ -182,27 +215,24 @@ export default class CartScreen extends Component {
 						<View style={{ alignItems: 'flex-start'}}>
 							<Text style={styles.title}>The Bagel Bar Cafe</Text>
 						</View>
-						<View style={{ flex: 1, alignItems: 'flex-end',marginRight: 15}}>
+						<View style={{ flex: 1, alignItems: 'flex-end',marginRight: 20}}>
 						    <Text style={styles.title}>View Location</Text>
 						</View>
 					</View>
 
-					<View style={{ flexDirection: 'row', marginBottom: 5}}>
+					<View style={{ flexDirection: 'row', marginBottom: 15}}>
 					  <View style={{ alignItems: 'flex-start'}}>
 				    	<TouchableOpacity
           					onPress={() => navigate('Menu')}  // when pressed call the userRegister function
-         					style={{width: Dimensions.get('window').width*.45,height:Dimensions.get('window').height*.057,padding:10,
+         					style={{width: Dimensions.get('window').width*.4,height:Dimensions.get('window').height*.057,padding:10,
 							justifyContent:'center',backgroundColor:'#F0F0F0',alignItems:'center', borderColor: 'brown', borderWidth: 2.5, borderRadius: 8,
-						 	marginTop: 10, marginLeft: 10, marginBottom: 10}}>
-							<View style={{flexDirection: 'row'}}>
-								<View style={{ marginTop: -6, marginRight: 6}}>
-									<Ionicons name={"ios-add"} size={31} color="brown" onPress={() => navigate('Menu')}/>
-								</View>
+						 	marginTop: 10, marginLeft: 20, marginBottom: 10}}>
+							<View style={{ justifyContent: 'center'}}>
          						<Text style={styles.buttonText2}>Add more items</Text>
 							</View>
       		    		</TouchableOpacity>
 					   </View>
-					   <View style={{ flex: 1, alignItems: 'flex-end',marginRight: 45}}>
+					   <View style={{ flex: 1, alignItems: 'flex-end',marginRight: 50}}>
 					  	 <TouchableOpacity
           					onPress={() => navigate('About')}  // when pressed call the userRegister function
          					style={{width: Dimensions.get('window').width*.15,height:Dimensions.get('window').height*.075,
@@ -215,63 +245,71 @@ export default class CartScreen extends Component {
 					<FlatList
 						data={ this.state.dataSource }
 						renderItem={({ item }) => (
-						<View>
-							<View style={{flexDirection: 'row', marginBottom: -3, marginTop: 5}}>
-								<View style={{ alignItems: 'flex-start'}}>
+						<View style={{marginTop: 5}}>
+							<View style={{flexDirection: 'row'}}>
+								<View style={{ alignItems: 'flex-start', marginLeft: Dimensions.get('window').width*.02}}>
 									
-								<View style={{ marginLeft: 10, marginTop: -4}}>
-									<Ionicons
-										name={'ios-arrow-up'}
-										size={Dimensions.get('window').height*.03}
-										color={'#505050'}
-										onPress={() => {this.incrementQuantity(item.item_id, item.quantity)}}
-									/>
+										<Ionicons
+											name={'ios-arrow-up'}
+											size={Dimensions.get('window').height*.03}
+											color={'#505050'}
+											onPress={() => {this.incrementQuantity(item.item_id, item.quantity)}}
+										/>
+									
+									<View style={{ marginLeft: Dimensions.get('window').width*.003}}>
+										<Text style={styles.itemQuantity}>{item.quantity}</Text>
+									</View>
+									
+										<Ionicons
+											name={'ios-arrow-down'}
+											size={Dimensions.get('window').height*.03}
+											color={'#505050'}
+											onPress={() => {this.decreaseQuantity(item.item_id, item.quantity)}}
+										/>
+									
 								</View>
-								<Text style={styles.itemQuantity}>{item.quantity}</Text>
-								<View style={{ marginLeft: 10, marginTop: -4, marginRight: 16}}>
-									<Ionicons
-										name={'ios-arrow-down'}
-										size={Dimensions.get('window').height*.03}
-										color={'#505050'}
-										onPress={() => {this.decreaseQuantity(item.item_id, item.quantity)}}
-									/>
-								</View>
-
-								</View>
-								<View style={{ alignItems: 'flex-start'}}>
+								<View style={{ flex: 1,alignItems: 'flex-start', justifyContent: 'center', marginLeft: Dimensions.get('window').width*.03, flexWrap: 'wrap'}}>
 									<Text style={styles.itemName}>{item.name}</Text>
 								</View>
-								<View style={{ flex: 1, alignItems: 'flex-end'}}>
+								<View style={{ alignItems: 'flex-end',justifyContent: 'center'}}>
 									<Text style={styles.itemPrice}>${(item.price*item.quantity).toFixed(2)}</Text>
 								</View>
 							</View>
 							
-							<View style={{ alignItems: 'flex-start'}}>
+							<View style={{ alignItems: 'flex-start', marginTop: -(Dimensions.get('window').height*.03)}}>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1 }}>
 									<Text style={styles.itemOpts}>{item.option1}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start'}}>
+								</View>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1 }}>
 							        {(null != item.option2) ? <Text style={styles.itemOpts}>{item.option2}</Text> : null}
-							</View>
-							<View style={{ alignItems: 'flex-start'}}>
+								</View>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1 }}>
 							        {(null != item.extra1) ? <Text style={styles.itemOpts}>{item.extra1}</Text> : null}
-							</View>
-							<View style={{ alignItems: 'flex-start'}}>
+								</View>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1}}>
 							        {(null != item.extra2) ? <Text style={styles.itemOpts}>{item.extra2}</Text> : null}
-							</View>
-							<View style={{ alignItems: 'flex-start'}}>
+								</View>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1 }}>
 									{(null != item.extra3) ? <Text style={styles.itemOpts}>{item.extra3}</Text> : null}
-							</View>
-							<View style={{ alignItems: 'flex-start'}}>
+								</View>
+								<View style={{ marginLeft: Dimensions.get('window').width*.1 }}>
 									{('' != item.notes) ? <Text style={styles.itemNotes}>{item.notes}</Text> : null}
+								</View>
+								<View style={{flexDirection: 'row', marginTop: Dimensions.get('window').height*.01}}>
+									<View style={{marginLeft: Dimensions.get('window').width*.08}}>
+										<TouchableOpacity
+        									onPress={() => {this.removeItem(item.item_id)}}>
+         									<Text style={styles.linkTextRem}>Remove</Text>
+        								</TouchableOpacity>
+									</View>
+									<View style={{marginLeft: Dimensions.get('window').width*.06}}>
+										<TouchableOpacity
+        									onPress={() => {this.favItem(item.name,item.price,item.option1,item.option2,item.extra1,item.extra2,item.extra3)}}>
+         									<Text style={styles.linkTextRem}>Favorite</Text>
+        								</TouchableOpacity>
+									</View>
+								</View>
 							</View>
-					
-							<View style={{ alignItems: 'flex-start', marginLeft: 10}}>
-								<TouchableOpacity style={styles.link}  // Sign in button
-        							onPress={() => {this.removeItem(item.item_id)}}>
-         							<Text style={styles.linkTextRem}>Remove</Text>
-        						</TouchableOpacity>
-							</View>
-							
 						</View>
 						)}
 						ItemSeparatorComponent={this.renderSeparator}
@@ -280,7 +318,7 @@ export default class CartScreen extends Component {
 	 				/>
 					
 				<View style={{ alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'white',
-					height: Dimensions.get('window').height * .1, width: Dimensions.get('window').width}}>
+					height: Dimensions.get('window').height * .1, width: Dimensions.get('window').width, marginBottom: 10}}>
 					<TouchableOpacity
           				onPress={() => navigate('Checkout')}  // when pressed call the userRegister function
          				style={styles.button}>
@@ -326,44 +364,32 @@ const styles = StyleSheet.create({
 		padding: 15,
 	},
 	itemName: {
-		marginTop: 15,
 		fontWeight: 'bold',
 		fontSize: Dimensions.get('window').height*.026,
 		color: 'black',
 	},
-	link: {
-		width: Dimensions.get('window').width*.3,
-		padding: 10,
-		alignItems: 'center'
-	  },
 	linkText: {
 		color: 'blue',
 		fontSize: Dimensions.get('window').height*.023,
 	  },
 	  linkTextRem: {
-		marginTop: 2,
 		color: 'blue',
 		fontSize: Dimensions.get('window').height*.023,
 	  },
 	itemPrice: {
-		marginTop: 15,
 		marginRight: 18,
 		fontSize: Dimensions.get('window').height*.026,
 		color: 'black',
 	},
 	itemOpts: {
-		marginLeft: 42,
 		fontSize: Dimensions.get('window').height*.023,
 		color: '#303030',
 	},
 	itemNotes: {
-		marginLeft: 42,
 		fontSize: Dimensions.get('window').height*.023,
 		color: 'black',
 	},
 	itemQuantity: {
-		marginTop: -6,
-		marginLeft: 12,
 		fontSize: Dimensions.get('window').height*.026,
 		color: 'black',
 	},

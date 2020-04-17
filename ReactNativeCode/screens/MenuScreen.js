@@ -1,9 +1,7 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
-/*  Filename:   HomeScreen.js                                       */
+/*  Filename:   MenuScreen.js                                       */
 /*  Purpose:    This file contains the user dashboard or home       */
 /*              screen. Once a user has logged into their           */
 /*              existing account this screen is displayed.          */

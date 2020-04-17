@@ -1,9 +1,7 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
-/*  Filename:   HomeScreen.js                                       */
+/*  Filename:   MenuDetail.js                                       */
 /*  Purpose:    This file contains the user dashboard or home       */
 /*              screen. Once a user has logged into their           */
 /*              existing account this screen is displayed.          */
@@ -88,14 +86,15 @@ export default class SubMenu extends Component {
 						    onPress={() => {this.sendChoice(item.name,item.price,item.description)}}
 	  						style={styles.item}>
 								<View style={{flexDirection: 'row'}}>
-									<View style={{ alignItems: 'flex-start'}}>
+									<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 										<Text style={styles.title}>{item.name}</Text>
 									</View>
-									<View style={{ flex: 1, alignItems: 'flex-end'}}>
+									<View style={{ alignItems: 'flex-end', marginLeft: Dimensions.get('window').width*.04}}>
 										<Text style={styles.price}>${item.price}</Text>
 									</View>
 								</View>
-								<View style={{ marginLeft: 5, marginRight: 50, marginTop: 4}}>
+								<View style={{ marginLeft: Dimensions.get('window').width*.01, marginRight: Dimensions.get('window').width*.1,
+								marginTop: Dimensions.get('window').height*.01}}>
 									<Text style={styles.subtitle}>{item.description}</Text>
 								</View>
 	  					</TouchableOpacity>	

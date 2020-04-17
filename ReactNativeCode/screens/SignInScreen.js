@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 20, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   SignInScreen.js                                     */
 /*  Purpose:    This file contains the user sign in screen to       */
 /*              log into an existing account. It allows the user    */
@@ -227,7 +225,7 @@ export default class SignIn extends Component {
 
         <TouchableOpacity  // Create account link
           onPress={() => navigate('Register')}
-          style={{marginBottom:275, width:Dimensions.get('window').width*.5, padding:10, alignItems:'center'}}>
+          style={{marginBottom:275, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Create Account</Text>
         </TouchableOpacity>
         </View>

@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    Febuary 1, 2020                                     */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   SettingsScreen.js                                   */
 /*  Purpose:    This file contains the user options for either      */
 /*              logging out of an account or updating account       */

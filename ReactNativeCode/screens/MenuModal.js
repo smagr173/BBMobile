@@ -1,9 +1,7 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
-/*  Filename:   HomeScreen.js                                       */
+/*  Filename:   MenuModal.js                                        */
 /*  Purpose:    This file contains the user dashboard or home       */
 /*              screen. Once a user has logged into their           */
 /*              existing account this screen is displayed.          */
@@ -14,46 +12,46 @@
 
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Image, ActivityIndicator, TouchableOpacity, View, Text, StyleSheet,TextInput, TouchableWithoutFeedback} from 'react-native';
+import { Image, ActivityIndicator, TouchableOpacity, View, Text, StyleSheet,TextInput, TouchableWithoutFeedback, ScrollView} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Ionicons } from '@expo/vector-icons';
 
 const bagels = [
 	{
 	  label: 'Plain',
-	  value: 'Plain',
+	  value: 'Plain Bagel',
 	},
 	{
 	  label: 'Asiago',
-	  value: 'Asiago',
+	  value: 'Asiago Bagel',
 	},
 	{
 	  label: 'Egg',
-	  value: 'Egg',
+	  value: 'Egg Bagel',
 	},
 	{
 	  label: 'Salt',
-	  value: 'Salt',
+	  value: 'Salt Bagel',
 	},
     {
 	  label: 'Multi-Grain',
-	  value: 'Multi-Grain',
+	  value: 'Multi-Grain Bagel',
 	},
 	{
 	  label: 'Everything',
-	  value: 'Everything',
+	  value: 'Everything Bagel',
 	},
 	{
 	  label: 'Garlic',
-	  value: 'Garlic',
+	  value: 'Garlic Bagel',
 	},
 	{
 	  label: 'Onion',
-	  value: 'Onion',
+	  value: 'Onion Bagel',
 	},
 	{
 	  label: 'Sesame',
-	  value: 'Sesame',
+	  value: 'Sesame Bagel',
 	},
 ];
 
@@ -65,27 +63,27 @@ const placeBag = {
 const creamCheese = [
 	{
 	  label: 'Plain',
-	  value: 'Plain',
+	  value: 'Plain Cream Cheese',
 	},
 	{
 	  label: 'Blueberry',
-	  value: 'Blueberry',
+	  value: 'Blueberry Cream Cheese',
 	},
 	{
 	  label: 'Nova Lox',
-	  value: 'Nova Lox',
+	  value: 'Nova Lox Cream Cheese',
 	},
 	{
 	  label: 'Strawberry',
-	  value: 'Strawberry',
+	  value: 'Strawberry Cream Cheese',
 	},
     {
 	  label: 'Garlic & Herb',
-	  value: 'Garlic & Herb',
+	  value: 'Garlic & Herb Cream Cheese',
 	},
 	{
 	  label: 'Veggie',
-	  value: 'Veggie',
+	  value: 'Veggie Cream Cheese',
 	},
 ];
 
@@ -97,15 +95,15 @@ const placeCream = {
   const wraps = [
 	{
 	  label: 'Plain',
-	  value: 'Plain',
+	  value: 'Plain Tortilla',
 	},
 	{
 	  label: 'Whole Wheat',
-	  value: 'Whole Wheat',
+	  value: 'Whole Wheat Tortilla',
 	},
 	{
 	  label: 'Sun Dried Tomato',
-	  value: 'Sun Dried Tomato',
+	  value: 'Sun Dried Tomato Tortilla',
 	},
 ];
 
@@ -171,8 +169,7 @@ export default class SubMenu extends Component {
 			checkboxClicked3: false,
 			checkboxShape1: 'ios-radio-button-off',
 			checkboxShape2: 'ios-radio-button-off',
-			checkboxShape3: 'ios-radio-button-off',
-			added: 0,
+			checkboxShape3: 'ios-radio-button-off'
 		}
 	}
 	incrementQuantity = () => {
@@ -187,12 +184,12 @@ export default class SubMenu extends Component {
 		}
 	};
 
-	handlePress1 = (extraItem1) => {
+	handlePress1 = () => {
 		if (this.state.checkboxClicked1 == false) {
 			this.setState({
 				checkboxClicked1: true,
 				checkboxShape1: 'ios-radio-button-on',
-				extra1: extraItem1
+				extra1: "Extra Cheese"
 		    })
 		}
 		else {
@@ -204,12 +201,12 @@ export default class SubMenu extends Component {
 		}
 	};
 
-	handlePress2 = (extraItem2) => {
+	handlePress2 = () => {
 		if (this.state.checkboxClicked2 == false) {
 			this.setState({
 				checkboxClicked2: true,
 				checkboxShape2: 'ios-radio-button-on',
-				extra2: extraItem2
+				extra2: "Extra Egg"
 		    })
 		}
 		else {
@@ -221,12 +218,12 @@ export default class SubMenu extends Component {
 		}
 	};
 
-	handlePress3 = (extraItem3) => {
+	handlePress3 = () => {
 		if (this.state.checkboxClicked3 == false) {
 			this.setState({
 				checkboxClicked3: true,
 				checkboxShape3: 'ios-radio-button-on',
-				extra3: extraItem3
+				extra3: "Cream Cheese"
 		    })
 		}
 		else {
@@ -239,28 +236,6 @@ export default class SubMenu extends Component {
 	};
 
 	componentDidMount() {
-		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
-			method:'POST',
-			header:{
-			  'Accept': 'application/json',
-			  'Content-type': 'application/json'
-			},
-			body: JSON.stringify({
-				getCart: 'getQuant'
-			  })
-		  }) // End fetch
-		  // Handle the response from PHP
-		  .then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({
-				  added: responseJson,
-			});
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-		global.prevCount = this.state.added;
-
 		this.setState({
 			isLoading: false,
 			itemName: global.itemName,
@@ -294,7 +269,6 @@ export default class SubMenu extends Component {
 		  .then((response) => response.json())
 			.then((responseJson) => {
 			if(responseJson.succ == "Success") {
-				global.itemsTotal = this.state.added + this.state.itemQuantity;
 				// If the add item succeeds, close modal
 				const {navigate} = this.props.navigation;
 				navigate('MenuDetail') // Redirect to sign in page
@@ -331,11 +305,12 @@ export default class SubMenu extends Component {
 		global.category =='Lunch Bagelwiches' || global.category =='Pizza Bagels') {
 		return (
 			<View style={styles.container}>
+			<ScrollView style={styles.container}>
 					<View style={{flexDirection: 'row'}}>
-						<View style={{ alignItems: 'flex-start'}}>
+						<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 							<Text style={styles.itemName}>{this.state.itemName}</Text>
 						</View>
-						<View style={{ flex: 1, alignItems: 'flex-end'}}>
+						<View style={{ alignItems: 'flex-end'}}>
 							<Text style={styles.itemPrice}>${(this.state.itemPrice * this.state.itemQuantity).toFixed(2)}</Text>
 						</View>
 					</View>
@@ -438,7 +413,7 @@ export default class SubMenu extends Component {
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={() => {this.handlePress1("Extra Cheese")}}>
+				        	onPress={() => {this.handlePress1()}}>
 							<Text style={styles.itemDescription}>Extra Cheese</Text>
 						</TouchableWithoutFeedback>
 						</View>
@@ -450,7 +425,7 @@ export default class SubMenu extends Component {
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={() => {this.handlePress2("Extra Egg")}}>
+				        	onPress={() => {this.handlePress2()}}>
 							<Text style={styles.itemDescription}>Extra Egg</Text>
 						</TouchableWithoutFeedback>
 						</View>
@@ -462,19 +437,20 @@ export default class SubMenu extends Component {
 						</View>
 						<View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 7}}>
 						<TouchableWithoutFeedback
-				        	onPress={() => {this.handlePress3("Cream Cheese")}}>
+				        	onPress={() => {this.handlePress3()}}>
 							<Text style={styles.itemDescription}>Add Cream Cheese</Text>
 						</TouchableWithoutFeedback>
 						</View>
 					</View>
-
-					<View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
-					  <TouchableOpacity style={styles.button}
-                        onPress={this.sendToCart}>
-                        <Text style={styles.buttonText}>Add to Bag</Text>
-                      </TouchableOpacity>
-                    </View>
-			</View>	
+				</ScrollView>	
+				<View style={{ alignItems: 'center', justifyContent: 'flex-end', backgroundColor: 'white',
+								height: Dimensions.get('window').height * .1, width: Dimensions.get('window').width, marginBottom: Dimensions.get('window').height * .003}}>
+				    <TouchableOpacity style={styles.button}
+						onPress={this.sendToCart}>
+						<Text style={styles.buttonText}>Add to Bag</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
 		  );  // End return
 		} // end classic/speciality if
 
@@ -482,10 +458,10 @@ export default class SubMenu extends Component {
 			return (
 				<View style={styles.container}>
 						<View style={{flexDirection: 'row'}}>
-							<View style={{ alignItems: 'flex-start'}}>
+							<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 								<Text style={styles.itemName}>{this.state.itemName}</Text>
 							</View>
-							<View style={{ flex: 1, alignItems: 'flex-end'}}>
+							<View style={{ alignItems: 'flex-end'}}>
 								<Text style={styles.itemPrice}>${(this.state.itemPrice * this.state.itemQuantity).toFixed(2)}</Text>
 							</View>
 						</View>
@@ -628,10 +604,10 @@ export default class SubMenu extends Component {
 				return (
 					<View style={styles.container}>
 							<View style={{flexDirection: 'row'}}>
-								<View style={{ alignItems: 'flex-start'}}>
+								<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 									<Text style={styles.itemName}>{this.state.itemName}</Text>
 								</View>
-								<View style={{ flex: 1, alignItems: 'flex-end'}}>
+								<View style={{ alignItems: 'flex-end'}}>
 									<Text style={styles.itemPrice}>${(this.state.itemPrice * this.state.itemQuantity).toFixed(2)}</Text>
 								</View>
 							</View>
@@ -737,10 +713,10 @@ export default class SubMenu extends Component {
 					return (
 						<View style={styles.container}>
 								<View style={{flexDirection: 'row'}}>
-									<View style={{ alignItems: 'flex-start'}}>
+									<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 										<Text style={styles.itemName}>{this.state.itemName}</Text>
 									</View>
-									<View style={{ flex: 1, alignItems: 'flex-end'}}>
+									<View style={{ alignItems: 'flex-end'}}>
 										<Text style={styles.itemPrice}>${(this.state.itemPrice * this.state.itemQuantity).toFixed(2)}</Text>
 									</View>
 								</View>
@@ -870,7 +846,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		paddingHorizontal:7,
 		marginTop:7,
-		width: Dimensions.get('window').width*.5,
+		width: Dimensions.get('window').width*.55,
 		height: Dimensions.get('window').height*.058,
 		margin:10, 
 		borderColor:"gray",

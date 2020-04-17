@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   InitialScreen.js                                    */
 /*  Purpose:    This file contains the first screen that is shown   */
 /*              to the user when they open the app. It contains     */
@@ -123,7 +121,6 @@ button: {
   alignItems: 'center'
 },
 link: {
-  width: Dimensions.get('window').width*.3,
   padding: 10,
   alignItems: 'center',
 },

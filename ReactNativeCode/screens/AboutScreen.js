@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Tyler Kurzawa                                       */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   AboutScreen.js                                      */
 /*  Purpose:    This file contains information about the Bagel      */
 /*              Bar Cafe. This includes their address, hours of     */

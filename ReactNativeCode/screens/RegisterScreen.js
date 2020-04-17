@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 15, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   RegisterScreen.js                                   */
 /*  Purpose:    This file contains the user registration screen     */
 /*              to create an account. It allows the user to         */
@@ -494,7 +492,7 @@ export default class register extends Component {
   
         <TouchableOpacity  // Sign in link
           onPress={() => navigate('SignIn')}
-          style={{marginBottom:260, width:Dimensions.get('window').width*.3, padding:10, alignItems:'center'}}>
+          style={{marginBottom:260, padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Sign In</Text>
         </TouchableOpacity>
         </View>

@@ -1,8 +1,6 @@
 /********************************************************************/
 /*  Author:     Stephen Magrowski                                   */
 /*  Created:    January 25, 2020                                    */
-/*  Course:     CSC 355-020                                         */
-/*  Professor:  Dr. Tan                                             */
 /*  Filename:   CheckoutScreen.js                                   */
 /*  Purpose:    This file contains the user dashboard or home       */
 /*              screen. Once a user has logged into their           */
@@ -48,6 +46,8 @@ export default class CartScreen extends Component {
 			promoCode: '',
 			subTotal: '',
 			salesTax: '',
+			combineTotal: '',
+			codeApplied: false,
 		}
 	}
 
@@ -115,6 +115,8 @@ export default class CartScreen extends Component {
 			},
 			body: JSON.stringify({
 				pickup: this.state.pickUpText,
+				total: this.state.subTotal,
+				combTotal: this.state.combineTotal
 			})
 		  }) // End fetch
 		  // Handle the response from PHP
@@ -206,7 +208,18 @@ export default class CartScreen extends Component {
 
 	handleCode = (text) => {
 		this.setState({ promoCode: text })
-	  }
+	}
+
+	handleCodePress = () => {
+		var newTotal = (this.state.combineTotal - 1.00).toFixed(2);
+		if (this.state.promoCode == '34568' && this.state.codeApplied == false) {
+			this.setState({ combineTotal: newTotal, codeApplied: true })
+			alert("Code applied");
+		}
+		else {
+			alert("Please enter a valid code");
+		}
+    }
 
 	showDatePicker = (visible) => {
 		this.setState({
@@ -228,10 +241,10 @@ export default class CartScreen extends Component {
 		hour = str.substring(0,2); 
 		// Checking if the Hour is less than equals to 11 then Set the Time format as AM.
 		if(hour <= 11) { 
-			TimeType = 'AM'}
+			TimeType = 'am'}
 		else {
 		  // If the Hour is Not less than equals to 11 then Set the Time format as PM.
-		  TimeType = 'PM';}
+		  TimeType = 'pm';}
 		// IF current hour is grater than 12 then minus 12 from current hour to make it in 12 Hours Format.
 		if( hour > 12 ) {
 			hour = hour - 12; }
@@ -244,7 +257,7 @@ export default class CartScreen extends Component {
 		// Adding all the variables in fullTime variable.
 		fullTime = hour.toString() + ':' + minutes.toString() + ' ' + TimeType.toString();
 
-		this.setState({ pickUpText: date[1] + ' ' + date[2] + ', ' + fullTime});
+		this.setState({ pickUpText: fullTime});
 	    this.hideDatePicker();
 	};
 
@@ -260,12 +273,13 @@ export default class CartScreen extends Component {
 		return (
 	 		<View style={styles.container}>
 				<View style={{ backgroundColor: '#F0F0F0'}}>
-					<View style={{ flexDirection: 'row',marginTop: 13, marginLeft: 10}}>
+					<View style={{ flexDirection: 'row',marginTop: Dimensions.get('window').height*.02, marginLeft: Dimensions.get('window').width*.03,
+					  marginBottom:Dimensions.get('window').height*.02}}>
 						<View style={{ alignItems: 'flex-start'}}>
 							<Text style={styles.title}>Pickup, {this.state.pickUpText}</Text>
 						</View>
-						<View style={{ flex: 1, alignItems: 'flex-end', marginTop: -6}}>
-							<TouchableOpacity style={styles.link}  // Sign in button
+						<View style={{ flex: 1, marginLeft: Dimensions.get('window').width*.08, }}>
+							<TouchableOpacity
         						onPress={() => {this.showDatePicker(true)}}>
          						<Text style={styles.linkText}>Change</Text>
         					</TouchableOpacity>
@@ -276,18 +290,17 @@ export default class CartScreen extends Component {
       					<DateTimePickerModal
        						isVisible={this.state.isDatePickerVisible}
 							mode="time"
-							minimumDate={new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours(), new Date().getMinutes())}
 							minuteInterval={15}
        						onConfirm={this.handleConfirm}
         					onCancel={this.hideDatePicker}
      					/>
     				</View>
 
-					<View style={{ flexDirection: 'row', marginTop: 18, marginLeft: 10}}>
+					<View style={{ flexDirection: 'row', marginTop: 18, marginLeft: Dimensions.get('window').width*.03}}>
 						<View style={{ alignItems: 'flex-start'}}>
 					      <Text style={styles.PromoText}>Promo Code</Text>
 						</View>
-					    <View style={{ marginLeft: 7, marginBottom: 15,marginTop: -7}}>
+					    <View style={{ marginLeft:Dimensions.get('window').width*.02, marginBottom: 15,marginTop: -7}}>
 								   <TextInput
 									 autoCorrect={false}
 									   returnKeyType='done'
@@ -301,9 +314,9 @@ export default class CartScreen extends Component {
 									 value={this.state.promoCode}
 									/>
 					    </View>
-						<View style={{ marginLeft: 13, marginBottom: 15,marginTop: -8}}>
+						<View style={{ marginLeft: Dimensions.get('window').width*.05, marginBottom: 15,marginTop: -8}}>
 						   <TouchableOpacity
-          			     	onPress={() => navigate('Menu')}  // when pressed call the userRegister function
+          			     	onPress={this.handleCodePress}
          				    style={{width: Dimensions.get('window').width*.2,height:Dimensions.get('window').height*.057,padding:10,
 						    justifyContent:'center',backgroundColor:'#800000',alignItems:'center'}}>
          					<Text style={styles.buttonText2}>Apply</Text>
@@ -320,31 +333,31 @@ export default class CartScreen extends Component {
 								<View style={{ alignItems: 'flex-start'}}>
 								    <Text style={styles.itemQuantity}>{item.quantity}</Text>
 								</View>
-								<View style={{ alignItems: 'flex-start'}}>
+								<View style={{ flex: 1, alignItems: 'flex-start', flexWrap: 'wrap'}}>
 									<Text style={styles.itemName}>{item.name}</Text>
 								</View>
-								<View style={{ flex: 1, alignItems: 'flex-end'}}>
+								<View style={{ alignItems: 'flex-end'}}>
 									<Text style={styles.itemPrice}>${(item.price*item.quantity).toFixed(2)}</Text>
 								</View>
 							</View>
 
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
+							<View style={{ alignItems: 'flex-start'}}>
 									<Text style={styles.itemOpts}>{item.option1}</Text>
 							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 3}}>
-									<Text style={styles.itemOpts}>{item.option2}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 3}}>
-									<Text style={styles.itemOpts}>{item.extra1}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
-									<Text style={styles.itemOpts}>{item.extra2}</Text>
-							</View>
-							<View style={{ alignItems: 'flex-start', marginBottom: 5}}>
-									<Text style={styles.itemOpts}>{item.extra3}</Text>
+							<View style={{ alignItems: 'flex-start'}}>
+							        {(null != item.option2) ? <Text style={styles.itemOpts}>{item.option2}</Text> : null}
 							</View>
 							<View style={{ alignItems: 'flex-start'}}>
-									<Text style={styles.itemNotes}>{item.notes}</Text>
+							        {(null != item.extra1) ? <Text style={styles.itemOpts}>{item.extra1}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+							        {(null != item.extra2) ? <Text style={styles.itemOpts}>{item.extra2}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+									{(null != item.extra3) ? <Text style={styles.itemOpts}>{item.extra3}</Text> : null}
+							</View>
+							<View style={{ alignItems: 'flex-start'}}>
+									{('' != item.notes) ? <Text style={styles.itemNotes}>{item.notes}</Text> : null}
 							</View>
 						</View>
 						)}
@@ -390,14 +403,9 @@ const styles = StyleSheet.create({
 		fontSize: Dimensions.get('window').height*.026,
 		color: 'black',
 	},
-	link: {
-		width: Dimensions.get('window').width*.3,
-		padding: 10,
-		alignItems: 'center'
-	  },
 	linkText: {
 		color: 'blue',
-		fontSize: Dimensions.get('window').height*.023,
+		fontSize: Dimensions.get('window').height*.024,
 	  },
 	  linkTextRem: {
 		marginTop: 2,
@@ -412,14 +420,11 @@ const styles = StyleSheet.create({
 	},
 	itemOpts: {
 		marginLeft: 42,
-		marginBottom: -5,
-		marginTop: -3,
 		fontSize: Dimensions.get('window').height*.023,
 		color: '#303030',
 	},
 	itemNotes: {
 		marginLeft: 42,
-		marginTop: -15,
 		fontSize: Dimensions.get('window').height*.023,
 		color: 'black',
 	},
@@ -433,7 +438,7 @@ const styles = StyleSheet.create({
 	itemTax: {
 		marginTop: 10,
 		marginRight: 18,
-		fontSize: Dimensions.get('window').height*.0272,
+		fontSize: Dimensions.get('window').height*.026,
 		color: 'black',
 	},
 	title: {
