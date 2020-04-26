@@ -75,12 +75,15 @@ justifyContent:'center',backgroundColor:'black', alignItems:'center'}}>
 </TouchableOpacity> 
 </View>
         );
-      } else {
+      } 
+      else {
         return (
           <View style={styles.container}>
-          <Text style={styles.pageText}>
-            Sign in or create an account to view full features
-          </Text>
+            <View style={{marginTop: Dimensions.get('window').height*.04}}>
+               <Text style={styles.pageText}>
+                 Sign in to view use all features
+              </Text>
+            </View>
 
 <TouchableOpacity  // Update information button
 onPress={() => navigate('SignIn')}  // When pressed navigate to the update info page

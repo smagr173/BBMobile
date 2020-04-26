@@ -37,9 +37,6 @@ export default class CartScreen extends Component {
 			itemDescription: '',
 			itemQuantity: '',
 			isDatePickerVisible: false,
-			day: '',
-			month: '',
-			year: '',
 			pickUpText: 'ASAP (15-20 mins)',
 			newQuant: '',
 			dataSource: '',
@@ -52,9 +49,6 @@ export default class CartScreen extends Component {
 	}
 
 	componentDidMount() {
-		var dayVar = new Date().getDate();
-		var monthVar = new Date().getMonth();
-		var yearVar = new Date().getFullYear();
 		// Networking for retrieving the user information
 		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
 		  method:'POST',
@@ -98,15 +92,11 @@ export default class CartScreen extends Component {
 		.catch((error) => {
 			console.log(error);
 		});
-		this.setState({
-			day: dayVar+4, //Current Date
-			month: monthVar, //Current Month
-			year: yearVar, //Current Year
-		});
-		
 	}  // End componentDidMount()
 
 	sendOrder = () => {
+		const {navigate} = this.props.navigation;
+		if (this.state.dataSource != '') {
 		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/addOrder.php', {
 			method:'POST',
 			header:{
@@ -122,17 +112,22 @@ export default class CartScreen extends Component {
 		  // Handle the response from PHP
 		  .then((response) => response.json())
 			.then((responseJson) => {
-				if (responseJson.succ == 'Success') {
-					const {navigate} = this.props.navigation;
-		            navigate('Home') // Redirect to sign in page
+				if (responseJson.succ != null) {
+					navigate('Home') // Redirect to home page
+					alert("Order #"+responseJson.succ+" has been placed");
 				}
 				else {
 					alert("Please sign in to place an order");
 				}
 		  })
-	.catch((error) => {
-		console.warn(error);
-	});
+		  .catch((error) => {
+			console.warn(error);
+	      });
+		}
+		else {
+		navigate('Cart') // Redirect to cart page
+		alert("Cart is empty");
+		}
 	}
 
 	renderSeparator = () => {
@@ -172,6 +167,14 @@ export default class CartScreen extends Component {
 				</View>
 				<View style={{flexDirection: 'row'}}>
 					<View style={{ alignItems: 'flex-start'}}>
+						{(this.state.codeApplied == true) ? <Text style={styles.itemQuantity}>Discount:</Text> : null}
+					</View>
+					<View style={{ flex: 1, alignItems: 'flex-end'}}>
+						{(this.state.codeApplied == true) ? <Text style={styles.itemPrice}>-$1.00</Text> : null}
+					</View>
+				</View>
+				<View style={{flexDirection: 'row'}}>
+					<View style={{ alignItems: 'flex-start'}}>
 						<Text style={styles.itemQuantity}>Total:</Text>
 					</View>
 					<View style={{ flex: 1, alignItems: 'flex-end'}}>
@@ -196,10 +199,74 @@ export default class CartScreen extends Component {
 		  }) // End fetch
 		  .then((response) => response.json())
 			.then((responseJson) => {
+				const {navigate} = this.props.navigation;
+				if (responseJson != '') {
 				this.setState({
-				  isLoading: false,
 				  dataSource: responseJson,
 			});
+			}
+			else {
+				navigate('Cart') // Redirect to cart page
+				alert("Your bag is empty");
+			}
+		  })
+		  .catch((error) => {
+			console.log(error);
+		})
+		.then(() => {
+			fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchCart.php', {
+				method:'POST',
+				header:{
+				  'Accept': 'application/json',
+				  'Content-type': 'application/json'
+				},
+				body: JSON.stringify({
+					getCart: 'getTotal'
+				  })
+			  }) // End fetch
+			  // Handle the response from PHP
+			  .then((response) => response.json())
+				.then((responseJson) => {
+					this.setState({
+					  subTotal: responseJson.toFixed(2),
+					  salesTax: (responseJson*.06).toFixed(2),
+					  combineTotal: (responseJson*.06+responseJson).toFixed(2)
+				});
+			})
+		}) // End second then
+		.catch((error) => {
+			console.log(error);
+		});
+	};
+
+	favItem = (name,price,option1,option2,extra1,extra2,extra3) => {
+		fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/addFav.php', {
+			method:'POST',
+			header:{
+			  'Accept': 'application/json',
+			  'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				name: name,
+				price: price,
+				option1: option1,
+				option2: option2,
+				extra1: extra1,
+				extra2: extra2,
+				extra3: extra3
+			})
+		  }) // End fetch
+		  .then((response) => response.json())
+			.then((responseJson) => {
+				if (responseJson.succ == 'Item has been favorited') {
+					alert(responseJson.succ);
+				}
+				if (responseJson.succ == 'Item is already a favorite') {
+					alert(responseJson.succ);
+				}
+				if (responseJson.succ == 'Please sign in to favorite an item') {
+					alert(responseJson.succ);
+				}
 		  })
 		  .catch((error) => {
 			console.log(error);
@@ -216,8 +283,11 @@ export default class CartScreen extends Component {
 			this.setState({ combineTotal: newTotal, codeApplied: true })
 			alert("Code applied");
 		}
-		else {
+		if (this.state.promoCode != '34568' || this.state.promoCode == '') {
 			alert("Please enter a valid code");
+		}
+		if (this.state.promoCode == '34568' && this.state.codeApplied == true) {
+			alert("Code has already been applied");
 		}
     }
 
@@ -234,6 +304,12 @@ export default class CartScreen extends Component {
 	};
 	  
 	handleConfirm = date => {
+		var currDate = new Date();
+		currDate.setMinutes(currDate.getMinutes() + 15);
+		currDate = new Date(currDate);
+		if (date < currDate) {
+			date = currDate;
+		}
 		date = String(date).split(' ');
 		var TimeType, hour, minutes, fullTime, str;
 		str = date[4];
@@ -278,7 +354,7 @@ export default class CartScreen extends Component {
 						<View style={{ alignItems: 'flex-start'}}>
 							<Text style={styles.title}>Pickup, {this.state.pickUpText}</Text>
 						</View>
-						<View style={{ flex: 1, marginLeft: Dimensions.get('window').width*.08, }}>
+						<View style={{ flex: 1, alignItems: 'flex-end', marginRight: Dimensions.get('window').width*.03 }}>
 							<TouchableOpacity
         						onPress={() => {this.showDatePicker(true)}}>
          						<Text style={styles.linkText}>Change</Text>
@@ -314,7 +390,7 @@ export default class CartScreen extends Component {
 									 value={this.state.promoCode}
 									/>
 					    </View>
-						<View style={{ marginLeft: Dimensions.get('window').width*.05, marginBottom: 15,marginTop: -8}}>
+						<View style={{ flex: 1, alignItems: 'flex-end', marginRight: Dimensions.get('window').width*.02, marginBottom: 15,marginTop: -8}}>
 						   <TouchableOpacity
           			     	onPress={this.handleCodePress}
          				    style={{width: Dimensions.get('window').width*.2,height:Dimensions.get('window').height*.057,padding:10,
@@ -358,6 +434,20 @@ export default class CartScreen extends Component {
 							</View>
 							<View style={{ alignItems: 'flex-start'}}>
 									{('' != item.notes) ? <Text style={styles.itemNotes}>{item.notes}</Text> : null}
+							</View>
+							<View style={{flexDirection: 'row', marginTop: Dimensions.get('window').height*.01}}>
+									<View style={{marginLeft: Dimensions.get('window').width*.08}}>
+										<TouchableOpacity
+        									onPress={() => {this.removeItem(item.item_id)}}>
+         									<Text style={styles.linkTextRem}>Remove</Text>
+        								</TouchableOpacity>
+									</View>
+									<View style={{marginLeft: Dimensions.get('window').width*.06}}>
+										<TouchableOpacity
+        									onPress={() => {this.favItem(item.name,item.price,item.option1,item.option2,item.extra1,item.extra2,item.extra3)}}>
+         									<Text style={styles.linkTextRem}>Favorite</Text>
+        								</TouchableOpacity>
+									</View>
 							</View>
 						</View>
 						)}
@@ -408,7 +498,6 @@ const styles = StyleSheet.create({
 		fontSize: Dimensions.get('window').height*.024,
 	  },
 	  linkTextRem: {
-		marginTop: 2,
 		color: 'blue',
 		fontSize: Dimensions.get('window').height*.023,
 	  },

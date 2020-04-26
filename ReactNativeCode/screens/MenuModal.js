@@ -173,7 +173,9 @@ export default class SubMenu extends Component {
 		}
 	}
 	incrementQuantity = () => {
+		if (this.state.itemQuantity < 99) {
 		this.setState({ itemQuantity: this.state.itemQuantity + 1 });
+		}
 	};
 	decreaseQuantity = () => {
 		const {itemQuantity} = this.state;
@@ -677,6 +679,7 @@ export default class SubMenu extends Component {
 							  onValueChange={value => {
 								this.setState({
 								  option1: value,
+								  option2: null
 								});
 							  }}
 							  style={{

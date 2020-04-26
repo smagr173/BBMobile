@@ -678,7 +678,7 @@ static navigationOptions= ({navigation}) =>({
 							<View style={{ alignItems: 'center', marginTop: Dimensions.get('window').height*.01}}>
 								<TouchableOpacity
 									onPress={() => {this.cancelOrder()}}>
-										{(this.state.status == "Pending") ? <Text style={styles.orderNum}>Cancel order</Text> : null}
+										{(this.state.status == "Pending") ? <Text style={styles.orderNum}>Cancel Order</Text> : null}
 								</TouchableOpacity>
 							</View>
 							<View style={{ justifyContent: 'center', backgroundColor: '#A9A9A9', width: Dimensions.get('window').width*.8,
@@ -762,7 +762,7 @@ static navigationOptions= ({navigation}) =>({
 				<ScrollView>
 				<TouchableOpacity
 						onPress={() => { this.handleFavPress() }}
-						style={{ justifyContent: 'center', backgroundColor: '#F0F0F0', width: Dimensions.get('window').width,
+						style={{ justifyContent: 'center', backgroundColor: '#DCDCDC', width: Dimensions.get('window').width,
 				                height: Dimensions.get('window').height*.1,alignItems: 'flex-start', borderBottomWidth: 2,borderColor: 'darkgray'}}>
 					<View style={{ flexDirection: 'row', marginLeft: Dimensions.get('window').width*.035}}>
 						<Text style={styles.subtitle}>Favorites</Text>
@@ -773,7 +773,7 @@ static navigationOptions= ({navigation}) =>({
 
 				<TouchableOpacity
 						onPress={() => { this.handleActPress() }}
-						style={{ justifyContent: 'center', backgroundColor: '#F0F0F0', width: Dimensions.get('window').width,
+						style={{ justifyContent: 'center', backgroundColor: '#DCDCDC', width: Dimensions.get('window').width,
 				                height: Dimensions.get('window').height*.1,alignItems: 'flex-start', borderBottomWidth: 2,borderColor: 'darkgray'}}>
 					<View style={{ flexDirection: 'row', marginLeft: Dimensions.get('window').width*.035}}>
 						<Text style={styles.subtitle}>Active Orders</Text>
@@ -784,14 +784,29 @@ static navigationOptions= ({navigation}) =>({
 
 				<TouchableOpacity
 						onPress={() => { this.handlePrevPress() }}
-						style={{ justifyContent: 'center', backgroundColor: '#F0F0F0', width: Dimensions.get('window').width,
-				                height: Dimensions.get('window').height*.1,alignItems: 'flex-start',borderBottomWidth: 2, borderColor: 'darkgray'}}>
+						style={{ justifyContent: 'center', backgroundColor: '#DCDCDC', width: Dimensions.get('window').width,
+				                height: Dimensions.get('window').height*.1,alignItems: 'flex-start',borderBottomWidth: 1, borderColor: 'darkgray'}}>
 					<View style={{ flexDirection: 'row', marginLeft: Dimensions.get('window').width*.035}}>
 						<Text style={styles.subtitle}>Previous Orders</Text>
 					</View>
 				</TouchableOpacity>
 
 				{this.state.visible2 ? this.showPrevOrders() : null}
+
+				<TouchableOpacity
+						 onPress={() => navigate('Menu')}
+						style={{ backgroundColor: '#F5F5F5', width: Dimensions.get('window').width,
+				                height: Dimensions.get('window').height*.5, borderTopWidth: 1, borderColor: 'darkgray'}}>
+					<View style={{ marginLeft:0, marginTop: Dimensions.get('window').height*.025,alignItems: 'center'}}>
+						<Text style={styles.subtitle2}>Explore the Menu</Text>
+					</View>
+					<View style={{alignItems: 'center',marginTop: Dimensions.get('window').height*.022}}>
+						<View style={{ backgroundColor: '#F5F5F5', width: Dimensions.get('window').width*.95,
+				                height: Dimensions.get('window').height*.4, justifyContent: 'center'}}>
+							<Image source={require('../assets/images/variety.jpeg')} style={styles.image2} />
+						</View>
+					</View>
+				</TouchableOpacity>
 
 				</ScrollView>
 				
@@ -840,6 +855,13 @@ const styles = StyleSheet.create({
 		width: Dimensions.get('window').width *.3,
 		height: '100%',
 	  },
+	  image2: {
+		width: '100%',
+		height: '100%',
+		borderWidth: 1,
+		borderColor: '#DCDCDC',
+		borderRadius: 8,
+	  },
 	  divider: {
 		marginTop: 15,
 		width: Dimensions.get('window').width *.8,
@@ -861,6 +883,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: 'black',
 		fontSize: Dimensions.get('window').height*.029,
+	  },
+	  subtitle2: {
+		fontWeight: 'bold',
+		color: 'black',
+		fontSize: Dimensions.get('window').height*.026,
 	  },
 	  modalTitle: {
 		fontWeight: 'bold',

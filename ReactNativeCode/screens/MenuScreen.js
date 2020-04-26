@@ -93,7 +93,7 @@ export default class SubMenu extends Component {
 				  onPress={this.handleChoice}>
 				  <View style={styles.item}>
 					<Text style={styles.title}>Wraps</Text>
-					<Text style={styles.subtitle}>12" wraps stuff with all kinds of goodness</Text>
+					<Text style={styles.subtitle}>12" wraps stuffed with all kinds of goodness</Text>
 				  </View>
 				</TouchableWithoutFeedback>
 

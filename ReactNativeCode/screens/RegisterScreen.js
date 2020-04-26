@@ -417,7 +417,7 @@ export default class register extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.pageText}>Create a Bagel Bar Account</Text>
-        <Text style={styles.errorText}>{regFail}</Text>
+        {(regFail != '') ? <Text style={styles.errorText}>{regFail}</Text> : null}
 
         <View style={{ alignItems: 'center'}}>
         <TextInput  // First name input field
@@ -425,9 +425,9 @@ export default class register extends Component {
           returnKeyType='done'
           placeholder={ fnamePlace }
           placeholderTextColor={fnamePlaceText}
-          style={{paddingHorizontal:7,marginTop:0,width:Dimensions.get('window').width*.93,
+          style={{paddingHorizontal:7,marginTop:2,width:Dimensions.get('window').width*.93,
           height:Dimensions.get('window').height*.058, borderColor:"gray", borderWidth:2,
-          fontSize:Dimensions.get('window').height*.023,marginBottom:27}}	
+          fontSize:Dimensions.get('window').height*.023,marginBottom:15}}	
           underlineColorAndroid="transparent"
           onChangeText = {this.handleFname}  // On event set value for first name
           value = {userFname}
@@ -460,7 +460,7 @@ export default class register extends Component {
         </View>
 
         <View style={{ alignItems: 'flex-start'}}>
-           <Text style={styles.errorText}>{invalidEmail}</Text>
+          {(invalidEmail != '') ?  <Text style={styles.errorText}>{invalidEmail}</Text> : null}
         </View>
 
         <View style={{ alignItems: 'center'}}>
@@ -479,7 +479,7 @@ export default class register extends Component {
         </View>
 
         <View style={{ alignItems: 'flex-start'}}>
-          <Text style={styles.errorText}>{invalidPass}</Text>
+          {(invalidPass != '') ? <Text style={styles.errorText}>{invalidPass}</Text> : null}
         </View>
 
         <View style={{ alignItems: 'center'}}>
@@ -492,7 +492,7 @@ export default class register extends Component {
   
         <TouchableOpacity  // Sign in link
           onPress={() => navigate('SignIn')}
-          style={{marginBottom:260, padding:10, alignItems:'center'}}>
+          style={{padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Sign In</Text>
         </TouchableOpacity>
         </View>
@@ -514,11 +514,11 @@ inField: {
   borderColor: 'gray',
   borderWidth: 2,
   fontSize: Dimensions.get('window').height*.023,
-  marginBottom: 27
+  marginBottom: 15
 },
 pageText: {
-  marginTop: 5,
-  marginBottom: 15,
+  marginTop: Dimensions.get('window').height*.01,
+  marginBottom: Dimensions.get('window').height*.02,
   fontWeight: 'bold',
   color: 'gray',
   textAlign: 'center',
@@ -533,7 +533,7 @@ buttonText: {
 errorText: {
   color: 'red',
   fontSize: Dimensions.get('window').height*.02,
-  marginLeft: 14
+  marginLeft: Dimensions.get('window').width*.04,
 },
 link: {
   margin: 7,

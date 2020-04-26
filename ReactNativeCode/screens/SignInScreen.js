@@ -225,7 +225,7 @@ export default class SignIn extends Component {
 
         <TouchableOpacity  // Create account link
           onPress={() => navigate('Register')}
-          style={{marginBottom:275, padding:10, alignItems:'center'}}>
+          style={{padding:10, alignItems:'center'}}>
           <Text style={styles.link}>Create Account</Text>
         </TouchableOpacity>
         </View>
@@ -238,11 +238,12 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: 'white',
+    marginTop: Dimensions.get('window').height*.03
   },
   pageText: {
-    marginBottom: 20,
+    marginBottom: Dimensions.get('window').height*.03,
     fontWeight: 'bold',
     color: 'gray',
     textAlign: 'center',
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    marginLeft: 14,
+    marginLeft: Dimensions.get('window').width*.04,
     fontSize: Dimensions.get('window').height*.021,
   },
 });

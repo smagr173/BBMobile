@@ -24,15 +24,12 @@ export default class InitialScreen extends Component {
   
 
   startSesh = () => {
-  fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/fetchRecord.php', {
+  fetch('http://csitrd.kutztown.edu/BBmobile/ReactBackend/startGuest.php', {
     method:'POST',
     header:{
       'Accept': 'application/json',
       'Content-type': 'application/json'
     },
-    body: JSON.stringify({
-      task: "start",
-    }) 
     }) // End fetch
     // Handle the response from PHP
     .then((response) => response.json())
