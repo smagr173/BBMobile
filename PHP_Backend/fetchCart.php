@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+$json = file_get_contents('php://input');
+
+// Parse JSON format to PHP object
+   $obj = json_decode($json,true);
+   
+   $option = $obj['getCart'];
+
  $record = $_SESSION['record'];
  $email = $record['email'];
 $db = new PDO("sqlite:content.db");
@@ -11,5 +18,28 @@ $db = new PDO("sqlite:content.db");
 
 $db = NULL;
 
-echo json_encode($cart);  // Display messages in JSON format
+if ($option != null) {
+    if ($option == 'getTotal') {
+      $total = 0;
+      $itemTotal = 0;
+      foreach($cart as $cartArr) {
+        $itemTotal = $cartArr['price'] * $cartArr['quantity'];
+	$total = $total + $itemTotal;
+      }
+      echo json_encode($total);
+    }
+    if ($option == 'getQuant') {
+      $quantity = 0;
+      $totalItems = 0;
+      foreach($cart as $cartArr) {
+        $quantity = $cartArr['quantity'];
+	$totalItems = $totalItems + $quantity;
+      }
+      echo json_encode($totalItems);
+    }
+}
+else {
+      echo json_encode($cart);  // Display messages in JSON format    
+}
+
 ?>

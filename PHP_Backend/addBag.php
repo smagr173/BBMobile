@@ -17,18 +17,22 @@ include "functions.php";
 	   $quantity = $obj['quantity'];
 	   $price = $obj['price'];
 	   $notes = $obj['notes'];
-	   $options = $obj['options'];
+	   $option1 = $obj['option1'];
+	   $option2 = $obj['option2'];
+	   $extra1 = $obj['extra1'];
+	   $extra2 = $obj['extra2'];
+	   $extra3 = $obj['extra3'];
 	
 	   $cart = checkCart($email);
 	  $itemID = $cart['item_id'];
 	   if ($itemID > 0) {
 	      $itemID += 1;
-	      addBag($email,$name,$price,$quantity,$itemID,$notes,$options);
+	      addBag($email,$name,$price,$quantity,$itemID,$notes,$option1,$option2,$extra1,$extra2,$extra3);
 	      $msgs['succ'] = "Success"; 
 	   }
 	   else {
 	      $itemID = 1;
-	      addBag($email,$name,$price,$quantity,$itemID,$notes,$options);
+	      addBag($email,$name,$price,$quantity,$itemID,$notes,$option1,$option2,$extra1,$extra2,$extra3);
 	      $msgs['succ'] = "Success"; 
 	   }
 	}

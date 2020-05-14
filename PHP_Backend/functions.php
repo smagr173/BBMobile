@@ -11,16 +11,80 @@
  *
 */
 
-function addBag($email, $name, $price, $quantity, $item_id, $notes, $options) {
+function addBag($email, $name, $price, $quantity, $item_id, $notes, $option1, $option2, $extra1, $extra2, $extra3) {
     $db = new PDO("sqlite:content.db");
 	
 	// Insert into the specific user's table
-    $sql = "INSERT INTO cart (email, name, price, quantity, item_id, notes, option) VALUES (?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO cart (email, name, price, quantity, item_id, notes, option1, option2, extra1, extra2, extra3) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
     $stmt= $db->prepare($sql);
-    $stmt->execute([$email, $name, $price, $quantity, $item_id, $notes, $options]);
+    $stmt->execute([$email, $name, $price, $quantity, $item_id, $notes, $option1, $option2, $extra1, $extra2, $extra3]);
 	
     $db = NULL;
+}
+
+function addStoreOrder($orderID,$email,$name,$price,$quantity,$itemID,$notes,$option1,$option2,$extra1,$extra2,$extra3) {
+    $db = new PDO("sqlite:content.db");
+	
+	// Insert into the specific user's table
+    $sql = "INSERT INTO storeOrder (orderID,email,name,price,quantity,item_id,notes,option1,option2,extra1,extra2,extra3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+	
+    $stmt= $db->prepare($sql);
+    $stmt->execute([$orderID,$email,$name,$price,$quantity,$itemID,$notes,$option1,$option2,$extra1,$extra2,$extra3]);
+	
+    $db = NULL;
+}
+
+function addFav($email,$name,$price,$fav_id,$option1,$option2,$extra1,$extra2,$extra3) {
+    $db = new PDO("sqlite:content.db");
+	
+	// Insert into the specific user's table
+    $sql = "INSERT INTO favorites (email,name,price,fav_id,option1,option2,extra1,extra2,extra3) VALUES (?,?,?,?,?,?,?,?,?)";
+	
+    $stmt= $db->prepare($sql);
+    $stmt->execute([$email,$name,$price,$fav_id,$option1,$option2,$extra1,$extra2,$extra3]);
+	
+    $db = NULL;
+}
+
+function addOrder($orderID,$email,$pickup,$time_placed,$date_placed,$status,$subtotal,$combTotal) {
+    $db = new PDO("sqlite:content.db");
+	
+	// Insert into the specific user's table
+    $sql = "INSERT INTO orderInfo (orderID,email,pickup,time_placed,date_placed,status,subtotal,combineTotal) VALUES (?,?,?,?,?,?,?,?)";
+	
+    $stmt= $db->prepare($sql);
+    $stmt->execute([$orderID,$email,$pickup,$time_placed,$date_placed,$status,$subtotal,$combTotal]);
+	
+    $db = NULL;
+}
+
+function cancelOrder ($order_id, $email) {
+	    $db = new PDO("sqlite:content.db");
+    $sql = "UPDATE orderInfo SET status='Canceled' WHERE orderID=? AND email=?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array($order_id, $email));
+    
+    $db=NULL;
+}
+
+function removeFav($fav_id,$email) {
+    $db = new PDO("sqlite:content.db");
+	
+    $sql = "DELETE FROM favorites WHERE fav_id=? AND email=?";
+	
+    $stmt = $db->prepare($sql);
+    $bool=$stmt->execute([$fav_id,$email]);
+    $db = NULL;
+}
+
+function checkFav($email) {
+    $db = new PDO("sqlite:content.db");
+        $sql = "SELECT * FROM favorites WHERE email='$email' ORDER BY fav_id DESC LIMIT 1";
+        $stmt = $db->query($sql);
+        // return cart as an associative array
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+   $db = NULL;
 }
 
 function checkCart($email) {
