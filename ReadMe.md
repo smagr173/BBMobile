@@ -10,10 +10,10 @@ accessible with any internet connection.
 ![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png) ![MenuScreen](http://acad.kutztown.edu/~smagr173/GitHub/menu.png)
 
 <h2>Viewing the Project</h2>
-If you wish to view the published app please follow the instructions below:
+If you wish to view the published app please follow the instructions below
 
 Requirements:
- - Smartphone or tablet(iOS or Android)
+ - Smartphone or tablet (iOS or Android)
  - Expo Client app
  
 The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play
