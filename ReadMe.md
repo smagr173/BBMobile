@@ -15,8 +15,7 @@ Requirements:
  
 Use the following link to view the project:<br>https://expo.io/@bagelbartest/bagel_bar_mobile
  
-The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client <br>
-When you follow the link, it will be the first option at the top of the page.
+The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play store on Android. Search for "Expo Client" or used the following link to find the required app: https://expo.io/tools#client
 
 Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
