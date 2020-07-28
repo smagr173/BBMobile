@@ -44,5 +44,7 @@ You can enter the link in your browser to view options for opening the project o
 scan with your device which will open the project in the Expo Client app. Another option is to send the link to your email address
 or have a linked sent using your phone number. Once sent, the link will automatically open the project using the Expo Client app.
 
+Enter the link below into your browser to view the project which is hosted on the Expo server. Here, you will be given options to open the project on your mobile device.
+
 <h4>Project Link</h4>
 expo.io/@bagelbartest/bagel_bar_mobile
