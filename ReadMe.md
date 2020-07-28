@@ -46,3 +46,5 @@ or have a linked sent using your phone number. Once sent, the link will automati
 
 <h4>Project Link</h4>
 expo.io/@bagelbartest/bagel_bar_mobile
+
+Enter this link into your browser to view the Expo hosted mobile app. Here, you will be given options to open the project on your mobile device.
