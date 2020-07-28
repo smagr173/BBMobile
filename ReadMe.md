@@ -21,8 +21,8 @@ When you follow the link, it will be the first option at the top of the page.
 Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
 If you would like to view the project on an iOS device please use the Expo account provided here.
-Enter the following username and password to access the project (Only necessary for iOS)
-Username: bagelbartest
+Enter the following username and password to access the project (Only necessary for iOS)<br>
+Username: bagelbartest<br>
 Password: easy123!
 
 The project will then be shown under "Published Projects" once you are signed into the test account.
