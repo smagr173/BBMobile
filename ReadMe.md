@@ -1,9 +1,6 @@
 <h2>Overview</h2>
-This repository contains the code and information for the Bagel Bar Mobile app. This project allows the user to create
-an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their
-shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.<br>
-The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is
-accessible with any internet connection.
+This repository contains the code and information for the Bagel Bar Mobile app. This project allows the user to create an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.<br>
+The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is accessible with any internet connection.
 
 ![HomeScreen](http://acad.kutztown.edu/~smagr173/GitHub/homeimg.png) ![DetailsScreen](http://acad.kutztown.edu/~smagr173/GitHub/details.png)
 ![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png) ![MenuScreen](http://acad.kutztown.edu/~smagr173/GitHub/menu.png)
@@ -18,13 +15,9 @@ Requirements:
  
 <h5>Use the following link to open and view the project: expo.io/@bagelbartest/bagel_bar_mobile</h5>
  
-The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play
-store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client
-When you follow the link, it will be the first option at the top of the page.
+The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client. When you follow the link, it will be the first option at the top of the page.
 
-Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are
-using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing
-policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
+Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
 If you would like to view the project on an iOS device please use the Expo account provided here.
 Enter the following username and password to access the project (Only necessary for iOS)
