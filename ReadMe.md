@@ -15,7 +15,7 @@ Requirements:
  
 Use the following link to view the project:<br>https://expo.io/@bagelbartest/bagel_bar_mobile
  
-The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play store on Android. Search for "Expo Client" or used the following link to find the required app: https://expo.io/tools#client
+The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play store on Android. Search for "Expo Client" or use the following link to find the required app: https://expo.io/tools#client
 
 Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
@@ -24,7 +24,7 @@ Enter the following username and password to access the project (Only necessary 
 Username: bagelbartest<br>
 Password: easy123!
 
-The project will then be shown under "Published Projects" once you are signed into the test account.
+Once you are signed in, navigate to the "Profile" page using the tab at the bottom of the screen. The project will then be shown under "Published Projects" if you are logged into the test account.
 
 The second option, if you are using an Android device, is to create your own Expo account. Creating your own account is not required
 since the app should allow you to scan QR codes or open a project without one. If you do choose to create one it will require you to
