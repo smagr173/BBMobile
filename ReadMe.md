@@ -1,3 +1,4 @@
+Overview
 This repository contains the code and information for the Bagel Bar Mobile app. This project allows the user to create
 an account, sign in, and update their information. Other features include viewing the menu and Bagel Bar information such as
 their phone number, address, and hours of operation. The user can also select an item from the menu and add it to their
