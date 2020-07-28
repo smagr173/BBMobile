@@ -10,7 +10,8 @@ accessible with any internet connection.
 ![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png) ![MenuScreen](http://acad.kutztown.edu/~smagr173/GitHub/menu.png)
 
 <h2>Viewing the Project</h2>
-If you wish to view the published app please follow the instructions below
+If you wish to view the published app please follow the instructions below.
+You are encouraged to use all of the apps features, including creating an account and placing orders.
 
 Requirements:
  - Smartphone or tablet (iOS or Android)
@@ -20,7 +21,7 @@ The fastest way to view the project is to first download the Expo Client app ava
 store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client
 When you follow the link, it will be the first option at the top of the page.
 
-Once you have downloaded and installed the Expo Client app you can then create an Expo account to view the project. If you are
+Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are
 using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing
 policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
@@ -31,18 +32,18 @@ Password: easy123!
 
 The project will then be shown under "Published Projects" once you are signed into the test account.
 
-The second option, if you are using an Android device, is to create your own Expo account. Creating an account will require you to
+The second option, if you are using an Android device, is to create your own Expo account. Creating your own account is not required
+since the app should allow you to scan QR codes or open a project without one. If you do choose to create one it will require you to
 enter your email address, username, and password to create an account. Once created you can sign in using the credentials that were
-entered previously. Note: You will be able reuse the credentials you created to view the project again.
+entered previously.
 
-You can also create an Expo account in your browser by entering this link in your browser: https://expo.io/signup
-However, you will still have to sign into the Expo Client app using the credentials you created in the browser.
-
-After you have installed the Expo Client app and have signed into your account you will be able to open the link provided to view
-the Bagel Bar Mobile project. You can enter the link in your browser to view options for opening the project on your phone.
-There will be a QR code that you can scan with your device which will open the project in the Expo Client app. Another option is to
-send the link to your email address or have a linked sent using your phone number. Once sent, the link will automatically open
-the project using the Expo Client app.
+After you have installed the Expo Client app and you will be able to open the link provided to view the Bagel Bar Mobile project.
+You can enter the link in your browser to view options for opening the project on your phone. There will be a QR code that you can
+scan with your device which will open the project in the Expo Client app. Another option is to send the link to your email address
+or have a linked sent using your phone number. Once sent, the link will automatically open the project using the Expo Client app.
 
 The link below can be used to access the project:
 exp.host/@bagelbartest/bagel_bar_mobile
+
+Thank you for taking the time to view the project, a lot of hours and work went into creating it.
+
