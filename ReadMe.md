@@ -17,7 +17,7 @@ Requirements:
  - Smartphone or tablet (iOS or Android)
  - Expo Client app
  
-<h5>Use the following link to open and view the project:  expo.io/@bagelbartest/bagel_bar_mobile</h5>
+<h5>Use the following link to open and view the project: expo.io/@bagelbartest/bagel_bar_mobile</h5>
  
 The fastest way to view the project is to first download the Expo Client app available on the App Store for iOS or the Google Play
 store on Android. If you cannot find the correct app enter this link into your browser: https://expo.io/tools#client
@@ -44,4 +44,5 @@ You can enter the link in your browser to view options for opening the project o
 scan with your device which will open the project in the Expo Client app. Another option is to send the link to your email address
 or have a linked sent using your phone number. Once sent, the link will automatically open the project using the Expo Client app.
 
-<div>
+<h4>Project Link</h4>
+expo.io/@bagelbartest/bagel_bar_mobile
