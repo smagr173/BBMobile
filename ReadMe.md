@@ -6,6 +6,7 @@ shopping cart.
 The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is
 accessible with any internet connection.
 
+
 ![HomeScreen](http://acad.kutztown.edu/~smagr173/GitHub/homeimg.png) ![DetailsScreen](http://acad.kutztown.edu/~smagr173/GitHub/details.png)
 ![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png) ![MenuScreen](http://acad.kutztown.edu/~smagr173/GitHub/menu.png)
 
