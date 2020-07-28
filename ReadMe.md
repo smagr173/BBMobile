@@ -1,10 +1,9 @@
 <h2>Overview</h2>
-This repository contains the code and information for the Bagel Bar Mobile app. This project allows the user to create
-an account, sign in, and update their information. Other features include viewing the menu and Bagel Bar information such as
-their phone number, address, and hours of operation. The user can also select an item from the menu, customize it, then add it to their
-shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.
-The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is
-accessible with any internet connection.
+<p1>This repository contains the code and information for the Bagel Bar Mobile app. This project allows the user to create
+an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their
+shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.</p1>
+<p1>The React Native code connects to a PHP back-end where the database is then accessed. This database is stored on the web and is
+accessible with any internet connection.</p1>
 
 ![HomeScreen](http://acad.kutztown.edu/~smagr173/GitHub/homeimg.png) ![DetailsScreen](http://acad.kutztown.edu/~smagr173/GitHub/details.png)
 ![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png) ![MenuScreen](http://acad.kutztown.edu/~smagr173/GitHub/menu.png)
