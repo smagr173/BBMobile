@@ -6,7 +6,7 @@ The React Native code connects to a PHP back-end where the database is then acce
 accessible with any internet connection.
 
 ![HomeScreen](http://acad.kutztown.edu/~smagr173/GitHub/homeimg.png) ![DetailsScreen](http://acad.kutztown.edu/~smagr173/GitHub/details.png)
-![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cart.png)
+![CartScreen](http://acad.kutztown.edu/~smagr173/GitHub/cartImg.png)
 
 The 'screens' folder contains the bulk of the React Native code. The 'navigation' folder contains the tab bar navigation and
 main navigation files.
