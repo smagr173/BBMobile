@@ -4,8 +4,8 @@ This project was created using React Native for the front-end components, which 
 The images below are screenshots of the home screen, menu, expanded menu item, and cart screen.
 <div><br><div>
 
-![HomeScreen](https://kuvapcsitrd01.kutztown.edu/~smagr173/GitHub/homeimg.png) ![MenuScreen](https://kuvapcsitrd01.kutztown.edu/~smagr173/GitHub/menu.png)
-![DetailsScreen](https://kuvapcsitrd01.kutztown.edu/~smagr173/GitHub/details.png) ![CartScreen](https://kuvapcsitrd01.kutztown.edu/~smagr173/GitHub/cartImg.png)
+![HomeScreen](https://johndan2354.github.io/BBMobileImages/HomeScreen.PNG) ![DetailsScreen](https://johndan2354.github.io/BBMobileImages/Details.PNG)
+![CartScreen](https://johndan2354.github.io/BBMobileImages/Checkout.PNG)
 <h2>Viewing the Project</h2>
 If you wish to view the published app please follow the instructions below.
 You are encouraged to use all of the apps features, including creating an account and placing orders.
