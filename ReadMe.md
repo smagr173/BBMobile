@@ -10,6 +10,8 @@ The images below are screenshots of the home screen, menu, expanded menu item, a
 If you wish to view the published app please follow the instructions below.
 You are encouraged to use all of the apps features, including creating an account and placing orders.
 
+ ![CartScreen](https://johndan2354.github.io/hobbieImages/comics.PNG)
+ 
 Requirements:
  - Smartphone or tablet (iOS or Android)
  - Expo Client app
