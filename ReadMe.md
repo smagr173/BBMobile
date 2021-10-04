@@ -5,7 +5,7 @@ The images below are screenshots of the home screen, menu, expanded menu item, a
 <div><br><div>
 
 ![HomeScreen](https://johndan2354.github.io/BBMobileImages/HomeScreen.PNG) ![DetailsScreen](https://johndan2354.github.io/BBMobileImages/Details.PNG)
-![CartScreen](https://johndan2354.github.io/BBMobileImages/Checkout.PNG)![Screen](https://johndan2354.github.io/BBMobileImages/collection.PNG)
+![CartScreen](https://johndan2354.github.io/BBMobileImages/Collection.PNG)
 <h2>Viewing the Project</h2>
 If you wish to view the published app please follow the instructions below.
 You are encouraged to use all of the apps features, including creating an account and placing orders.
