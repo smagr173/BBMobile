@@ -23,8 +23,8 @@ Once you have downloaded and installed the Expo Client app you can optionally cr
 
 If you would like to view the project on an iOS device please use the Expo account provided here.
 Enter the following username and password to access the project (Only necessary for iOS)<br/>
-Username: bagelbartest<br/>
-Password:
+&nbsp; &nbsp;Username: bagelbartest<br/>
+&nbsp; &nbsp;Password:
 
 Once you are signed in, navigate to the "Profile" page using the tab at the bottom of the screen. The project will then be shown under "Published Projects" if you are logged into the test account.
 
