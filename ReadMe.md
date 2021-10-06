@@ -1,12 +1,13 @@
-<h2>Overview</h2>
-This repository contains the code and information for the BBMobile app. This project allows the user to create an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.<br>
-This project was created using React Native for the front-end components, which is a JavaScript framework for mobile apps. The React Native code connects to a PHP back-end where the SQL database is then accessed.<br>
-The images below are screenshots of the home screen, menu, expanded menu item, and cart screen.
-<div><br><div>
-
+# Bagel Bar Mobile
+Food and beverage ordering app for coffee shop<br/>
+## Overview
+This repository contains the code and information for the BBMobile app. This project allows the user to create an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.<br/>
+This project was created using React Native for the front-end components, which is a JavaScript framework for mobile apps. The React Native code connects to a PHP back-end where the SQL database is then accessed.<br/>
+The images below are screenshots of the home screen, menu, expanded menu item, and cart screen.<br/>
+<br/>
 ![HomeScreen](https://johndan2354.github.io/BBMobileImages/Home.PNG) ![DetailsScreen](https://johndan2354.github.io/BBMobileImages/Details.PNG)
 ![CheckoutScreen](https://johndan2354.github.io/BBMobileImages/Checkout.PNG)
-<h2>Viewing the Project</h2>
+## Viewing the Project
 If you wish to view the published app please follow the instructions below.
 You are encouraged to use all of the apps features, including creating an account and placing orders.
 
@@ -21,8 +22,8 @@ The fastest way to view the project is to first download the Expo Client app ava
 Once you have downloaded and installed the Expo Client app you can optionally create an Expo account to view the project. If you are using an iOS device then you will have to log in to Expo using a specific account. This is due to Apple's signing and sharing policies. However, Android has no restriction on this so feel free to create an Expo account or use the one provided.
 
 If you would like to view the project on an iOS device please use the Expo account provided here.
-Enter the following username and password to access the project (Only necessary for iOS)<br>
-Username: bagelbartest<br>
+Enter the following username and password to access the project (Only necessary for iOS)<br/>
+Username: bagelbartest<br/>
 Password:
 
 Once you are signed in, navigate to the "Profile" page using the tab at the bottom of the screen. The project will then be shown under "Published Projects" if you are logged into the test account.
@@ -39,5 +40,5 @@ or have a linked sent using your phone number. Once sent, the link will automati
 
 Enter the link below into your browser to view the project which is hosted on the Expo server. Here, you will be given options to open the project on your mobile device.
 
-<h4>Project Link</h4>
+### Project Link
 expo.io/@bagelbartest/bagel_bar_mobile
