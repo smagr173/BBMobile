@@ -40,4 +40,5 @@ or have a linked sent using your phone number. Once sent, the link will automati
 
 Enter the link below into your browser to view the project which is hosted on the Expo server. Here, you will be given options to open the project on your mobile device.
 
-**Project Link:**&nbsp; &nbsp;expo.io/@bagelbartest/bagel_bar_mobile
+**Project Link:**<br/>
+&nbsp;&nbsp;expo.io/@bagelbartest/bagel_bar_mobile
