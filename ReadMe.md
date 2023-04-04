@@ -1,7 +1,7 @@
 # Bagel Bar Mobile
 Food and beverage ordering web app for coffee shop<br/>
-- Implemented using React Native, PHP, MySQL, Node.js
-- Traditional React class components
+- Implemented using React Native, PHP, MySQL
+- Convential Class components
 - Connects to employee site where orders are displayed
 ## Overview
 This repository contains the code and information for the BBMobile app. This project allows the user to create an account, sign in, and update their information. The user can select an item from the menu, customize it, then add it to their shopping cart. Once an order is placed, the customer can view the active order at the home screen, along with items that have been favorited and previous orders.<br/>
