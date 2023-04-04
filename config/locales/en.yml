@@ -1,0 +1,6 @@
+en:
+  auth:
+    labels:
+      welcome: 'Get Started'
+    content:
+      description: 'Bring fighters together'
