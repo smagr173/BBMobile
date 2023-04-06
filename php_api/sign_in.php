@@ -2,7 +2,6 @@
 session_start();
 include "functions.php";
 
-
 	// Get JSON inputs, store in variable
 	$json = file_get_contents('php://input');
 	
