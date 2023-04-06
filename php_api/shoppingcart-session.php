@@ -1,20 +1,3 @@
-<!--*************************************************************************//
-//																			 //
-//  Author:    	 Dr. Tan                                                     //
-//  Edited by:	 Stephen Magrowski											 //
-//  Major:		 Software Development										 //
-//  Class:     	 CSC 242-020                                                 //
-//	Professor:   Dr. Tan													 //
-//	Created on:  10/13/17													 //
-//	Due:		 10/16/17													 //
-//  Assignment:  Project 2                                                   //
-//  Filename:    lab-12-3-shoppingcart-session.php                           //
-//  Purpose:     This file creates a class ShoppingCart to store the         //
-//				 product in the cart. It adds the item through its product   //
-//				 ID and allows items to be updated or removed. The number    //
-//				 of items in the cart is also updated and stored.            //
-//**************************************************************************-->
-
 <?php # ShoppingCart.php  
 
 class ShoppingCart { 
