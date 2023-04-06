@@ -1,16 +1,4 @@
 <?php
-/*
- * Author: Stephen Magrowski
- * Created: January 25, 2020
- * Course: CSC 355-20
- * Professor: Dr. Tan
- * Filename: functions.php
- * Description: This file contains the functions for the PHP back-end
- * code. It includes functions for inserting user data into a SQL
- * database. There are also queries for selecting user data.
- *
-*/
-
 function addBag($email, $name, $price, $quantity, $item_id, $notes, $option1, $option2, $extra1, $extra2, $extra3) {
     $db = new PDO("sqlite:content.db");
 	
